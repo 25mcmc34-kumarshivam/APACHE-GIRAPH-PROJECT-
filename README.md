@@ -32,6 +32,10 @@ Start with [`docs/INSTALLATION.md`](docs/INSTALLATION.md) when preparing a new U
 
 For structured study from basic Linux through distributed computing, Hadoop, Giraph, graph algorithms, and research work, follow [`docs/STUDY-ROADMAP.md`](docs/STUDY-ROADMAP.md). The shorter [`docs/LEARNING-GUIDE.md`](docs/LEARNING-GUIDE.md) explains the algorithms used in the completed lab.
 
+Project administration and reporting are recorded in [`docs/PROJECT-OVERVIEW.md`](docs/PROJECT-OVERVIEW.md), [`docs/WEEKLY-TIMELINE.md`](docs/WEEKLY-TIMELINE.md), and the reusable [`docs/WEEKLY-REPORT-TEMPLATE.md`](docs/WEEKLY-REPORT-TEMPLATE.md).
+
+Top-level indexes are available in [`setup/`](setup/), [`study-material/`](study-material/), and [`weekly-reports/`](weekly-reports/).
+
 For theory, command meanings, algorithm walkthroughs, exercises, and the weekly study plan, use [`docs/LEARNING-GUIDE.md`](docs/LEARNING-GUIDE.md).
 
 ## Five-node directed graph
