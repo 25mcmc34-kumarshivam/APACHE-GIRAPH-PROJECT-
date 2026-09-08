@@ -6,13 +6,15 @@
 - **Institution:** University of Hyderabad
 - **School:** School of Computer and Information Sciences (SCIS)
 - **Current semester:** Semester III
-- **Project duration:** One academic year
+- **Project period currently recorded:** July 2026 through May 2028
 - **Total project credits:** 12
-- **Current-semester credits:** 6
-- **Current-semester evaluation:** Expected in late November or early December 2026
-- **Later evaluation date:** To be confirmed with the supervisor/department
+- **First major evaluation:** Internal evaluation, late November or early December 2026
+- **Credits attached to the internal evaluation/current semester:** 6
+- **Second major evaluation:** External evaluation, May 2028
+- **Credits attached to the May 2028 external evaluation:** 6
+- **Total:** 6 internal-evaluation credits + 6 external-evaluation credits = 12 project credits
 
-The team has mentioned May 2027 and May 2028 while discussing later evaluations. These dates are not recorded here as confirmed milestones because “one-year project,” “Semester IV,” and May 2028 do not form a consistent schedule. The official evaluation notice should be used to finalize the date.
+May 2027 was previously written in the project notes by mistake. The team clarified that the external evaluation is planned for May 2028. Official departmental notices remain authoritative if the schedule changes.
 
 ## Faculty supervisor
 
@@ -58,7 +60,21 @@ The title and problem statement must not be reconstructed from memory. When the 
 - **Location:** Supervisor's chamber
 - **Supervisor:** Dr. Anjeneya Swami Kare (“Swami Sir”)
 
-Before each meeting, every group should update its weekly report. The report should show what was planned, what was actually completed, evidence, problems, decisions, and work for the next week.
+This is a continuous learning, implementation, and teaching process. The students work and study throughout the week. During the Thursday meeting, the supervisor reviews the work, asks what has been understood, checks the project status, corrects the direction, and assigns or approves the next week's work.
+
+### Weekly working cycle
+
+1. Record the task agreed during the Thursday meeting.
+2. Divide the task between the team members or groups.
+3. Study the required theory before or alongside implementation.
+4. Perform the implementation and experiments during the week.
+5. Save code, commands, datasets, results, errors, and fixes in Git.
+6. Write what each member learned and can explain independently.
+7. Update the weekly report before the next Thursday meeting.
+8. Present the actual status to the supervisor, including incomplete or failed work.
+9. Record the supervisor's feedback and the next week's task.
+
+The weekly report is therefore not only a list of completed commands. It is evidence of continuous study, practical work, teaching and guidance, technical progress, and the team's response to feedback.
 
 ## Current shared phase
 
@@ -108,7 +124,7 @@ Keeping the shared title does not mean the two groups should later submit identi
 
 - [ ] Obtain the exact approved project title.
 - [ ] Obtain the exact approved problem statement.
-- [ ] Confirm the Semester III evaluation date.
-- [ ] Confirm whether the next evaluation is May 2027 or May 2028.
+- [ ] Record the exact internal evaluation date when the November–December 2026 notice is issued.
+- [x] Correct the external evaluation year to May 2028.
 - [ ] Confirm the credit split and assessment components in writing.
 - [ ] Decide whether both groups use one repository or separate implementation branches/repositories later.

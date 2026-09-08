@@ -18,9 +18,8 @@ Status labels:
 |---|---|---|
 | 17 July 2026 | Project record begins | Reported |
 | July–September 2026 | Common setup and graph-processing foundations | In progress |
-| Late November/early December 2026 | Semester III evaluation (6 credits) | Date to confirm |
-| May 2027 | Evaluation mentioned by team | Scope/date to confirm |
-| May 2028 | Later evaluation mentioned by team | Conflicts with one-year/Semester-IV description; confirm |
+| Late November/early December 2026 | First major/internal evaluation (6 credits) | Exact date to be announced |
+| May 2028 | Second major/external evaluation (6 credits) | Confirmed by the team; official notice remains authoritative |
 
 ## Week 1 — 17–23 July 2026
 
@@ -187,6 +186,20 @@ Copy this section for every new week:
 
 - [ ] Task — owner — due date
 ```
+
+## Continuous weekly process
+
+The project is expected to progress every week, not only immediately before evaluation. Each weekly cycle includes:
+
+- learning the concepts needed for the assigned task;
+- teaching and clarification during supervision;
+- implementation and experiments during the week;
+- an honest status update, including unfinished work;
+- evidence through commits, commands, datasets, and results;
+- feedback from the supervisor;
+- a defined task for the following week.
+
+The team should update the report before every Thursday meeting, then add the supervisor's feedback after the meeting.
 
 ## Reporting rule
 

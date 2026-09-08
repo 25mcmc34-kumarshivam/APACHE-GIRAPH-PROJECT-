@@ -21,4 +21,6 @@ Each report must contain:
 - supervisor feedback;
 - assigned work for the next Thursday.
 
+The report represents a continuous cycle: weekly study, implementation, evidence collection, Thursday status review, guidance/teaching by the supervisor, and planning for the following week. Failed or incomplete work must be reported honestly because diagnosis and learning are also part of the project.
+
 Earlier weeks with missing evidence must remain marked `Record needed` until reliable notes are recovered.

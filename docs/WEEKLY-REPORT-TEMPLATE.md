@@ -17,6 +17,14 @@ Write the goal agreed during the previous meeting in one or two precise sentence
 |---|---|---|---|
 | | | | |
 
+## 2A. Learning and teaching record
+
+- What did we know before this week?
+- What new idea was taught or explained during supervision?
+- What did we study independently?
+- What can we now explain without copying?
+- What still needs clarification?
+
 ## 3. Work completed
 
 Describe the actual work. Separate Group A, Group B, and shared work when applicable.
@@ -53,6 +61,12 @@ Explain what the result means. Do not paste output without interpreting it.
 ## 8. Supervisor feedback
 
 Record decisions and corrections, not private conversation.
+
+- Status presented by the team:
+- Supervisor's assessment of progress:
+- Concepts corrected or taught:
+- Change in direction, if any:
+- Work approved/assigned for next week:
 
 ## 9. Work before next Thursday
 
