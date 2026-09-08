@@ -30,6 +30,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 Start with [`docs/INSTALLATION.md`](docs/INSTALLATION.md) when preparing a new Ubuntu machine. After installation, run `scripts/check_environment.sh` to check the commands, versions, HDFS, and YARN before submitting a graph job.
 
+For theory, command meanings, algorithm walkthroughs, exercises, and the weekly study plan, use [`docs/LEARNING-GUIDE.md`](docs/LEARNING-GUIDE.md).
+
 ## Five-node directed graph
 
 The example graph contains these weighted directed edges:
