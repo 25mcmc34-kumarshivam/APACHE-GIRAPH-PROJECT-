@@ -26,7 +26,9 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 - `src/` contains the custom Giraph computation classes.
 - `scripts/` contains reusable job scripts.
 - `results/` contains verified outputs from the lab server.
-- `docs/` contains the lab record and and operating notes.
+- `docs/` contains the installation guide, lab record, and operating notes.
+
+Start with [`docs/INSTALLATION.md`](docs/INSTALLATION.md) when preparing a new Ubuntu machine. After installation, run `scripts/check_environment.sh` to check the commands, versions, HDFS, and YARN before submitting a graph job.
 
 ## Five-node directed graph
 
