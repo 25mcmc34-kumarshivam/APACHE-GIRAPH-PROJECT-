@@ -10,7 +10,18 @@ Status labels:
 
 - **Verified:** supported by a command result, file, commit, or saved output.
 - **Reported:** supplied by a team member but not yet supported by repository evidence.
-- **Record needed:** no reliable activity record is currently available.
+
+## Earlier faculty direction — 29 May 2026
+
+Before the formal weekly record began, the supervisor shared the initial areas to learn:
+
+- parallel computing with OpenMP and MPI;
+- distributed computing;
+- IntelliJ IDEA editor;
+- MapReduce framework;
+- Apache Giraph framework.
+
+This direction established that the project required both conceptual study and practical implementation.
 
 ## Semester milestones
 
@@ -23,65 +34,84 @@ Status labels:
 
 ## Week 1 — 17–23 July 2026
 
-**Status:** Record needed
+**Status:** Reported by the team
 
-- Project starting discussions occurred around this period.
-- Exact title, problem statement, assigned reading, and meeting decisions still need to be recovered.
-- No command output from this week is presently stored in the repository.
+- Began by understanding the approved project title, expected outcome, and why distributed graph processing is needed.
+- Studied basic Linux terminal ideas and commands because the implementation environment was Linux.
+- Discussed graphs, social-network problems, vertices, edges, and the broad purpose of Giraph.
+- Identified the need to learn continuously instead of only installing software.
+- Next direction: collect introductory material on Java, Hadoop, MapReduce, parallel/distributed computing, Pregel, and Giraph.
 
 ## Week 2 — 24–30 July 2026
 
-**Status:** Record needed
+**Status:** Reported by the team
 
-- Add details from personal notebooks, WhatsApp/email discussions, or supervisor meeting notes.
-- Do not claim installation or experiments without evidence.
+- Collected introductory learning material from the internet.
+- Studied the difference between ordinary programs, parallel computing, and distributed computing.
+- Learned the basic roles of Java, Git, Maven, Hadoop, MapReduce, HDFS, YARN, Pregel, and Apache Giraph.
+- Noted that much of the available Giraph setup material was old, often dating from around 2013 and using obsolete Hadoop/Java combinations.
+- Began identifying a compatible software stack instead of following old commands unchanged.
+- Next direction: start installation and test it on an available Linux machine.
 
 ## Week 3 — 31 July–6 August 2026
 
-**Status:** Partly verified
+**Status:** Reported and partly verified
 
-- Giraph source existed under `/home/mca2025/giraph`.
-- Repository branch was `trunk` at commit `14a74297` (`GIRAPH-1253`).
-- Giraph build artifacts had timestamps from 5 August 2026.
-- Initial Hadoop/Giraph setup work had therefore started by this period.
-- Exact commands and division of work still need to be recovered.
+- The faculty provided access to one Linux system in the CI Lab, SCIS.
+- Began converting this machine into the shared project environment.
+- Installed and checked basic requirements including Java, Git, Maven, Hadoop, SSH, and Giraph source/build dependencies.
+- Compared older online instructions with the actual Ubuntu system and adjusted versions and paths where required.
+- Created the `mca2025` development location and began building Giraph.
+- Giraph artifacts dated 5 August and source commit `14a74297` confirm that the build work reached a working stage during this period.
+- Next direction: configure Hadoop users, HDFS/YARN, remote access, and shared working arrangements.
 
 ## Week 4 — 7–13 August 2026
 
-**Status:** Partly verified
+**Status:** Reported and supported by the 14 August progress email
 
-- HDFS directories `/tmp`, `/user`, `/input`, and `/team` existed.
-- `/user/hduser` and YARN staging data were present.
-- The system was being used as a single-node Hadoop environment.
-- Exact weekly meeting decisions require earlier notes.
+- Created the Hadoop group and configured the team accounts available on the shared system.
+- Kumar Shivam, Archana Kumari, and Suyash Singh used accounts on the lab system; Aman Chaudhary had the setup on his own laptop.
+- Configured the lab computer as a shared SSH-accessible server so members could work from their laptops instead of crowding around one machine.
+- Created separate user spaces in HDFS while keeping users under the common Hadoop group.
+- Tested Hadoop services, HDFS, YARN, Giraph, and remote login from different accounts.
+- Examined available Giraph examples, including connected-components-related material.
+- Sent a written project progress update on 14 August summarizing the first month.
+- Next direction: attempt an actual graph program from personal accounts and solve access problems.
 
 ## Week 5 — 14–20 August 2026
 
-**Status:** Record needed
+**Status:** Reported by the team
 
-- No reliable chronological record is currently available.
-- Add only evidence-backed activities.
+- Continued remote SSH access and tried to run work from individual accounts/laptops.
+- Faced permission restrictions because the Giraph source and some directories under `mca2025` were not accessible in the way other users expected.
+- Learned that Linux user ownership, Hadoop-group membership, local filesystem permissions, and HDFS permissions are separate concerns.
+- Attempted a PageRank program but encountered multiple setup/runtime problems.
+- During the 20 August meeting, the supervisor asked the team to try working with the Pregel model/framework.
+- Next direction: study Pregel and find a usable setup or implementation path.
 
 ## Week 6 — 21–27 August 2026
 
-**Status:** Record needed
+**Status:** Reported by the team; meeting skipped
 
-- No reliable chronological record is currently available.
-- Add only evidence-backed activities.
+- Searched for a practical Pregel setup and tried to understand its relationship with Giraph.
+- Could not find a directly usable standalone Pregel setup because Pregel is primarily Google's graph-processing model/system, while Giraph is the open-source framework available for this project.
+- Continued dealing with multi-user access and installation complexity.
+- The Thursday meeting on 27 August was skipped because of internal examinations in regular MCA subjects.
+- Next direction: return to the working Giraph environment, simplify account usage, and diagnose the PageRank failure systematically.
 
 ## Week 7 — 28 August–3 September 2026
 
-**Status:** Verified
+**Status:** Reported and verified
 
-- Connected to the Ubuntu server through SSH.
-- Inspected Giraph source, branch, commit, working tree, and build artifacts.
-- Confirmed Hadoop 2.7.7 and passwordless localhost SSH.
-- Found that `JAVA_HOME` pointed to Java 8 while `java` selected Java 21.
-- Found a malformed `hadoop-env.sh` assignment and duplicated `.bashrc` entries.
-- Backed up the environment files and corrected Java/Hadoop environment values.
-- Restarted Hadoop services and confirmed all HDFS/YARN daemons used Java 8.
-- Checked HDFS health; no corrupt or missing blocks were reported.
-- Removed old experimental staging paths and created a fresh learning directory.
+- Simplified the work by concentrating Hadoop service operations under `hduser` and Giraph source/build work under `mca2025`.
+- Connected through SSH and audited the installed software, files, accounts, environment, HDFS, and YARN.
+- Confirmed Hadoop 2.7.7, Giraph `trunk`, existing build artifacts, and passwordless localhost SSH.
+- Found Java 8/Java 21 path inconsistency, malformed `hadoop-env.sh`, and duplicated `.bashrc` lines.
+- Backed up configuration files before correcting Java and Hadoop environment settings.
+- Restarted services and confirmed that Hadoop daemons used Java 8.
+- Checked HDFS health and created a clean learning directory.
+- Reported the current status in the 3 September meeting.
+- Next direction: run one small graph from input to output and explain every step.
 
 ## Week 8 — 4–10 September 2026
 
@@ -125,12 +155,18 @@ Status labels:
 - Created the GitHub repository.
 - Added datasets, source, scripts, verified results, installation instructions, lab notes, and study guides.
 
+### Presentation plan
+
+- Prepared the week's main progress for presentation in the 10 September meeting.
+- The key outcome was not only a successful command: the team isolated Java, YARN, NodeManager, permission, LocalJobRunner, and Guava compatibility problems and recorded their fixes.
+
 ## Week 9 — 11–17 September 2026
 
 **Status:** Planned
 
 - [ ] Confirm the exact project title and approved problem statement.
-- [ ] Confirm evaluation dates and assessment requirements.
+- [x] Record the approved project title and supplied problem statement.
+- [ ] Confirm the exact internal evaluation date when announced.
 - [ ] Add the actual Hadoop configuration files to the repository.
 - [ ] Add reusable in-degree and out-degree scripts.
 - [ ] Create an automated tiny-graph result checker.

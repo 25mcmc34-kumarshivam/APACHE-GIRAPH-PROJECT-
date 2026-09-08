@@ -14,7 +14,7 @@
 - **Credits attached to the May 2028 external evaluation:** 6
 - **Total:** 6 internal-evaluation credits + 6 external-evaluation credits = 12 project credits
 
-May 2027 was previously written in the project notes by mistake. The team clarified that the external evaluation is planned for May 2028. Official departmental notices remain authoritative if the schedule changes.
+The external evaluation is planned for May 2028. Official departmental notices remain authoritative if the schedule changes.
 
 ## Faculty supervisor
 
@@ -47,11 +47,13 @@ All four students currently work under the same broad project title. The work is
 
 ## Project title and problem statement
 
-- **Common project title:** To be inserted exactly as approved by the supervisor.
-- **Approved problem statement:** Awaiting the exact text from the team/supervisor.
-- **Current technical direction:** Learning and experimenting with large-scale graph processing using Apache Hadoop, Apache Giraph, and graph algorithms.
+- **Approved title:** Implementation of Distributed Graph Algorithms for Social Network Problems Using Apache Giraph Framework
+- **Number of students per implementation group:** 2
+- **Prerequisite stated in the project allocation:** Students should be willing to learn distributed-processing frameworks.
 
-The title and problem statement must not be reconstructed from memory. When the approved wording is received, update this section without paraphrasing it.
+**Problem statement:** Implement algorithms for social-network problems using the Apache Giraph framework, which follows a vertex-centric, massively scalable approach to graph processing.
+
+The title and description above are transcribed from the supplied project-allocation record. Both Group A and Group B currently share this title; their implementations will diverge later.
 
 ## Weekly supervision meeting
 
@@ -122,8 +124,8 @@ Keeping the shared title does not mean the two groups should later submit identi
 
 ## Immediate administrative actions
 
-- [ ] Obtain the exact approved project title.
-- [ ] Obtain the exact approved problem statement.
+- [x] Record the approved project title from the allocation document.
+- [x] Record the supplied project description/problem statement.
 - [ ] Record the exact internal evaluation date when the November–December 2026 notice is issued.
 - [x] Correct the external evaluation year to May 2028.
 - [ ] Confirm the credit split and assessment components in writing.
