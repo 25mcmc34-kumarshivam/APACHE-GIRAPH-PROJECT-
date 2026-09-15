@@ -12,6 +12,7 @@ Existing detailed reports:
 - [Week 6 — 21–27 August](2026-08-27-week-06.md)
 - [Week 7 — 28 August–3 September](2026-09-03-week-07.md)
 - [Week 8 — 4–10 September](2026-09-10-week-08.md)
+- [Week 9 — 11–17 September](2026-09-17-week-09.md)
 
 Recommended filename format:
 

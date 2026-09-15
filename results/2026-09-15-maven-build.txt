@@ -1,0 +1,30 @@
+Apache Giraph custom learning build
+Date: 15 September 2026
+Build profile: hadoop_2
+Java: OpenJDK 8
+Hadoop: 2.7.7
+
+Command:
+mvn clean -Phadoop_2 -DskipTests -Dgiraph.maven.duplicate.finder.skip=true package
+
+Reactor Summary for Apache Giraph Parent 1.4.0-SNAPSHOT:
+
+Apache Giraph Parent ............................... SUCCESS [  1.106 s]
+Apache Giraph Core ................................. SUCCESS [ 13.583 s]
+Apache Giraph Blocks Framework ..................... SUCCESS [  7.949 s]
+Apache Giraph Examples ............................. SUCCESS [ 14.838 s]
+Apache Giraph Distribution ......................... SUCCESS [  4.052 s]
+
+BUILD SUCCESS
+Total time: 41.615 s
+Finished at: 2026-09-15T13:00:55Z
+
+Purpose of this build:
+- Compile the documented LearningInDegreeComputation.
+- Compile the documented LearningOutDegreeComputation.
+- Compile the robust LongDoubleFloatTextInputFormat.
+- Compile the new LearningBfsComputation.
+- Recreate the Hadoop-compatible Guava-shaded examples JAR.
+
+Generated JAR files are intentionally excluded from GitHub and must be built
+from source.
