@@ -2,6 +2,11 @@
 
 Use the [complete installation guide](../docs/INSTALLATION.md) to reproduce the Ubuntu, Java 8, Hadoop 2.7.7, and Giraph environment.
 
+For normal daily work after installation, follow the
+[daily lab startup checklist](../docs/DAILY-LAB-STARTUP.md), including dynamic
+IP discovery, account roles, service startup, verification, recovery, and
+clean shutdown.
+
 After setup, run:
 
 ```bash
