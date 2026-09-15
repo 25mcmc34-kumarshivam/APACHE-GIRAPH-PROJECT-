@@ -18,3 +18,6 @@ Validation:
 
 The BFS output exactly matched the manually calculated levels recorded in the
 Week 9 report.
+
+The calculation and interpretation are explained in the
+[`BFS thirty-node walkthrough`](../../docs/BFS-THIRTY-NODE-WALKTHROUGH.md).

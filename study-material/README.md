@@ -8,6 +8,7 @@ Study in this order:
 4. [Five-node dataset](../datasets/five_node_graph.json) — graph used for manual and Giraph calculations.
 5. [Verified results](../results/) — answers used to check understanding and program correctness.
 6. [Hinglish Java guide](hinglish-java-guide/) — team-only learning companion explaining the degree, text-reader, and BFS programs line by line. It is not used for compilation.
+7. [Thirty-node BFS walkthrough](../docs/BFS-THIRTY-NODE-WALKTHROUGH.md) — explains the output, manual levels, Giraph supersteps, example routes, and BFS versus weighted shortest path.
 
 The roadmap includes websites, books, Wikipedia pages, research papers, YouTube channels, exercises, and completion checkboxes.
 

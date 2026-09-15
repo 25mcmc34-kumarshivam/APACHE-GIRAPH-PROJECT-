@@ -17,6 +17,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 - PageRank
 - Out-degree calculation
 - In-degree calculation
+- Breadth-first search (BFS)
 - Single-source shortest paths
 - Giraph/Hadoop Guava compatibility repair using a shaded JAR
 
@@ -62,3 +63,6 @@ The detailed installation manual is maintained separately in Google Docs. This r
 79-edge directed graph divided into three text files. Hadoop/Giraph reads the
 directory as one logical dataset. The accompanying source includes a commented
 plain-text reader and BFS, in-degree, and out-degree computations.
+
+The verified 30-node BFS result is explained level by level in
+[`docs/BFS-THIRTY-NODE-WALKTHROUGH.md`](docs/BFS-THIRTY-NODE-WALKTHROUGH.md).
