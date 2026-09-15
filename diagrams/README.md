@@ -41,3 +41,13 @@ dot -Tsvg diagrams/thirty-node-full-graph.dot \
 
 The simplified BFS-only diagram and full explanation are in
 [`../docs/BFS-THIRTY-NODE-WALKTHROUGH.md`](../docs/BFS-THIRTY-NODE-WALKTHROUGH.md).
+
+## Weighted comparison graph
+
+![Weighted BFS comparison graph](weighted-bfs-comparison.svg)
+
+This six-node diagram labels every edge weight. It demonstrates a case where
+BFS selects the two-hop route to vertex 6 but weighted shortest path selects a
+four-hop route with a lower total cost. The dataset and expected answers are
+documented in
+[`../datasets/weighted-bfs-comparison/`](../datasets/weighted-bfs-comparison/).

@@ -69,3 +69,10 @@ The verified 30-node BFS result is explained level by level in
 [`docs/BFS-THIRTY-NODE-WALKTHROUGH.md`](docs/BFS-THIRTY-NODE-WALKTHROUGH.md).
 The complete 30-node, 79-edge directed topology is available in
 [`diagrams/`](diagrams/).
+
+The focused [`weighted BFS comparison dataset`](datasets/weighted-bfs-comparison/)
+demonstrates why the fewest-hop route can differ from the route with the lowest
+total edge weight. Use
+[`scripts/run_text_graph_algorithm.sh`](scripts/run_text_graph_algorithm.sh)
+to run any of the five current algorithms without retyping the long Giraph
+command.

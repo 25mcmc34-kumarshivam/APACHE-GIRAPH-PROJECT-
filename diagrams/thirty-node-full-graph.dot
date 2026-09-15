@@ -10,7 +10,7 @@ digraph ThirtyNodeGraph {
     outputorder=edgesfirst,
     labelloc="t",
     fontsize=18,
-    label="30-node directed graph | 79 edges | BFS source 1\nBlue: one BFS discovery tree | Gray: all remaining directed edges | every weight = 1"
+    label="30 nodes | 79 edges | BFS source 1\nBlue = BFS tree | Gray = other edges\nweights = 1"
   ];
   node [shape=circle, style=filled, fillcolor="#dbeafe", color="#1d4ed8", fontname="Arial", fontsize=10, width=0.75, height=0.75, fixedsize=true];
   edge [color="#9ca3af", arrowsize=0.55, penwidth=0.8];
