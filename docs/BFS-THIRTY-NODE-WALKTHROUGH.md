@@ -171,6 +171,11 @@ Read the diagram from left to right. Moving across one arrow increases the BFS
 distance by one. For example, following `1 -> 6 -> 12 -> 17 -> 22` reaches
 vertex 22 in four hops.
 
+For the complete topology containing all 79 directed edges, see the
+[`thirty-node graph diagram`](../diagrams/README.md). The diagram in this
+section intentionally shows only one BFS discovery edge per non-source vertex
+so that the distance levels remain easy to follow.
+
 ### First two expansions by hand
 
 At distance 0, only the source is known:

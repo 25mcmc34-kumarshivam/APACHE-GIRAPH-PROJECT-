@@ -28,3 +28,7 @@ Thumbs.db
 *.tmp
 *.bak
 *.backup-*
+
+# Python-generated cache
+__pycache__/
+*.pyc

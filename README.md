@@ -27,6 +27,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 - `src/` contains the custom Giraph computation classes.
 - `scripts/` contains reusable job scripts.
 - `results/` contains verified outputs from the lab server.
+- `diagrams/` contains exact graph visualizations and editable Graphviz source.
 - `docs/` contains the installation guide, lab record, and operating notes.
 
 Start with [`docs/INSTALLATION.md`](docs/INSTALLATION.md) when preparing a new Ubuntu machine. After installation, run `scripts/check_environment.sh` to check the commands, versions, HDFS, and YARN before submitting a graph job.
@@ -66,3 +67,5 @@ plain-text reader and BFS, in-degree, and out-degree computations.
 
 The verified 30-node BFS result is explained level by level in
 [`docs/BFS-THIRTY-NODE-WALKTHROUGH.md`](docs/BFS-THIRTY-NODE-WALKTHROUGH.md).
+The complete 30-node, 79-edge directed topology is available in
+[`diagrams/`](diagrams/).
