@@ -286,10 +286,11 @@ Weighted shortest path minimizes the sum of edge weights:
 weighted distance = sum of weights on the route
 ```
 
-Every edge in the present dataset has weight 1. Therefore the weighted
-shortest-path result from source 1 should be identical to the BFS result. A
-future test should use different positive weights to demonstrate a case where
-the fewest-hop route and the lowest-weight route are different.
+Every edge in the present dataset has weight 1. The weighted shortest-path job
+was run from source 1 and produced exactly the same 30 values as BFS. A direct
+comparison returned exit code `0`, confirming that there was no difference.
+A future test should use different positive weights to demonstrate a case
+where the fewest-hop route and the lowest-weight route are different.
 
 ## How we verified the result
 
@@ -299,6 +300,10 @@ the fewest-hop route and the lowest-weight route are different.
 - Direct neighbours 2 and 6 had distance 1.
 - The output matched all manually calculated BFS levels.
 - No infinity value appeared, so all vertices were reachable from source 1.
+- The weighted shortest-path output matched BFS for every vertex, as expected
+  for edges that all have weight 1.
 
 The complete result is stored in
 [`../results/thirty-node-text/bfs-from-1.txt`](../results/thirty-node-text/bfs-from-1.txt).
+The matching weighted result is stored in
+[`../results/thirty-node-text/shortest-path-from-1.txt`](../results/thirty-node-text/shortest-path-from-1.txt).
