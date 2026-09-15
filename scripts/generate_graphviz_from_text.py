@@ -110,6 +110,13 @@ def build_dot(
     distance, parent = bfs(adjacency, source)
     tree_edges = {(parent[vertex], vertex) for vertex in parent}
     edge_count = sum(len(targets) for targets in adjacency.values())
+    unique_weights = sorted(set(weights.values()))
+    if len(unique_weights) == 1:
+        weight_summary = f"weights = {unique_weights[0]:g}"
+        show_weight_labels = False
+    else:
+        weight_summary = "weights shown"
+        show_weight_labels = True
 
     lines = [
         "digraph ThirtyNodeGraph {",
@@ -124,7 +131,7 @@ def build_dot(
         "    outputorder=edgesfirst,",
         "    labelloc=\"t\",",
         "    fontsize=18,",
-        f"    label=\"30-node directed graph | {edge_count} edges | BFS source {source}\\nBlue: one BFS discovery tree | Gray: all remaining directed edges | every weight = 1\"",
+        f"    label=\"{len(adjacency)} nodes | {edge_count} edges | BFS source {source}\\nBlue = BFS tree | Gray = other edges\\n{weight_summary}\"",
         "  ];",
         "  node [shape=circle, style=filled, fillcolor=\"#dbeafe\", color=\"#1d4ed8\", fontname=\"Arial\", fontsize=10, width=0.75, height=0.75, fixedsize=true];",
         "  edge [color=\"#9ca3af\", arrowsize=0.55, penwidth=0.8];",
@@ -158,15 +165,20 @@ def build_dot(
         for target in targets:
             weight = weights[(start, target)]
             tooltip = dot_quote(f"{start} -> {target}; weight {weight:g}")
+            weight_label = (
+                f', label="{weight:g}", fontsize=9, fontname="Arial", '
+                'fontcolor="#374151"'
+                if show_weight_labels else ""
+            )
             if (start, target) in tree_edges:
                 attributes = (
                     'color="#2563eb", penwidth=2.2, arrowsize=0.7, '
-                    f'tooltip="{tooltip}"'
+                    f'tooltip="{tooltip}"{weight_label}'
                 )
             else:
                 attributes = (
                     'color="#9ca3af80", penwidth=0.7, arrowsize=0.5, '
-                    f'constraint=false, tooltip="{tooltip}"'
+                    f'constraint=false, tooltip="{tooltip}"{weight_label}'
                 )
             lines.append(f"  n{start} -> n{target} [{attributes}];")
 
