@@ -7,6 +7,7 @@ Study in this order:
 3. [Installation guide](../docs/INSTALLATION.md) — practical environment and command reference.
 4. [Five-node dataset](../datasets/five_node_graph.json) — graph used for manual and Giraph calculations.
 5. [Verified results](../results/) — answers used to check understanding and program correctness.
+6. [Hinglish Java guide](hinglish-java-guide/) — team-only learning companion explaining the degree, text-reader, and BFS programs line by line. It is not used for compilation.
 
 The roadmap includes websites, books, Wikipedia pages, research papers, YouTube channels, exercises, and completion checkboxes.
 
