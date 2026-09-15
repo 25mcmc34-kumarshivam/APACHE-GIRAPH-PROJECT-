@@ -55,3 +55,10 @@ Every edge has weight `1`. The JSON input format is:
 This repository does not contain passwords, SSH keys, Hadoop data directories, logs, Maven `target/` directories, or generated JAR files. Build the shaded Giraph JAR on the Ubuntu server before running the scripts.
 
 The detailed installation manual is maintained separately in Google Docs. This repository stores the code, datasets, results, and concise reproducibility notes.
+
+## Thirty-node distributed-input experiment
+
+[`datasets/thirty-node-text/`](datasets/thirty-node-text/) contains a 30-vertex,
+79-edge directed graph divided into three text files. Hadoop/Giraph reads the
+directory as one logical dataset. The accompanying source includes a commented
+plain-text reader and BFS, in-degree, and out-degree computations.
