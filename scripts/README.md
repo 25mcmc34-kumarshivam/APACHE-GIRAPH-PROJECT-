@@ -32,6 +32,10 @@ The script checks commands, the shaded Giraph JAR, HDFS input, output-path
 safety, and YARN availability before submitting a job. It always uses the
 project's plain-text `LongDoubleFloatTextInputFormat`.
 
+The runner was verified on the lab server on 16 September 2026 using the
+weighted six-vertex dataset and BFS from source vertex 1. The produced output
+matched the manually calculated hop distances.
+
 HDFS output directories cannot be reused. Choose a new output path or remove
 an old experimental output deliberately after confirming that it is no longer
 needed.

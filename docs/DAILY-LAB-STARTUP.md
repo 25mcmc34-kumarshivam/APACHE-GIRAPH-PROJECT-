@@ -99,13 +99,33 @@ yarn node -list
 Do not submit if NodeManager is missing, a stale node is displayed, or old
 containers never clear.
 
-## 6. Known NodeManager recovery
+## 6. Known NodeManager cleanup problem and recovery
 
-On the reference machine, NodeManager sometimes stops during container cleanup.
+On the reference machine, Hadoop 2.7.7's `DefaultContainerExecutor` sometimes
+stops NodeManager while cleaning up a completed job's process group. The log
+shows `RECEIVED SIGNAL 15: SIGTERM` inside
+`DefaultContainerExecutor.killContainer`, followed by container exit code 143
+and the NodeManager shutdown message. The containers were within their memory
+limits, so this was not an out-of-memory failure or a Giraph algorithm error.
+
 Symptoms include no real NodeManager process, a stale YARN node, three reported
-containers, or a new application remaining in `ACCEPTED`.
+containers, or a new application remaining in `ACCEPTED`. Confirm the real
+process first:
 
-Kill only the waiting application if necessary. Then, as `hduser`:
+```bash
+ps -ef | grep '[N]odeManager'
+```
+
+If no process is printed but ResourceManager is still running, restart only
+NodeManager as `hduser`:
+
+```bash
+yarn-daemon.sh start nodemanager
+yarn node -list
+```
+
+If YARN contains stale registrations or does not recover, kill only the waiting
+application if necessary and perform a clean YARN restart as `hduser`:
 
 ```bash
 stop-yarn.sh
