@@ -76,3 +76,6 @@ total edge weight. Use
 [`scripts/run_text_graph_algorithm.sh`](scripts/run_text_graph_algorithm.sh)
 to run any of the five current algorithms without retyping the long Giraph
 command.
+
+The verified comparison outputs are stored in
+[`results/weighted-bfs-comparison/`](results/weighted-bfs-comparison/).

@@ -69,3 +69,9 @@ The two-hop route `1 -> 2 -> 6` costs `10 + 1 = 11`. The four-hop route
 `1 -> 3 -> 4 -> 5 -> 6` costs only `1 + 1 + 1 + 1 = 4`. Therefore BFS gives
 vertex 6 a distance of 2 hops, while weighted shortest path gives it a total
 cost of 4.
+
+## Verified execution
+
+Both jobs were run successfully with Giraph on 16 September 2026. Their actual
+outputs matched the expected values exactly. See the
+[`verified results`](../../results/weighted-bfs-comparison/).
