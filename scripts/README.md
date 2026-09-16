@@ -1,5 +1,11 @@
 # Reusable Giraph Scripts
 
+Beginner-friendly teaching copies of every script, with detailed English and
+Hinglish comments, are in [`learning-guides/`](learning-guides/README.md).
+They explain variables, Bash syntax, safety checks, Giraph options, input
+parsing, BFS, and diagram generation without making the operational scripts
+harder to maintain.
+
 ## Text graph algorithm runner
 
 `run_text_graph_algorithm.sh` runs the five algorithms currently used in the
