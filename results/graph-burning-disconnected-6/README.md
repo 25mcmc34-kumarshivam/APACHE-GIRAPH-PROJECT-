@@ -23,5 +23,22 @@ not mean the chosen sources covered the graph.
 
 This test shows that the computation does not invent an edge between separate
 input components. It does not prove any minimum burning number or test source
-selection automatically. A three-round follow-up with sources `2:5:4`
-should cover both paths; that prediction has not yet been verified by a job.
+selection automatically.
+
+## Three-round follow-up: both groups covered
+
+We then ran source sequence `2:5:4` with HDFS output path
+`/user/mca2025/giraph_learning/graph_burning_disconnected6_three_round_output`.
+The [actual output](burn-rounds-2-5-4.txt) was:
+
+| Round | What first burns |
+|---:|---|
+| 1 | Vertex 2 (first source). |
+| 2 | Vertices 1 and 3 from vertex 2; vertex 5 as the second source. |
+| 3 | Vertices 4 and 6 from vertex 5; vertex 4 is also the third source. |
+
+All six vertices have finite burn rounds, so this supplied sequence covers
+the graph within three rounds. Notice that selecting vertex 4 in round 3
+does not make it burn earlier: fire from 5 reaches it in that same round.
+This is a coverage result, **not** proof that three rounds are the smallest
+possible number for a disconnected graph.
