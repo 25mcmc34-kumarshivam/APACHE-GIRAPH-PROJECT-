@@ -10,7 +10,7 @@ of edges, yani minimum hops, calculate karta hai. Edge weights ignore hote hain.
 ## Source configure karna
 
 ```java
-public static final LongConfOption SOURCE_ID = new LongConfOption(
+public static final LongConfOption SOURCE\\\_ID = new LongConfOption(
     "LearningBfsComputation.sourceId", 1L,
     "Vertex from which BFS starts");
 ```
@@ -25,17 +25,17 @@ Default source ID `1` hai. Command mein source change kiya ja sakta hai:
 
 ```java
 if (getSuperstep() == 0) {
-  vertex.getValue().set(Double.MAX_VALUE);
+  vertex.getValue().set(Double.MAX\\\_VALUE);
 }
 ```
 
 Sab vertices pehle infinity/unreachable hain. Java mein yahan
-`Double.MAX_VALUE` infinity marker ke roop mein use ho raha hai.
+`Double.MAX\\\_VALUE` infinity marker ke roop mein use ho raha hai.
 
 ```java
 double smallestCandidate =
-    vertex.getId().get() == SOURCE_ID.get(getConf())
-        ? 0.0 : Double.MAX_VALUE;
+    vertex.getId().get() == SOURCE\\\_ID.get(getConf())
+        ? 0.0 : Double.MAX\\\_VALUE;
 ```
 
 Agar current vertex selected source hai, candidate distance zero. Baaki ke liye
@@ -78,9 +78,10 @@ sab vertices inactive ho jate hain, BFS complete hota hai.
 
 ## BFS versus weighted shortest path
 
-- BFS: every edge ka cost one hop. Stored weight ignore hota hai.
-- Weighted shortest path: path cost edge weights ka sum hota hai.
+* BFS: every edge ka cost one hop. Stored weight ignore hota hai.
+* Weighted shortest path: path cost edge weights ka sum hota hai.
 
 Hamare current dataset mein every edge weight `1` hai, so BFS aur weighted
 shortest-path distances equal honge. Later unequal weights wala dataset bana kar
 dono algorithms ka difference clearly demonstrate karna chahiye.
+

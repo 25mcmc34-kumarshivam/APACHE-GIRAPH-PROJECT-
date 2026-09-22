@@ -40,6 +40,9 @@ import org.apache.hadoop.io.LongWritable;
  */
 public class LearningGraphBurningComputation extends BasicComputation<
     LongWritable, DoubleWritable, FloatWritable, DoubleWritable> {
+  // Types above, in order: vertex ID, value stored at a vertex, edge value,
+  // and message value. The input reader uses long IDs, double vertex values,
+  // and float edge weights; our fire messages also carry double values.
 
   /** Colon-separated vertex IDs, one source for each burning round. */
   public static final StrConfOption SOURCE_SEQUENCE = new StrConfOption(
@@ -52,12 +55,16 @@ public class LearningGraphBurningComputation extends BasicComputation<
    * @return Ordered source vertex IDs
    */
   private long[] getSources() {
+    // Giraph passes -ca KEY=VALUE settings to every worker. This reads the
+    // ordered source IDs, for example "3:8:6" for three burning rounds.
     String configured = SOURCE_SEQUENCE.get(getConf()).trim();
     if (configured.isEmpty()) {
       throw new IllegalArgumentException(
           "LearningGraphBurning.sourceSequence cannot be empty");
     }
 
+    // A colon is used because Giraph treats commas inside -ca as separators
+    // between DIFFERENT configuration settings.
     String[] tokens = configured.split(":");
     long[] sources = new long[tokens.length];
     for (int index = 0; index < tokens.length; index++) {
@@ -70,34 +77,45 @@ public class LearningGraphBurningComputation extends BasicComputation<
   public void compute(
       Vertex<LongWritable, DoubleWritable, FloatWritable> vertex,
       Iterable<DoubleWritable> messages) throws IOException {
+    // Giraph calls compute once per active vertex in each superstep.
+    // Each vertex gets only its own state and messages sent to it; it does
+    // not directly read all other vertices as a single local program would.
     long[] sources = getSources();
+    // Computer supersteps start at 0; our human burning rounds start at 1.
     long superstep = getSuperstep();
     long currentRound = superstep + 1;
 
     if (superstep == 0) {
-      // Infinity is the marker for a vertex that has not burned.
+      // Initialize every vertex to "not burned" at the start of the job.
+      // Double.MAX_VALUE is only a marker, not a real number of rounds.
       vertex.getValue().set(Double.MAX_VALUE);
     }
 
     double earliestRound = vertex.getValue().get();
 
-    // Fire messages were sent by vertices that burned in the previous round.
+    // The vertex's stored value is its first known burn round. Messages
+    // arriving now came from neighbours burned in the previous round.
+    // Math.min keeps the earliest arrival if several neighbours send fire.
     for (DoubleWritable message : messages) {
       earliestRound = Math.min(earliestRound, message.get());
     }
 
-    // Exactly one scheduled source is ignited during each configured round.
+    // Source number 0 is ignited in round 1, source number 1 in round 2, etc.
+    // This checks whether THIS vertex is the chosen source for this round.
     if (superstep < sources.length &&
         vertex.getId().get() == sources[(int) superstep]) {
       earliestRound = Math.min(earliestRound, currentRound);
     }
 
+    // An unchanged value means the vertex was already burned earlier (or is
+    // still unburned), so it must not repeat its outgoing messages.
     boolean newlyBurned = earliestRound < vertex.getValue().get();
     if (newlyBurned) {
       vertex.getValue().set(earliestRound);
 
-      // A sequence of k sources defines exactly k rounds. Do not spread fire
-      // into an extra round after the last source has been selected.
+      // A sequence of k sources defines exactly k rounds. A vertex burned
+      // in round r sends (r+1) to neighbours; Giraph delivers it in the next
+      // superstep. Do not create a message for round k+1.
       if (earliestRound < sources.length) {
         double nextRound = earliestRound + 1;
         for (Edge<LongWritable, FloatWritable> edge : vertex.getEdges()) {
@@ -107,8 +125,9 @@ public class LearningGraphBurningComputation extends BasicComputation<
       }
     }
 
-    // All vertices must remain active while future scheduled sources are due.
-    // After the final round, no later message is needed and they may halt.
+    // A future source might receive no message, but it must still execute
+    // when its scheduled round arrives. Therefore vertices do not halt early.
+    // At the end of the final configured round, every vertex may halt.
     if (currentRound >= sources.length) {
       vertex.voteToHalt();
     }
