@@ -125,21 +125,6 @@ activation is not necessarily permanent: an infected vertex later moves to R.
 SIR is used for epidemics, malware propagation and other processes where an
 active infectious period ends.
 
-## 5. What does “LTIDT” mean?
-
-`LTIDT` was not found as a standard graph-spreading or social-network diffusion
-model acronym in the original and survey literature checked for this note. We
-must not invent an expansion. Possible explanations are:
-
-- the faculty listed **LT** and **IDT** as two separate items;
-- it was written with a hyphen or different spelling;
-- it is an acronym defined in a particular paper or slide;
-- it may have referred to a discrete-time form of another model.
-
-Action for the next meeting: show the original photo/slide or ask, “Sir, could
-you please confirm the full form and reference for LTIDT?” Once confirmed, add
-the exact definition and source here.
-
 ## Comparison table
 
 | Model | Deterministic? | How a vertex changes state | Permanent? | Main output |
@@ -220,7 +205,6 @@ Implement one model at a time after GB:
 ## Proposed work for this week
 
 - [x] Understand GB, ICM, LTM and SIR at concept level.
-- [x] Identify that LTIDT requires confirmation.
 - [ ] Draw and manually solve a small Graph Burning example.
 - [ ] Define the Giraph input, output and source-schedule formats.
 - [ ] Implement `LearningGraphBurningComputation.java` as a simulator.

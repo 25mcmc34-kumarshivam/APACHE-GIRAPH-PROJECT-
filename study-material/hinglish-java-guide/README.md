@@ -17,6 +17,7 @@
 2. [In-degree computation](LearningInDegreeComputation-Hinglish.md)
 3. [Plain-text graph reader](LongDoubleFloatTextInputFormat-Hinglish.md)
 4. [Breadth-first search](LearningBfsComputation-Hinglish.md)
+5. [Graph Burning simulator](LearningGraphBurningComputation-Hinglish.md)
 
 ## Common Giraph types
 
