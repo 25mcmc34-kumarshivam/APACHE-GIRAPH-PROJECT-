@@ -10,6 +10,7 @@ Study in this order:
 6. [Hinglish Java guide](hinglish-java-guide/) — team-only learning companion explaining the degree, text-reader, and BFS programs line by line. It is not used for compilation.
 7. [Thirty-node BFS walkthrough](../docs/BFS-THIRTY-NODE-WALKTHROUGH.md) — explains the output, manual levels, Giraph supersteps, example routes, and BFS versus weighted shortest path.
 8. [Graph Burning and diffusion models](graph-burning-and-diffusion-models.md) — explains GB, ICM, LTM and SIR, distinguishes them from BFS, and gives the Giraph implementation roadmap.
+9. [Maven build workflow](maven-build-workflow.md) — explains why we repeatedly build, every part of the command, the JAR check, and how to decide whether a new build is needed.
 
 The roadmap includes websites, books, Wikipedia pages, research papers, YouTube channels, exercises, and completion checkboxes.
 
