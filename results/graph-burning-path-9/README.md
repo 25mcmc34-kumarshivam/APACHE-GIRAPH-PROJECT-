@@ -23,6 +23,10 @@ does not reject a source ID that is absent or already burned, so future tests
 must validate source sequences before interpreting them as valid burning
 sequences. Larger and disconnected graph tests remain to be done.
 
+We also ran the shorter sequence `2:8` for two rounds. Its [actual output](burn-rounds-2-8.txt)
+contains five unburned vertices. The [beginner explanation](../../study-material/graph-burning-two-round-example.md)
+walks through each round and explains the large unburned marker.
+
 ## Commands used
 
 After copying the Java source into the server's Giraph examples package:
