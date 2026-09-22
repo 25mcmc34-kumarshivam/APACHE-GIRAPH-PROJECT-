@@ -160,7 +160,8 @@ burnRound >= 0   means the first round in which it burned
 
 Giraph superstep design:
 
-1. Read the source schedule, for example `3,8,6`.
+1. Read the source schedule, for example `3:8:6`. Giraph uses commas to
+   separate `-ca` settings, so the source IDs use colons.
 2. At superstep 0, ignite source 3 and send a fire message to its neighbours.
 3. At the next superstep, vertices receiving their first fire message record
    that round, send fire onward, and the scheduled source 8 is also ignited.

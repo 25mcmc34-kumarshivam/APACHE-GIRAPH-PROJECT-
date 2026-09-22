@@ -14,7 +14,7 @@ tokens, but Graph Burning ignores the weight.
 ## Source sequence
 
 ```text
-3,8,6
+3:8:6
 ```
 
 ## Manual calculation
@@ -41,3 +41,6 @@ Expected output (`vertex burnRound`):
 
 The graph burns completely in three rounds. This agrees with the known path
 formula `b(P_n) = ceil(sqrt(n))`, which gives `b(P_9) = 3`.
+
+The colon is deliberate: Giraph's `-ca` option splits settings at commas. A
+comma-separated source sequence would be misread as multiple settings.

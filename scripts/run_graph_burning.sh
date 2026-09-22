@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run the deterministic Graph Burning simulator on a text adjacency-list graph.
 # Usage: run_graph_burning.sh INPUT_HDFS_PATH OUTPUT_HDFS_PATH SOURCE_SEQUENCE
-# Example SOURCE_SEQUENCE: 3,8,6
+# Example SOURCE_SEQUENCE: 3:8:6 (Giraph reserves commas in -ca values)
 
 set -euo pipefail
 
@@ -13,6 +13,11 @@ export PATH="$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH"
 INPUT_PATH="${1:?Usage: run_graph_burning.sh INPUT OUTPUT SOURCES}"
 OUTPUT_PATH="${2:?Usage: run_graph_burning.sh INPUT OUTPUT SOURCES}"
 SOURCE_SEQUENCE="${3:?Usage: run_graph_burning.sh INPUT OUTPUT SOURCES}"
+
+if [[ ! "$SOURCE_SEQUENCE" =~ ^-?[0-9]+(:-?[0-9]+)*$ ]]; then
+  echo "ERROR: SOURCES must be colon-separated vertex IDs, for example 3:8:6"
+  exit 2
+fi
 
 GIRAPH_JAR="$HOME/giraph/giraph-examples/target/giraph-examples-1.4.0-SNAPSHOT-hadoop-guava-shaded.jar"
 

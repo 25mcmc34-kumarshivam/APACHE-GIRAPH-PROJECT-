@@ -5,7 +5,7 @@ this Markdown file is only for understanding.
 
 ## Program ka goal
 
-Hum pehle se diya hua source sequence, jaise `3,8,6`, simulate karte hain. Har
+Hum pehle se diya hua source sequence, jaise `3:8:6`, simulate karte hain. Har
 round me ek naya source burn hota hai aur pichhle round me burn hue vertices
 apne neighbours ko message bhejte hain. Final value batati hai vertex pehli baar
 kaunse round me burn hua.
@@ -29,8 +29,9 @@ BasicComputation<LongWritable, DoubleWritable,
 ## Configuration
 
 `StrConfOption SOURCE_SEQUENCE` command ke
-`-ca LearningGraphBurning.sourceSequence=3,8,6` value ko read karta hai.
-`getSources()` commas par split karke `long[] {3, 8, 6}` banata hai. Array
+`-ca LearningGraphBurning.sourceSequence=3:8:6` value ko read karta hai.
+`getSources()` colons par split karke `long[] {3, 8, 6}` banata hai. Giraph
+`-ca` ke andar comma ko alag configuration setting maan leta hai. Array
 order hi burning-round order hai.
 
 ## Superstep and round
@@ -83,7 +84,7 @@ configured round. After that they call `voteToHalt()`.
 
 ## Expected nine-node result
 
-For path `1—2—3—4—5—6—7—8—9` and sequence `3,8,6`:
+For path `1—2—3—4—5—6—7—8—9` and sequence `3:8:6`:
 
 - round 1: vertex 3;
 - round 2: vertices 2, 4 and source 8;

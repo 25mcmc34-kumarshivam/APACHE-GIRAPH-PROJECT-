@@ -35,19 +35,19 @@ import org.apache.hadoop.io.LongWritable;
  * burning number. Example option:</p>
  *
  * <pre>
- * -ca LearningGraphBurning.sourceSequence=3,8,6
+ * -ca LearningGraphBurning.sourceSequence=3:8:6
  * </pre>
  */
 public class LearningGraphBurningComputation extends BasicComputation<
     LongWritable, DoubleWritable, FloatWritable, DoubleWritable> {
 
-  /** Comma-separated vertex IDs, one source for each burning round. */
+  /** Colon-separated vertex IDs, one source for each burning round. */
   public static final StrConfOption SOURCE_SEQUENCE = new StrConfOption(
       "LearningGraphBurning.sourceSequence", "1",
-      "Comma-separated graph-burning source sequence");
+      "Colon-separated graph-burning source sequence");
 
   /**
-   * Convert the configured comma-separated sequence into numeric vertex IDs.
+   * Convert the configured colon-separated sequence into numeric vertex IDs.
    *
    * @return Ordered source vertex IDs
    */
@@ -58,7 +58,7 @@ public class LearningGraphBurningComputation extends BasicComputation<
           "LearningGraphBurning.sourceSequence cannot be empty");
     }
 
-    String[] tokens = configured.split(",");
+    String[] tokens = configured.split(":");
     long[] sources = new long[tokens.length];
     for (int index = 0; index < tokens.length; index++) {
       sources[index] = Long.parseLong(tokens[index].trim());
