@@ -206,12 +206,14 @@ Implement one model at a time after GB:
 ## Proposed work for this week
 
 - [x] Understand GB, ICM, LTM and SIR at concept level.
-- [ ] Draw and manually solve a small Graph Burning example.
-- [ ] Define the Giraph input, output and source-schedule formats.
-- [ ] Implement `LearningGraphBurningComputation.java` as a simulator.
-- [ ] Build the shaded Giraph JAR.
-- [ ] Run and validate it on small graphs.
-- [ ] Add English/Hinglish code explanation, results and weekly report.
+- [x] Draw and manually solve a small Graph Burning example.
+- [x] Define the Giraph input, output and source-schedule formats.
+- [x] Implement `LearningGraphBurningComputation.java` as a simulator.
+- [x] Build the shaded Giraph JAR.
+- [x] Run and validate it on the nine-vertex path.
+- [x] Add English/Hinglish code explanation, results and weekly report.
+- [ ] Test other graph structures and invalid source sequences.
+- [ ] Implement and evaluate a source-selection heuristic.
 
 ## Reliable learning sources
 
