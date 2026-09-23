@@ -85,9 +85,8 @@ The verified comparison outputs are stored in
 The [Giraph Graph Burning computation](src/LearningGraphBurningComputation.java)
 simulates a supplied sequence such as `3:8:6`; it reports each vertex's
 first burn round. Lab-verified runs cover a nine-node path, a seven-node star,
-and two sequences on a disconnected six-node graph. Their outputs are in
-[`results/`](results/). A six-node cycle is prepared but has not yet been
-run in Giraph.
+two sequences on a disconnected six-node graph, and a six-node cycle.
+Their outputs are in [`results/`](results/).
 
 The [local Python source selector](scripts/find_small_graph_burning_sequence.py)
 can validate a supplied sequence, search exactly on up to ten vertices, or
