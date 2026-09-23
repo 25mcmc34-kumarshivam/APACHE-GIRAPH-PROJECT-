@@ -4,6 +4,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Preparing for the 24 September meeting?** Start with the [complete meeting brief](docs/MEETING-2026-09-24-COMPLETE-BRIEF.md). It explains the project, every graph/input format, all verified algorithms and outputs, the Java/Python files, and what remains unfinished in one place.
 
+**Studying only this week's Graph Burning work?** Use the [self-contained Week 10 study sheet](docs/WEEK-10-GRAPH-BURNING-SELF-CONTAINED-STUDY.md). It reproduces the input data, actual outputs, round calculations, code explanations, and limitations on one page.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS
