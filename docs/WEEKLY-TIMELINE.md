@@ -162,16 +162,62 @@ This direction established that the project required both conceptual study and p
 
 ## Week 9 — 11–17 September 2026
 
-**Status:** Planned
+**Status:** Technical work verified; supervisor feedback not yet recorded
 
-- [ ] Confirm the exact project title and approved problem statement.
-- [x] Record the approved project title and supplied problem statement.
-- [ ] Confirm the exact internal evaluation date when announced.
-- [ ] Add the actual Hadoop configuration files to the repository.
-- [ ] Add reusable in-degree and out-degree scripts.
-- [ ] Create an automated tiny-graph result checker.
-- [ ] Begin the Linux and Java foundation checklist.
-- [ ] Prepare a concise demonstration for the Thursday meeting.
+- Responded to the faculty's request for a larger dataset by creating a
+  30-vertex, 79-edge directed graph in three text files. Hadoop/Giraph read
+  all three as one logical input directory.
+- Used a text adjacency-list reader rather than assuming the `.txt` extension
+  would automatically replace the earlier JSON input format.
+- Ran and checked out-degree, in-degree, PageRank, BFS from vertex 1, and
+  weighted shortest path on the 30-node graph. Every edge weight was 1, so
+  BFS hop count and weighted shortest-path cost matched on that graph.
+- Added a separate weighted comparison where the two-hop BFS route and the
+  cheaper four-hop weighted route to vertex 6 differ. The output files and
+  explanation were saved in the repository.
+- Added comments to the Java classes, Hinglish learning guides, a detailed
+  BFS level walkthrough, a 30-node diagram, and reusable run scripts.
+- Recorded the recurring NodeManager shutdown during container cleanup and
+  the clean YARN restart workaround. The permanent reliability fix is not
+  established.
+- Evidence: [Week 9 report](../weekly-reports/2026-09-17-week-09.md),
+  [30-node dataset](../datasets/thirty-node-text/),
+  [BFS walkthrough](BFS-THIRTY-NODE-WALKTHROUGH.md), and
+  [weighted comparison](../results/weighted-bfs-comparison/).
+- Supervisor feedback for this week remains to be entered from the actual
+  meeting notes; it is not inferred from completed terminal work.
+
+## Week 10 — 18–24 September 2026
+
+**Status:** Graph Burning experiments verified; Thursday feedback pending
+
+- Following faculty direction, studied deterministic Graph Burning and
+  implemented `LearningGraphBurningComputation` in Giraph. The Java program
+  evaluates a supplied source sequence; it does not choose sources itself.
+- Tested a nine-node path divided into three files. Sequence `3:8:6` burned
+  all vertices in three rounds; the shorter `2:8` test deliberately left
+  five vertices unburned and clarified the output marker.
+- Tested a seven-node star with `1:2`, a disconnected six-node graph with
+  incomplete and complete sequences, and a six-node cycle with `1:3:4`.
+  Saved each actual Giraph result and its manual explanation.
+- Built a local Python reference checker for exact small-graph source search,
+  source-sequence validation, and a greedy heuristic. Added detailed
+  English comments and separate Hinglish code guides; 11 automated tests
+  passed locally.
+- Created a separate undirected derivative of the earlier directed 30-node
+  graph. Local greedy search proposed `1:18:3:8`. Giraph verified all 30
+  first-burn rounds in four rounds; every value matched the local prediction.
+  A radius-counting lower bound rules out three rounds for this specific
+  undirected derivative. These results must not be labelled results on the
+  original directed graph.
+- The recurring NodeManager shutdown required clean YARN restarts between
+  several jobs; this is still an environment reliability issue.
+- Evidence: [Week 10 report](../weekly-reports/2026-09-24-week-10.md),
+  [Graph Burning results](../results/graph-burning-30-undirected/), and
+  [source-selection explanation](../study-material/graph-burning-source-selection-30.md).
+- Next research stage: automatic source choice inside Giraph and a reliable
+  NodeManager fix. Record the supervisor's actual Thursday feedback after
+  the meeting; do not invent it in advance.
 
 ## Future weekly entry template
 
