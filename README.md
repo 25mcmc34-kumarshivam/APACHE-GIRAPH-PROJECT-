@@ -2,6 +2,8 @@
 
 This repository records the Apache Hadoop and Apache Giraph learning work completed on the single-node Ubuntu lab server.
 
+**Preparing for the 24 September meeting?** Start with the [complete meeting brief](docs/MEETING-2026-09-24-COMPLETE-BRIEF.md). It explains the project, every graph/input format, all verified algorithms and outputs, the Java/Python files, and what remains unfinished in one place.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS
@@ -19,6 +21,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 - In-degree calculation
 - Breadth-first search (BFS)
 - Single-source shortest paths
+- Graph Burning simulation for supplied source sequences, with local Python source checking
 - Giraph/Hadoop Guava compatibility repair using a shaded JAR
 
 ## Repository layout
