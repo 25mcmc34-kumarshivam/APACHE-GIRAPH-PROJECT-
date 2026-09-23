@@ -30,7 +30,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 - `diagrams/` contains exact graph visualizations and editable Graphviz source.
 - `docs/` contains the installation guide, lab record, and operating notes.
 
-Start with [`docs/INSTALLATION.md`](docs/INSTALLATION.md) when preparing a new Ubuntu machine. After installation, run `scripts/check_environment.sh` to check the commands, versions, HDFS, and YARN before submitting a graph job.
+For a new Ubuntu 22.04 machine, start with [`setup/UBUNTU-22.04-FROM-SCRATCH.md`](setup/UBUNTU-22.04-FROM-SCRATCH.md). After installation, run `scripts/check_environment.sh` to check the commands, versions, HDFS, and YARN before submitting a graph job. The older [`docs/INSTALLATION.md`](docs/INSTALLATION.md) records the lab setup but is not the clean-machine checklist.
 
 For structured study from basic Linux through distributed computing, Hadoop, Giraph, graph algorithms, and research work, follow [`docs/STUDY-ROADMAP.md`](docs/STUDY-ROADMAP.md). The shorter [`docs/LEARNING-GUIDE.md`](docs/LEARNING-GUIDE.md) explains the algorithms used in the completed lab.
 

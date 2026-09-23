@@ -1,0 +1,67 @@
+diff --git a/giraph-core/src/main/java/org/apache/giraph/worker/AllWorkersInfo.java b/giraph-core/src/main/java/org/apache/giraph/worker/AllWorkersInfo.java
+index 32cc8c5..a6d7ca8 100644
+--- a/giraph-core/src/main/java/org/apache/giraph/worker/AllWorkersInfo.java
++++ b/giraph-core/src/main/java/org/apache/giraph/worker/AllWorkersInfo.java
+@@ -51,11 +51,10 @@ public class AllWorkersInfo {
+         Preconditions.checkState(
+             task > workerInfos.get(i - 1).getTaskId(), "Tasks not ordered");
+       }
+-      Preconditions.checkState(task >= 0, "Task not specified, %d", task);
++      Preconditions.checkState(task >= 0, "Task not specified, " + task);
+       int old = taskIdToIndex.put(task, i);
+       Preconditions.checkState(old == -1,
+-          "Task with %d id found twice (positions %d and %d)",
+-          task, i, old);
++          "Task with " + task + " id found twice (positions " + i + " and " + old + ")");
+     }
+ 
+     myWorkerIndex = getWorkerIndex(myWorker);
+diff --git a/giraph-examples/pom.xml b/giraph-examples/pom.xml
+index 470c742..d731163 100644
+--- a/giraph-examples/pom.xml
++++ b/giraph-examples/pom.xml
+@@ -45,6 +45,31 @@ under the License.
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-assembly-plugin</artifactId>      
+       </plugin>      
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId>
++        <artifactId>maven-shade-plugin</artifactId>
++        <version>3.2.4</version>
++        <executions>
++          <execution>
++            <id>shade-guava-for-hadoop</id>
++            <phase>package</phase>
++            <goals>
++              <goal>shade</goal>
++            </goals>
++            <configuration>
++              <shadedArtifactAttached>true</shadedArtifactAttached>
++              <shadedClassifierName>hadoop-guava-shaded</shadedClassifierName>
++              <createDependencyReducedPom>false</createDependencyReducedPom>
++              <relocations>
++                <relocation>
++                  <pattern>com.google.common</pattern>
++                  <shadedPattern>org.apache.giraph.shaded.com.google.common</shadedPattern>
++                </relocation>
++              </relocations>
++            </configuration>
++          </execution>
++        </executions>
++      </plugin>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-checkstyle-plugin</artifactId>
+diff --git a/pom.xml b/pom.xml
+index cb92756..11dcc7f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -329,7 +329,7 @@ under the License.
+     <dep.fasterxml-jackson.version>2.10.0</dep.fasterxml-jackson.version>
+     <dep.fastutil.version>6.5.4</dep.fastutil.version>
+     <dep.google.findbugs.version>2.0.2</dep.google.findbugs.version>
+-    <dep.guava.version>21.0</dep.guava.version>
++    <dep.guava.version>11.0.2</dep.guava.version>
+     <dep.jaxb-impl.version>2.2.4-1</dep.jaxb-impl.version>
+     <dep.jersey.version>1.17</dep.jersey.version>
+     <dep.jetty.version>6.1.26</dep.jetty.version>

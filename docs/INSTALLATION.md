@@ -1,5 +1,7 @@
 # Hadoop and Giraph Installation Guide
 
+> For a **new laptop**, use [the check-before-install Ubuntu 22.04 guide](../setup/UBUNTU-22.04-FROM-SCRATCH.md) instead. This file records the original lab configuration and omits some fresh-install safeguards.
+
 This guide reproduces the software arrangement used in the lab. Read each verification result before continuing. Do not paste the whole document into a terminal at once.
 
 ## 1. Target arrangement

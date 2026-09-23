@@ -1,6 +1,6 @@
 # Setup
 
-Use the [complete installation guide](../docs/INSTALLATION.md) to reproduce the Ubuntu, Java 8, Hadoop 2.7.7, and Giraph environment.
+For a new Ubuntu 22.04 laptop, use the [from-scratch, check-before-install guide](UBUNTU-22.04-FROM-SCRATCH.md). It includes the verified Hadoop XML examples and the pinned Giraph compatibility patch. The [older lab installation notes](../docs/INSTALLATION.md) are useful historical context, but are not a complete clean-machine procedure.
 
 For normal daily work after installation, follow the
 [daily lab startup checklist](../docs/DAILY-LAB-STARTUP.md), including dynamic
@@ -14,11 +14,10 @@ chmod +x scripts/check_environment.sh
 ./scripts/check_environment.sh
 ```
 
-Planned additions:
+Included here:
 
-- [ ] Sanitized copies of the four verified Hadoop XML files
-- [ ] Verified shell environment example
-- [ ] Giraph Guava shade-plugin patch
-- [ ] Version manifest and file checksums
+- `config/`: sanitized single-node Hadoop XML files for the fresh-install profile.
+- `patches/`: Guava compatibility patch for pinned Giraph revision `14a74297378dc1584efbb698054f0e8bff4f90bc`.
+- `UBUNTU-22.04-FROM-SCRATCH.md`: conditional installation and smoke-test procedure.
 
 Do not store passwords, SSH keys, live Hadoop data, or machine-specific secrets here.
