@@ -94,6 +94,7 @@ propose a greedy sequence for a larger teaching graph. Its greedy mode is
 not generally an optimality proof. We made a separate
 [undirected version of the 30-node graph](datasets/thirty-node-undirected-burning/)
 for this experiment; the original directed graph is unchanged. The proposed
-four-round sequence is **local-only until verified in Giraph**. Start with
+four-round sequence `1:18:3:8` was [verified in Giraph](results/graph-burning-30-undirected/),
+with all 30 values matching the local prediction. Start with
 the [Graph Burning study note](study-material/graph-burning-source-selection-30.md)
 and the [Hinglish Python code guide](study-material/hinglish-code-guide/find-small-graph-burning-sequence-Hinglish.md).

@@ -19,8 +19,10 @@ python3 scripts/find_small_graph_burning_sequence.py \
 
 It chose `1:18:3:8`: source 1 in round 1, 18 in round 2, 3 in round 3,
 and 8 in round 4. Its local BFS calculation predicted all 30 vertices
-burning by the end of round 4. This is a **local Python prediction**, not a
-completed Hadoop/Giraph job. The older PageRank, degree and BFS results
+burning by the end of round 4. We then ran the same sequence in Giraph:
+all 30 first-burn rounds matched the local prediction. The
+[actual cluster output](../results/graph-burning-30-undirected/) is saved
+separately. The older PageRank, degree and BFS results
 used the original **directed** dataset and must not be mixed with this one.
 
 ## Why can we say four is minimum for this particular graph?
@@ -42,12 +44,11 @@ Greedy alone cannot prove it. A separate counting argument can:
 This reasoning uses undirected edge-count distances. It does not prove
 that the greedy method always finds a minimum on other graphs.
 
-## What still needs a lab run?
+## Lab verification
 
-Copy the three undirected part files to `mca2025`; upload them to a **new**
-HDFS input directory, not the original directed one. Check that it has 30
-vertex lines, check one real NodeManager, then run the existing Graph Burning
-script with `1:18:3:8` and a new output path. Compare all 30 Giraph results
-against local predicted burn rounds. Only then call it a verified cluster
-result. If YARN is unhealthy, use the
-[daily startup guide](../docs/DAILY-LAB-STARTUP.md).
+The three undirected part files were uploaded to a new HDFS directory, not
+the original directed input. The Giraph runner completed with `1:18:3:8`;
+all 30 output values matched the local checker exactly. NodeManager needed
+another clean YARN restart before submission, following the
+[daily startup guide](../docs/DAILY-LAB-STARTUP.md). That recurring YARN
+reliability issue is separate from the Graph Burning result.
