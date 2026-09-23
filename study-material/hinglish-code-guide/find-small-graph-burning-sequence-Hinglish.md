@@ -12,6 +12,14 @@ graph ko padhkar source sequence dhundta hai. Python local machine par chalta
 hai; HDFS, YARN, Maven ya Java JAR iske liye zaroori nahi. Python ka result
 Giraph me test karna alag experiment hai.
 
+Ab script ke **teen modes** hain:
+
+| Mode | Kaam | Minimum prove karta hai? |
+|---|---|---|
+| No flag | Chhote graph me all source orders check | Haan, agar limit hit na ho |
+| `--greedy` | Jaldi useful sources propose karo | Aam taur par nahi |
+| `--check-sequence 3:8:6` | Di hui list valid/complete hai kya | Nahi; sirf list ko check karta hai |
+
 ## Input line ka meaning
 
 ```text
@@ -144,8 +152,56 @@ aur source rounds ka difference bhi 1.
 
 `states` tries count karta hai. Bahut guesses hone par `SearchLimitReached`
 error deta hai. Error ka matlab "minimum nahi pata", **not** "minimum
-nahi hai". Input limit 10 vertices hai. 30-node ya huge graph ke liye
-future heuristic/distributed method chahiye.
+nahi hai". **Exact mode** ki input limit 10 vertices hai. 30-node graph
+ke liye neeche wala greedy mode use kar sakte hain; very large graph ke
+liye aage distributed method chahiye.
+
+## `burn_rounds(graph, sequence)` — source list check
+
+Ye function human ya Giraph sequence ko independently check karta hai.
+Unknown source ID (jaise graph me 99 nahi), repeated source (`3:3`), aur
+jo source apne selected round **se pehle** jal chuka tha, un par error.
+Lekin usi round me kisi aur source ki fire pahunch rahi ho to source allowed
+hai: round start hone par woh unburned tha. Star graph me `1:2` isi tarah
+valid hai.
+
+Har vertex ka arrival = `source_round + BFS_distance`. Sab possible
+sources ke arrivals me minimum uska first-burn round hai. Agar minimum
+total scheduled rounds ke baad hai, result `None` hota hai aur screen par
+`UNBURNED` print hota hai. Java ka huge `Double.MAX_VALUE` yahan nahi.
+**Java/Giraph job abhi khud invalid source sequence reject nahi karta**;
+ye local Python pre-check hai.
+
+## `greedy_sequence(graph)` — automatic, par general proof nahi
+
+Greedy har proposed total length `k` ke liye ek sequence banata hai. Har
+round me woh legal source chunta hai jo final round tak sabse zyada **naye**
+vertices cover kare. `k=4` me round-1 source radius 3, round-2 radius 2,
+round-3 radius 1, round-4 radius 0 cover kar sakta hai.
+
+```python
+for total_rounds in range(1, len(vertices) + 1): # 1, phir 2, phir 3...
+    chosen = []                                      # is k ke sources
+    covered = set()                                  # final tak covered nodes
+    for round_number in range(1, total_rounds + 1):
+        radius = total_rounds - round_number
+        # Har legal candidate ka new coverage count karo.
+        # Sabse bada count wala candidate choose karo.
+```
+
+Do candidates same score dein to chhota vertex ID choose hota hai; isliye
+har run repeatable hai. Greedy ek branch choose karta hai, exact search
+jaisa sab possible orders nahi dekhta. Complete sequence bhi normally
+minimum rounds ka proof nahi. 30-node graph par use kar sakte hain:
+
+```bash
+python3 scripts/find_small_graph_burning_sequence.py \
+  datasets/thirty-node-undirected-burning --greedy
+```
+
+Output `1:18:3:8` aur 30/30 burned **local** prediction hai. Original
+30-node graph directed tha; naye folder me edge ko two-way banaya hai.
+Original graph change nahi hua. Giraph cluster run alag se verify hoga.
 
 ## `main()` aur printed output
 

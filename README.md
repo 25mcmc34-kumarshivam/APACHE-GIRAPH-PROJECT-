@@ -79,3 +79,22 @@ command.
 
 The verified comparison outputs are stored in
 [`results/weighted-bfs-comparison/`](results/weighted-bfs-comparison/).
+
+## Graph Burning work
+
+The [Giraph Graph Burning computation](src/LearningGraphBurningComputation.java)
+simulates a supplied sequence such as `3:8:6`; it reports each vertex's
+first burn round. Lab-verified runs cover a nine-node path, a seven-node star,
+and two sequences on a disconnected six-node graph. Their outputs are in
+[`results/`](results/). A six-node cycle is prepared but has not yet been
+run in Giraph.
+
+The [local Python source selector](scripts/find_small_graph_burning_sequence.py)
+can validate a supplied sequence, search exactly on up to ten vertices, or
+propose a greedy sequence for a larger teaching graph. Its greedy mode is
+not generally an optimality proof. We made a separate
+[undirected version of the 30-node graph](datasets/thirty-node-undirected-burning/)
+for this experiment; the original directed graph is unchanged. The proposed
+four-round sequence is **local-only until verified in Giraph**. Start with
+the [Graph Burning study note](study-material/graph-burning-source-selection-30.md)
+and the [Hinglish Python code guide](study-material/hinglish-code-guide/find-small-graph-burning-sequence-Hinglish.md).
