@@ -4,7 +4,7 @@ This is the **lab-compatible** setup for a new Ubuntu laptop. We use Ubuntu 22.0
 
 Work through one section at a time. Commands labelled **administrator**, **hduser** and **mca2025** must run in those accounts. If a check finds an existing Hadoop installation or HDFS data, **stop**: this fresh-install path must not overwrite it. Nothing in this guide requires deleting an installation or formatting an existing NameNode. The two account names match our scripts and HDFS examples; they are service/development roles, not the professor's login.
 
-This is a procedure, not a claim that every laptop has been tested. Our lab server ran the final algorithms; a second clean Ubuntu laptop still needs an end-to-end trial.
+Validation status (23 September 2026): we built the pinned Giraph source and ran a three-file Hadoop MapReduce job and a 30-vertex Giraph BFS job on a second Ubuntu 22.04 computer. Its existing Hadoop 2.9.2 installation and data were left untouched; our Hadoop 2.7.7 test ran in an isolated directory. The exact two-account, administrator-assisted installation below has **not** yet been trialled from start to finish on a blank laptop. Check each stop point rather than assuming the commands fit an existing machine.
 
 ## 0. Preflight — administrator's Ubuntu terminal
 
@@ -15,15 +15,17 @@ free -h
 df -h / /usr/local /home
 sudo -v
 command -v java || true
+command -v javac || true
 command -v hadoop || true
 command -v git || true
 command -v mvn || true
 getent passwd hduser || true
 getent passwd mca2025 || true
 ls -ld /usr/local/hadoop /home/hduser/hadoop_tmp 2>/dev/null || true
+ls -ld /opt/hadoop /opt/hadoop/* /home/"$USER"/hadoop_data 2>/dev/null || true
 ```
 
-Continue only for **Ubuntu 22.04**, **x86_64**, working `sudo`, approximately **16 GB RAM and 40 GB free disk**. 8 GB RAM might be possible with a smaller YARN configuration but is *not* this tested profile. If `hadoop` exists or `/usr/local/hadoop` or `/home/hduser/hadoop_tmp` already exists, inspect that installation first; do not follow the Hadoop extraction/configuration/format steps below. If a different Java is the system default, that is fine: we explicitly select Java 8 for these two accounts. Do not change the professor's global Java default.
+Continue only for **Ubuntu 22.04**, **x86_64**, working `sudo`, approximately **16 GB RAM and 40 GB free disk**. 8 GB RAM might be possible with a smaller YARN configuration but is *not* this tested profile. If `hadoop` exists **or** Hadoop appears under `/opt/hadoop`, `/usr/local/hadoop`, or an account's data directory, inspect it first; a missing `hadoop` command does **not** prove that Hadoop is absent. Do not follow the Hadoop extraction/configuration/format steps below on an existing installation. If a different Java or `javac` is the system default, that is fine: we explicitly select Java 8 for these two accounts. Do not change the professor's global Java default.
 
 Check network access to GitHub and the Apache archive. If TLS verification fails, fix the laptop/network trust configuration; do **not** use `curl -k` or disable certificate verification.
 
@@ -154,6 +156,32 @@ export PATH="$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH"
 
 If `hadoop-conf-original` exists, stop and choose a different backup name; never overwrite a backup. In `$HADOOP_CONF_DIR/hadoop-env.sh`, set the existing `export JAVA_HOME=` line to `/usr/lib/jvm/java-8-openjdk-amd64` (use an editor; avoid adding two conflicting lines). Verify with `grep -n JAVA_HOME "$HADOOP_CONF_DIR/hadoop-env.sh"`.
 
+### Ubuntu 22.04 / Hadoop 2.7.7 NodeManager compatibility
+
+This is required for the tested version combination. Hadoop 2.7.7 invokes `kill -15 -PROCESS_GROUP` when it cleans up a container. On our Ubuntu 22.04 test PC, `/usr/bin/kill` interpreted that form as `kill(0, SIGTERM)`, terminating the NodeManager's own group. We reproduced it with `strace` and confirmed that adding `--` sends the signal to the intended container group. The project wrapper changes **only** this two-argument process-group form and is used **only** by Hadoop daemons through `yarn-env.sh`; it does not replace the system's `kill` command.
+
+First type `exit` to leave the `hduser` shell and return to the **administrator** shell. Then install the reviewed wrapper for `hduser` on this new setup:
+
+```bash
+exit
+sudo install -d -m 755 -o hduser -g hadoop /home/hduser/giraph-compat
+sudo install -m 755 -o hduser -g hadoop /home/mca2025/giraph-learning-lab/setup/compat/kill /home/hduser/giraph-compat/kill
+sudo -u hduser bash -n /home/hduser/giraph-compat/kill
+sudo -iu hduser
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HADOOP_HOME=/usr/local/hadoop
+export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
+export PATH="$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH"
+```
+
+As **hduser**, open `/usr/local/hadoop/etc/hadoop/yarn-env.sh` and add this line once at the end:
+
+```bash
+export PATH="/home/hduser/giraph-compat:$PATH"
+```
+
+Check it with `grep -n 'giraph-compat' "$HADOOP_CONF_DIR/yarn-env.sh"`. Do not add this directory to every user's global `PATH`. If your Hadoop release or OS differs, investigate first; do not assume this wrapper is needed there.
+
 Persist the environment **once** in `/home/hduser/.bashrc` (use `nano`; do not add duplicate/conflicting exports):
 
 ```bash
@@ -228,7 +256,7 @@ git rev-parse HEAD
 
 If `giraph` existed before this guide, **do not change its checkout** until you have inspected its status and revision. If a fresh clone cannot find the commit, run `git fetch origin trunk` and retry. The source revision is from [Apache Giraph's repository](https://github.com/apache/giraph).
 
-Apply our reviewed Guava/Hadoop patch once:
+Apply our reviewed shading patch once:
 
 ```bash
 PATCH_FILE="$HOME/giraph-learning-lab/setup/patches/giraph-hadoop-2.7.7.patch"
@@ -242,12 +270,12 @@ fi
 git diff --stat
 ```
 
-If the `STOP` branch prints, **do not build yet**. The patch changes Giraph's Guava dependency to Hadoop's version, replaces two incompatible `Preconditions` overloads, and relocates Guava in an attached shaded JAR so Giraph and Hadoop do not load conflicting classes.
+If the `STOP` branch prints, **do not build yet**. Keep the pinned Giraph source's Guava **21.0** dependency for compilation: changing it to Hadoop's 11.0.2 caused missing `MoreObjects` symbols in a clean build. The patch adds a shaded examples JAR that relocates Giraph's Guava classes so Hadoop can still use its own older Guava at runtime.
 
-Copy this project's five Java examples **before** building. If destination files already exist and differ, inspect them instead of overwriting them:
+Copy this project's **four new `Learning*Computation.java` classes** before building. The `LongDoubleFloatTextInputFormat.java` in this study repository is an annotated copy of a class already present upstream; **do not overwrite the upstream file**. If a destination already exists and differs, inspect it instead of overwriting it:
 
 ```bash
-for source_file in "$HOME"/giraph-learning-lab/src/*.java; do
+for source_file in "$HOME"/giraph-learning-lab/src/Learning*Computation.java; do
   target_file="$HOME/giraph/giraph-examples/src/main/java/org/apache/giraph/examples/$(basename "$source_file")"
   if test -e "$target_file"; then cmp -s "$source_file" "$target_file" || { echo "STOP: different existing file: $target_file"; exit 1; }; else cp "$source_file" "$target_file"; fi
 done
@@ -256,14 +284,14 @@ done
 If any `STOP` printed, resolve it before building. Our study repository contains custom example classes; it is not a replacement for upstream Giraph. Build from `$HOME/giraph`:
 
 ```bash
-mvn clean -Phadoop_2 -DskipTests -Dgiraph.maven.duplicate.finder.skip=true package
+mvn -s "$HOME/giraph-learning-lab/setup/maven-settings-https.xml" -B clean -Phadoop_2 -DskipTests -Dgiraph.maven.duplicate.finder.skip=true package
 test -s giraph-examples/target/giraph-examples-1.4.0-SNAPSHOT-hadoop-guava-shaded.jar
 jar tf giraph-examples/target/giraph-examples-1.4.0-SNAPSHOT-hadoop-guava-shaded.jar | grep -m1 '^org/apache/giraph/shaded/com/google/common/base/Preconditions.class$'
 if jar tf giraph-examples/target/giraph-examples-1.4.0-SNAPSHOT-hadoop-guava-shaded.jar | grep -q '^com/google/common/'; then echo 'STOP: unrelocated Guava remains'; fi
 jar tf giraph-examples/target/giraph-examples-1.4.0-SNAPSHOT-hadoop-guava-shaded.jar | grep 'LearningBfsComputation.class'
 ```
 
-Expected: `BUILD SUCCESS`, a nonempty shaded JAR, a relocated Guava class, **no** original `com/google/common/` classes, and our learning class. Maven downloads dependencies during the first build, so this step needs network access and can take longer than the lab's later rebuilds.
+Expected: `BUILD SUCCESS`, a nonempty shaded JAR, a relocated Guava class, **no** original `com/google/common/` classes, and our learning class. The pinned upstream POM contains an obsolete HTTP Maven repository; the supplied settings file routes downloads through HTTPS Maven Central. Its `mirrorOf=*` applies to this command only; do not install it globally for unrelated projects. Maven downloads dependencies during the first build, so this step needs network access and can take longer than later rebuilds. On the second PC, this exact shaded build completed in about 85 seconds after dependencies were available.
 
 Persist the same four environment exports in `/home/mca2025/.bashrc` once. Open a new login and check `java -version`, `hadoop version`, `mvn -version`, `command -v yarn`. `jps` run as `mca2025` may show only that user's processes; check daemon health with `yarn node -list` and `hdfs dfsadmin -report`, or use `jps` as `hduser`.
 
@@ -282,12 +310,17 @@ else
   hdfs dfs -put datasets/thirty-node-text/part-*.txt /user/mca2025/giraph_learning/install_smoke_input/
 fi
 hdfs dfs -ls /user/mca2025/giraph_learning/install_smoke_input
+MAPREDUCE_OUTPUT="/user/mca2025/giraph_learning/install_smoke_wordcount_$(date +%Y%m%d_%H%M%S)"
+hadoop jar "$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar" wordcount /user/mca2025/giraph_learning/install_smoke_input "$MAPREDUCE_OUTPUT"
+hdfs dfs -cat "$MAPREDUCE_OUTPUT"/part-r-00000 | head -n 5
 SMOKE_OUTPUT="/user/mca2025/giraph_learning/install_smoke_bfs_$(date +%Y%m%d_%H%M%S)"
 ./scripts/run_text_graph_algorithm.sh bfs /user/mca2025/giraph_learning/install_smoke_input "$SMOKE_OUTPUT" 1
 hdfs dfs -cat "$SMOKE_OUTPUT"/part-m-\* | sort -n | head -n 10
+ps -ef | grep '[N]odeManager'
+yarn node -list
 ```
 
-The input directory should contain **three** text parts. BFS from vertex 1 should begin `1 0.0`, `2 1.0`, `3 2.0`, `4 3.0` (tabs/spaces may differ). Compare the full result with `results/` only after a successful job. If the job waits for resources, check `yarn node -list`; `ACCEPTED` with no live node is not a computation in progress.
+The input directory should contain **three** text parts. Wordcount must finish successfully, including its reducer; this tests container cleanup before Giraph. BFS from vertex 1 should begin `1 0.0`, `2 1.0`, `3 2.0`, `4 3.0` (tabs/spaces may differ). The Giraph job should report 30 vertices and 79 edges. Compare the full result with `results/` only after a successful job. The NodeManager must still be alive after both jobs. If the job waits for resources, check both `yarn node -list` **and the live NodeManager process as `hduser`**; a stale node listing alone is not proof the process survived. `ACCEPTED` with no live node is not a computation in progress.
 
 ## Daily use and important stop points
 
