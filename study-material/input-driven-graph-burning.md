@@ -5,8 +5,8 @@ validator, formatter and nine-node example are in the repository. The local
 Python tests pass. The lab Maven build succeeded and both new classes are in
 the shaded JAR. The three input parts were uploaded to HDFS and validated
 after reading them back. The **Giraph job completed on the nine-node path**,
-and all nine actual formatted rows match the prediction below. `NB -1` has
-passed local tests but still needs a deliberately incomplete Giraph run.
+and all nine actual formatted rows match the prediction below. A second
+two-round Giraph run on the same path confirmed five actual `NB -1` rows.
 
 This is a new variant, not a replacement for the earlier working
 `LearningGraphBurningComputation` and `run_graph_burning.sh`. Keeping both
@@ -99,7 +99,9 @@ The local validator predicted, and the 30 September Giraph run produced:
 To test `NB -1`, use the separately committed dataset
 `datasets/graph-burning-path-9-two-round-scheduled/`: vertex 2 is selected
 in round 1 and vertex 8 in round 2. By the end, only 1, 2, 3 and 8 have
-burned; vertices 4, 5, 6, 7 and 9 should be `NB -1`. **Do not modify the
+burned; vertices 4, 5, 6, 7 and 9 should be `NB -1`. The lab Giraph result
+on 30 September matched this prediction; see
+`results/graph-burning-path-9-two-round-scheduled/`. **Do not modify the
 three-round example in place**; keep each test in its own input directory
 and output path.
 
@@ -174,9 +176,12 @@ of these checks proves a YARN job completed or the output is correct.**
    and the expected `3:8:6` schedule.
 5. Run `bash "$HOME/giraph/run_graph_burning_from_input.sh" INPUT OUTPUT`
    with a new output name. No `3:8:6` argument is required. **Completed
-   on the nine-node path on 30 September.**
+   on both the three-round and two-round nine-node paths on 30 September.**
+   Use `bash` explicitly if the transferred file is not executable; the
+   direct invocation will otherwise say `Permission denied`.
 6. Inspect `OUTPUT/part-00000`; compare all nine rows to the prediction.
-   All nine rows matched. The actual output is saved under `results/`.
+   All nine rows matched in both runs, including five actual `NB -1` rows
+   in the two-round run. Both outputs are saved under `results/`.
    Also inspect `OUTPUT.__giraph_raw/part-m-*` if a value looks wrong.
 7. Only after success, copy the actual HDFS result into `results/`, record
    the YARN application ID/build result, and update the Week 11 report.
@@ -184,8 +189,8 @@ of these checks proves a YARN job completed or the output is correct.**
 ### Known limits and honest presentation
 
 This version is for the existing **one-source-per-round, undirected**
-Graph Burning model. The complete-coverage path test ran on the lab server;
-the incomplete-coverage `NB -1` test is pending. It does not
+Graph Burning model. Both complete-coverage and incomplete-coverage path
+tests ran on the lab server. This version does not
 automatically select the sources, change the mathematical model, or solve
 the recurring NodeManager problem. The new preflight scans the full input
 locally and is meant for the current teaching datasets, not a scalability

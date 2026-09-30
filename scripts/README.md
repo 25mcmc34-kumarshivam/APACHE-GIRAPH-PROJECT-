@@ -59,6 +59,9 @@ needed.
   and `format_burning_output.py` to create `vertex B/NB round` output. The
   full explanation is in `study-material/input-driven-graph-burning.md`.
   The lab-server Giraph build passed on 30 September and packaged both new
-  classes. The new runner completed on the nine-node scheduled path, and
-  all actual `B`/round values matched the prediction. A separate
-  incomplete-coverage run is still needed to verify `NB -1` in Giraph.
+  classes. The new runner completed on both the three-round complete path
+  and the two-round incomplete path. Actual `B`/round and `NB -1` values
+  matched both predictions; see the matching directories under `results/`.
+  Invoke the lab copy as `bash "$HOME/giraph/run_graph_burning_from_input.sh"`
+  if it lacks executable permission (a direct invocation then says
+  `Permission denied`). This does not require a rebuild.

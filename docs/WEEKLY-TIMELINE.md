@@ -224,7 +224,8 @@ This direction established that the project required both conceptual study and p
 **Status as of 30 September:** new input-driven Graph Burning variant tested
 locally, compiled in the lab Giraph build, uploaded/validated in HDFS, and
 successfully run on the nine-node path. All nine actual `B`/round rows match
-the prediction. `NB -1` in a real incomplete run is still pending. The
+the prediction. A separate two-round run also confirmed five actual `NB -1`
+rows, matching the local prediction. The
 [week report](../weekly-reports/2026-10-01-week-11.md) and
 [full explanation](../study-material/input-driven-graph-burning.md) record
 the file format, code, predictions, tests, and verification checklist.
@@ -235,10 +236,14 @@ the file format, code, predictions, tests, and verification checklist.
   vertices still unburned after the scheduled rounds.
 - The implementation keeps one source per round, matching earlier tests.
   Local validation and 21 Python tests passed, and both Java classes were
-  found in the shaded JAR after `BUILD SUCCESS`; **no new lab cluster result
-  is claimed yet**.
-- Next: run a deliberately incomplete schedule to verify `NB -1` on the
-  lab machine, save evidence, and record any problems and Sir's next feedback.
+  found in the shaded JAR after `BUILD SUCCESS`. Both lab Giraph runs
+  completed, and the results are saved under `results/`.
+- Before the incomplete run, a stale YARN node registration was cleared by
+  restarting the old ResourceManager, after confirming no active job and
+  only one real NodeManager process. The transferred runner lacked execute
+  permission, so it was run explicitly with `bash`.
+- Next: ask Sir which Graph Burning extension should follow this verified
+  one-source-per-round input format; record actual meeting feedback.
 
 ## Future weekly entry template
 

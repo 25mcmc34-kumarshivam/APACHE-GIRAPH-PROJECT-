@@ -6,7 +6,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Studying only this week's Graph Burning work?** Use the [self-contained Week 10 study sheet](docs/WEEK-10-GRAPH-BURNING-SELF-CONTAINED-STUDY.md). It reproduces the input data, actual outputs, round calculations, code explanations, and limitations on one page.
 
-**Week 11 work in progress:** [input-driven Graph Burning explanation](study-material/input-driven-graph-burning.md) records the new schedule-in-the-file format, `B`/`NB` output, code, local tests, and the still-pending lab verification. The old working runner is preserved.
+**Week 11:** [input-driven Graph Burning explanation](study-material/input-driven-graph-burning.md) records the new schedule-in-the-file format, `B`/`NB` output, code, local tests, and two verified lab runs (including actual `NB -1`). The old working runner is preserved.
 
 ## Verified environment
 

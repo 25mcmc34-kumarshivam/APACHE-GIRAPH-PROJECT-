@@ -26,6 +26,8 @@ predicted readable output is:
 9  NB -1
 ```
 
-Local prediction is not a Giraph result. Keep this dataset in its own HDFS
-input directory and give its job a new HDFS output path. Do not modify or
-overwrite the complete three-round example.
+The prediction was confirmed by an actual lab Giraph run on 30 September
+2026. The captured result is in
+`results/graph-burning-path-9-two-round-scheduled/`. Keep this dataset in
+its own HDFS input directory and use a new output path for any repeat run.
+Do not modify or overwrite the complete three-round example.
