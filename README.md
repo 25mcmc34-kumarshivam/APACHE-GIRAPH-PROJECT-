@@ -8,6 +8,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Week 11:** [input-driven Graph Burning explanation](study-material/input-driven-graph-burning.md) records the new schedule-in-the-file format, `B`/`NB` output, code, local tests, and two verified lab runs (including actual `NB -1`). The old working runner is preserved.
 
+**Next direct experiment:** [hand-picked, non-optimized nine-node schedule](datasets/graph-burning-path-9-hand-picked/README.md) uses source vertices 1, 9, 5 without a source-selection program. It is an input/prediction only until its Giraph output is saved under `results/`.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS

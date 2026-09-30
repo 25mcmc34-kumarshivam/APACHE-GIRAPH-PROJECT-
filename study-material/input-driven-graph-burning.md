@@ -12,6 +12,30 @@ This is a new variant, not a replacement for the earlier working
 `LearningGraphBurningComputation` and `run_graph_burning.sh`. Keeping both
 lets us compare the old command-line schedule with the new file-based one.
 
+## Are Python programs choosing our burning sources?
+
+**No, not in this input-driven runner.** There are three different jobs that
+should not be mixed up:
+
+| Program | Used by the current runner? | What happens if we do not use it? |
+|---|---|---|
+| `find_small_graph_burning_sequence.py` | No | Nothing breaks. It is an optional, earlier local tool for searching/checking source sequences, including a greedy option. We are postponing source optimization. |
+| `validate_burning_schedule.py` | Yes | The current shell runner stops because it needs this preflight to check graph/schedule errors and find the number of rounds. It **does not choose** sources; it reads the source-round numbers already written in the text files. |
+| `format_burning_output.py` | Yes | The current shell runner cannot produce the requested `B`/`NB -1` text file. Giraph's internal numeric output would still be possible through a manual `hadoop jar` command, but it would not be the same readable result. |
+
+Giraph itself runs the Java input reader and Java burning computation. The
+Python validator and formatter run only on the client machine before and
+after the distributed job. They make this lab workflow safer and easier to
+read; they are **not** a greedy or optimal ignition algorithm. The current
+preflight reads all parts locally, so this runner is not a scalability
+benchmark for a very large distributed dataset.
+
+For a direct non-optimized experiment, see
+`datasets/graph-burning-path-9-hand-picked/`. We picked vertices 1, 9, 5
+for rounds 1, 2, 3 by hand and wrote those numbers into the input parts.
+No source-finding script was run. This is arbitrary and reproducible, not
+mathematically random or guaranteed to burn every vertex.
+
 ## The requested change
 
 Previously a graph line had only an ID and outgoing neighbours:
