@@ -53,3 +53,10 @@ needed.
   exact Graphviz DOT diagram.
 - `run_pagerank.sh` and `run_shortest_path.sh` are the earlier JSON-oriented
   scripts retained as part of the lab history.
+- `run_graph_burning_from_input.sh` is the new Week 11 experiment: the input
+  file itself marks each source's ignition round. It uses
+  `validate_burning_schedule.py` to precheck the graph/derive total rounds
+  and `format_burning_output.py` to create `vertex B/NB round` output. The
+  full explanation is in `study-material/input-driven-graph-burning.md`.
+  The lab-server Giraph build/run still needs verification; do not mistake
+  local Python tests for a successful cluster job.
