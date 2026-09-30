@@ -3,7 +3,8 @@
 **Status, 30 September 2026:** The new input reader, computation, runner,
 validator, formatter and nine-node example are in the repository. The local
 Python tests pass. The lab Maven build succeeded and both new classes are in
-the shaded JAR. The **HDFS input upload and Giraph job run are still pending**;
+the shaded JAR. The three input parts were uploaded to HDFS and validated
+after reading them back. The **Giraph job run is still pending**;
 the predicted table below must not be presented as a newly observed cluster
 result until that run succeeds and is compared row by row.
 
@@ -168,6 +169,8 @@ of these checks proves a YARN job completed or the output is correct.**
    **Completed on 30 September;** the build summary is saved under `results/`.
 4. Upload **only** the three `part-*.txt` input files into a new HDFS
    directory. Do not upload the dataset README as graph input.
+   **Completed on 30 September:** HDFS read-back showed all three parts
+   and the expected `3:8:6` schedule.
 5. Run `bash "$HOME/giraph/run_graph_burning_from_input.sh" INPUT OUTPUT`
    with a new output name. No `3:8:6` argument is required.
 6. Inspect `OUTPUT/part-00000`; compare all nine rows to the prediction.
