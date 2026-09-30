@@ -222,9 +222,10 @@ This direction established that the project required both conceptual study and p
 ## Week 11 — 25 September–1 October 2026
 
 **Status as of 30 September:** new input-driven Graph Burning variant tested
-locally, compiled in the lab Giraph build, and uploaded/validated in HDFS;
-the Giraph/YARN job run is still
-pending. The [week report](../weekly-reports/2026-10-01-week-11.md) and
+locally, compiled in the lab Giraph build, uploaded/validated in HDFS, and
+successfully run on the nine-node path. All nine actual `B`/round rows match
+the prediction. `NB -1` in a real incomplete run is still pending. The
+[week report](../weekly-reports/2026-10-01-week-11.md) and
 [full explanation](../study-material/input-driven-graph-burning.md) record
 the file format, code, predictions, tests, and verification checklist.
 
@@ -233,11 +234,11 @@ the file format, code, predictions, tests, and verification checklist.
   source list; output `B`/`NB` and the first burn round, with `-1` for
   vertices still unburned after the scheduled rounds.
 - The implementation keeps one source per round, matching earlier tests.
-  Local validation and 20 Python tests passed, and both Java classes were
+  Local validation and 21 Python tests passed, and both Java classes were
   found in the shaded JAR after `BUILD SUCCESS`; **no new lab cluster result
   is claimed yet**.
-- Next: run on the lab machine, compare all actual rows,
-  save evidence, and record any problems and Sir's next feedback.
+- Next: run a deliberately incomplete schedule to verify `NB -1` on the
+  lab machine, save evidence, and record any problems and Sir's next feedback.
 
 ## Future weekly entry template
 

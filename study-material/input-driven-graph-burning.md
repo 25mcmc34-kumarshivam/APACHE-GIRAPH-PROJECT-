@@ -4,9 +4,9 @@
 validator, formatter and nine-node example are in the repository. The local
 Python tests pass. The lab Maven build succeeded and both new classes are in
 the shaded JAR. The three input parts were uploaded to HDFS and validated
-after reading them back. The **Giraph job run is still pending**;
-the predicted table below must not be presented as a newly observed cluster
-result until that run succeeds and is compared row by row.
+after reading them back. The **Giraph job completed on the nine-node path**,
+and all nine actual formatted rows match the prediction below. `NB -1` has
+passed local tests but still needs a deliberately incomplete Giraph run.
 
 This is a new variant, not a replacement for the earlier working
 `LearningGraphBurningComputation` and `run_graph_burning.sh`. Keeping both
@@ -82,7 +82,7 @@ Manual prediction:
 | 2 | 8 | 2, 4 from 3 | 2→2, 4→2, 8→2 |
 | 3 | 6 | 1, 5, 7, 9 through earlier fire | 1→3, 5→3, 6→3, 7→3, 9→3 |
 
-The local validator predicts:
+The local validator predicted, and the 30 September Giraph run produced:
 
 ```text
 1  B  3
@@ -96,11 +96,12 @@ The local validator predicts:
 9  B  3
 ```
 
-To test `NB -1`, use a separate version of this same path with only vertex
-2 scheduled in round 1 and vertex 8 in round 2. By the end, only 1, 2, 3
-and 8 have burned; vertices 4, 5, 6, 7 and 9 should be `NB -1`. **Do not
-modify the committed three-round example in place**; keep each test as a
-separate input directory and output path.
+To test `NB -1`, use the separately committed dataset
+`datasets/graph-burning-path-9-two-round-scheduled/`: vertex 2 is selected
+in round 1 and vertex 8 in round 2. By the end, only 1, 2, 3 and 8 have
+burned; vertices 4, 5, 6, 7 and 9 should be `NB -1`. **Do not modify the
+three-round example in place**; keep each test in its own input directory
+and output path.
 
 ## What the new files do
 
@@ -111,7 +112,7 @@ separate input directory and output path.
 | `scripts/validate_burning_schedule.py` | Reads all input parts (or standard input from HDFS); checks unique vertex IDs, edge syntax/endpoints, reverse edges, exactly one source for each round, and sources not already burned *before* selection. It predicts burn rounds locally using BFS. The runner uses its `--rounds-only` mode to derive the last round automatically from the file. This is a local preflight check, not a distributed algorithm. |
 | `scripts/format_burning_output.py` | Converts raw `vertexId numericValue` from Giraph to `vertexId B round` for a positive value, or `vertexId NB -1` for zero/negative value. Rejects malformed or fractional burn rounds. |
 | `scripts/run_graph_burning_from_input.sh` | Checks Java/Hadoop/Python, JAR, HDFS input/output and YARN; validates the graph; passes the derived total-round count (but **no source IDs**) to Giraph; writes the readable result into a new HDFS output directory. It keeps the raw numeric output separately as evidence. |
-| `tests/test_input_driven_burning.py` | Nine new local tests for the schedule, expected path values, `NB -1`, malformed/repeated/missing rounds, reverse edges and formatter. Eleven older Graph Burning tests still pass, making 20 tests total in the local suite. |
+| `tests/test_input_driven_burning.py` | Ten new local tests for the schedules, expected path values, `NB -1`, malformed/repeated/missing rounds, reverse edges and formatter. Eleven older Graph Burning tests still pass, making 21 tests total in the local suite. |
 
 ### Why store a negative round inside the Java vertex value?
 
@@ -151,12 +152,12 @@ bash -n scripts/run_graph_burning_from_input.sh
 ```
 
 On 30 September the validator printed 9 vertices, 8 undirected connections,
-3 scheduled rounds, sources `3:8:6`, and the predicted table above. All 20
+3 scheduled rounds, sources `3:8:6`, and the predicted table above. All 21
 Python tests and the Bash syntax check passed locally. Separately, the lab
 Maven build succeeded, and the shaded JAR contains both new classes. **None
 of these checks proves a YARN job completed or the output is correct.**
 
-## Lab run checklist (not yet verified)
+## Lab run checklist and verification status
 
 1. As `hduser`, confirm HDFS/YARN are running and `yarn node -list` shows
    one healthy `RUNNING` node. Do not start a duplicate NodeManager if one
@@ -172,8 +173,10 @@ of these checks proves a YARN job completed or the output is correct.**
    **Completed on 30 September:** HDFS read-back showed all three parts
    and the expected `3:8:6` schedule.
 5. Run `bash "$HOME/giraph/run_graph_burning_from_input.sh" INPUT OUTPUT`
-   with a new output name. No `3:8:6` argument is required.
+   with a new output name. No `3:8:6` argument is required. **Completed
+   on the nine-node path on 30 September.**
 6. Inspect `OUTPUT/part-00000`; compare all nine rows to the prediction.
+   All nine rows matched. The actual output is saved under `results/`.
    Also inspect `OUTPUT.__giraph_raw/part-m-*` if a value looks wrong.
 7. Only after success, copy the actual HDFS result into `results/`, record
    the YARN application ID/build result, and update the Week 11 report.
@@ -181,7 +184,8 @@ of these checks proves a YARN job completed or the output is correct.**
 ### Known limits and honest presentation
 
 This version is for the existing **one-source-per-round, undirected**
-Graph Burning model. It has not yet been run on the lab server. It does not
+Graph Burning model. The complete-coverage path test ran on the lab server;
+the incomplete-coverage `NB -1` test is pending. It does not
 automatically select the sources, change the mathematical model, or solve
 the recurring NodeManager problem. The new preflight scans the full input
 locally and is meant for the current teaching datasets, not a scalability

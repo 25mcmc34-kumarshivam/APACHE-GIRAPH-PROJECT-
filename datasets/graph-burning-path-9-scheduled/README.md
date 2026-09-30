@@ -32,6 +32,7 @@ Expected result with the new `B`/`NB` output format:
 9  B  3
 ```
 
-The local validator can predict this result now. Record a **new actual
-Giraph result** only after the lab-server run completes and every row has
-been checked. Do not label this predicted table as new cluster evidence.
+The lab Giraph job completed on 30 September 2026; its actual nine rows
+match this prediction exactly. The saved run is under
+`results/graph-burning-path-9-scheduled/`. This complete-coverage run
+does not exercise the `NB -1` branch; a separate incomplete schedule will.

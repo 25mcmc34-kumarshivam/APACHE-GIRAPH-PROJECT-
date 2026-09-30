@@ -44,6 +44,20 @@ class InputDrivenBurningTests(unittest.TestCase):
         self.assertEqual([vertex for vertex in sorted(result) if result[vertex] == -1],
                          [4, 5, 6, 7, 9])
 
+    def test_committed_two_round_dataset(self):
+        folder = ROOT / "datasets" / "graph-burning-path-9-two-round-scheduled"
+        lines = (
+            line
+            for file in sorted(folder.glob("*.txt"))
+            for line in file.read_text(encoding="utf-8").splitlines()
+        )
+        graph, sources = schedule.parse_lines(lines)
+        self.assertEqual(sources, {1: 2, 2: 8})
+        self.assertEqual(
+            schedule.predicted_rounds(graph, sources),
+            {1: 2, 2: 1, 3: 2, 4: -1, 5: -1, 6: -1, 7: -1, 8: 2, 9: -1},
+        )
+
     def test_reject_two_sources_in_one_round(self):
         with self.assertRaisesRegex(ValueError, "choose one source per round"):
             schedule.parse_lines(["1 1 2:1", "2 1 1:1"])

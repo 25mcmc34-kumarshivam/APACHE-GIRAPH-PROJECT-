@@ -59,5 +59,6 @@ needed.
   and `format_burning_output.py` to create `vertex B/NB round` output. The
   full explanation is in `study-material/input-driven-graph-burning.md`.
   The lab-server Giraph build passed on 30 September and packaged both new
-  classes; the HDFS/YARN run still needs verification. Do not mistake local
-  Python tests or a Maven build for a successful graph job.
+  classes. The new runner completed on the nine-node scheduled path, and
+  all actual `B`/round values matched the prediction. A separate
+  incomplete-coverage run is still needed to verify `NB -1` in Giraph.
