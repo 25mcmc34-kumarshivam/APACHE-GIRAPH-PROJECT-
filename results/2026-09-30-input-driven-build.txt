@@ -1,0 +1,21 @@
+Lab-server build evidence reported by mca2025 on 30 September 2026.
+Command:
+  cd "$HOME/giraph"
+  mvn clean -Phadoop_2 -DskipTests -Dgiraph.maven.duplicate.finder.skip=true package
+
+Reactor Summary for Apache Giraph Parent 1.4.0-SNAPSHOT:
+Apache Giraph Parent ............................... SUCCESS [  1.302 s]
+Apache Giraph Core ................................. SUCCESS [ 15.967 s]
+Apache Giraph Blocks Framework ..................... SUCCESS [  9.491 s]
+Apache Giraph Examples ............................. SUCCESS [ 17.120 s]
+Apache Giraph Distribution ......................... SUCCESS [  4.195 s]
+BUILD SUCCESS
+Total time: 48.167 s
+Finished at: 2026-09-30T11:16:46Z
+
+Class check in the shaded examples JAR:
+org/apache/giraph/examples/LearningGraphBurningFromInputComputation.class
+org/apache/giraph/examples/BurningScheduleTextInputFormat.class
+
+This proves compilation and packaging, not successful YARN execution or
+correctness of the final Graph Burning output.

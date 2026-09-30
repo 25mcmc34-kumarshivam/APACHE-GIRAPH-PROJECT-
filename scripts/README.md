@@ -58,5 +58,6 @@ needed.
   `validate_burning_schedule.py` to precheck the graph/derive total rounds
   and `format_burning_output.py` to create `vertex B/NB round` output. The
   full explanation is in `study-material/input-driven-graph-burning.md`.
-  The lab-server Giraph build/run still needs verification; do not mistake
-  local Python tests for a successful cluster job.
+  The lab-server Giraph build passed on 30 September and packaged both new
+  classes; the HDFS/YARN run still needs verification. Do not mistake local
+  Python tests or a Maven build for a successful graph job.

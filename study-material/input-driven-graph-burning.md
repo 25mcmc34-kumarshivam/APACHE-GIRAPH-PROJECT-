@@ -2,7 +2,8 @@
 
 **Status, 30 September 2026:** The new input reader, computation, runner,
 validator, formatter and nine-node example are in the repository. The local
-Python tests pass. The **lab Giraph build and HDFS run are still pending**;
+Python tests pass. The lab Maven build succeeded and both new classes are in
+the shaded JAR. The **HDFS input upload and Giraph job run are still pending**;
 the predicted table below must not be presented as a newly observed cluster
 result until that run succeeds and is compared row by row.
 
@@ -150,8 +151,9 @@ bash -n scripts/run_graph_burning_from_input.sh
 
 On 30 September the validator printed 9 vertices, 8 undirected connections,
 3 scheduled rounds, sources `3:8:6`, and the predicted table above. All 20
-Python tests and the Bash syntax check passed locally. **These checks do not
-compile Java or prove a YARN job completed.**
+Python tests and the Bash syntax check passed locally. Separately, the lab
+Maven build succeeded, and the shaded JAR contains both new classes. **None
+of these checks proves a YARN job completed or the output is correct.**
 
 ## Lab run checklist (not yet verified)
 
@@ -163,6 +165,7 @@ compile Java or prove a YARN job completed.**
    and place the three new scripts together under `$HOME/giraph/`.
 3. Build from `$HOME/giraph` with the same working Maven profile used in
    earlier experiments. Check the new two `.class` files in the shaded JAR.
+   **Completed on 30 September;** the build summary is saved under `results/`.
 4. Upload **only** the three `part-*.txt` input files into a new HDFS
    directory. Do not upload the dataset README as graph input.
 5. Run `bash "$HOME/giraph/run_graph_burning_from_input.sh" INPUT OUTPUT`
