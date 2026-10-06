@@ -14,7 +14,8 @@ Existing detailed reports:
 - [Week 8 — 4–10 September](2026-09-10-week-08.md)
 - [Week 9 — 11–17 September](2026-09-17-week-09.md)
 - [Week 10 — 18–24 September](2026-09-24-week-10.md)
-- [Week 11 — 25 September–1 October (in progress)](2026-10-01-week-11.md)
+- [Week 11 — 25 September–1 October](2026-10-01-week-11.md)
+- [Week 12 — 2–8 October (meeting pending)](2026-10-08-week-12.md)
 
 Recommended filename format:
 

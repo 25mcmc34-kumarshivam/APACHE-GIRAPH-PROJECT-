@@ -19,7 +19,8 @@ Prediction made by following the fire round by round:
 | 2 | 9 | 2 (from 1) |
 | 3 | 5 | 3 (from 2), 8 (from 9) |
 
-Expected output **before** a Giraph run (not yet a measured result):
+Output predicted before the run and **confirmed by Giraph on 6 October
+2026**:
 
 ```text
 1  B   1
@@ -33,6 +34,7 @@ Expected output **before** a Giraph run (not yet a measured result):
 9  B   2
 ```
 
+The actual output is saved under `results/graph-burning-path-9-hand-picked/`.
 This makes an important point for the supervisor: picking arbitrary legal
 sources does not guarantee that every vertex burns within three rounds.
 The experiment tests the Giraph simulation without solving the source

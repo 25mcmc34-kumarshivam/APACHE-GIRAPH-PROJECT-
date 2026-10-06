@@ -34,7 +34,10 @@ For a direct non-optimized experiment, see
 `datasets/graph-burning-path-9-hand-picked/`. We picked vertices 1, 9, 5
 for rounds 1, 2, 3 by hand and wrote those numbers into the input parts.
 No source-finding script was run. This is arbitrary and reproducible, not
-mathematically random or guaranteed to burn every vertex.
+mathematically random or guaranteed to burn every vertex. On 6 October
+2026 the Giraph job completed successfully and its actual output matched
+the hand calculation: vertices 4, 6, and 7 remained `NB -1` after three
+rounds. See `results/graph-burning-path-9-hand-picked/`.
 
 ## The requested change
 

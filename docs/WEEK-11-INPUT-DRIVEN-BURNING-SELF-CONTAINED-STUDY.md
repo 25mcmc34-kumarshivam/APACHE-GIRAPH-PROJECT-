@@ -1,9 +1,13 @@
-# Week 11 team study sheet — Graph Burning sources inside the input
+# Weeks 11–12 team study sheet — Graph Burning sources inside the input
 
 **Week:** 25 September–1 October 2026  
 **Project:** Distributed graph algorithms for social-network problems using Apache Giraph  
 **What is verified:** The new Java classes built on the lab PC, and two scheduled nine-vertex graphs ran through Giraph. The complete three-round run and the incomplete two-round run both matched our hand calculations.  
-**What is not verified yet:** The separate hand-picked `1, 9, 5` schedule has input files and a prediction, but has **not** run on Giraph.
+**6 October follow-up:** The separate hand-picked `1, 9, 5` schedule also ran
+successfully on Giraph. Its actual output matched the hand prediction and
+left vertices 4, 6, and 7 unburned after round 3. The 1 October supervisor
+meeting did not take place because of convocation; the planned 8 October
+meeting covers both weeks.
 
 This sheet is meant to be read from top to bottom before explaining this week's work to Sir. It includes the actual data, code ideas, commands, results, errors and remaining question in one place. The paths in backticks identify files; no other study page is required to understand the experiment.
 
@@ -260,9 +264,9 @@ We did **not** delete the older results to make these experiments work. Each dat
 
 ## 9. Did we use a “perfect” or greedy source choice?
 
-Not for the two new Giraph runs. The complete `3, 8, 6` case reused a previously studied source sequence to confirm the **new input mechanism** against known results. The incomplete `2, 8` case deliberately stopped after two rounds to verify `NB -1`. Neither run measures how good a source-selection algorithm is. Our optional `find_small_graph_burning_sequence.py` can search for choices, but the input-driven runner **never calls it**.
+Not for these three Giraph runs. The complete `3, 8, 6` case reused a previously studied source sequence to confirm the **new input mechanism** against known results. The incomplete `2, 8` case deliberately stopped after two rounds to verify `NB -1`. Neither run measures how good a source-selection algorithm is. Our optional `find_small_graph_burning_sequence.py` can search for choices, but the input-driven runner **never calls it**.
 
-For the next direct experiment, we wrote another nine-vertex input with **hand-picked non-optimized** sources `1, 9, 5` for rounds 1–3. That choice was made by us, not by Python. Our hand calculation predicts:
+For the direct non-optimized experiment, we wrote another nine-vertex input with **hand-picked** sources `1, 9, 5` for rounds 1–3. That choice was made by us, not by Python. Our hand calculation predicted:
 
 ```text
 1 B 1    2 B 2    3 B 3
@@ -270,15 +274,25 @@ For the next direct experiment, we wrote another nine-vertex input with **hand-p
 7 NB -1  8 B 3    9 B 2
 ```
 
-The input is in `datasets/graph-burning-path-9-hand-picked/`. A local input check agreed with the calculation, but **the Giraph job has not yet run** because of the network interruption. Do not present those rows as an actual cluster result. “Hand-picked” is also more accurate than “random”: we did not use a random-number generator or prove any probability claim. Arbitrary choices need not burn every vertex within the same number of rounds.
+The input is in `datasets/graph-burning-path-9-hand-picked/`. On 6 October,
+we uploaded its three parts to one HDFS directory and ran the Giraph job.
+YARN reported `application_1790779476667_0001` as `FINISHED / SUCCEEDED`;
+the actual nine rows **exactly matched** the table above. They are saved
+in `results/graph-burning-path-9-hand-picked/`. “Hand-picked” is more
+accurate than “random”: we did not use a random-number generator or prove
+any probability claim. Arbitrary choices need not burn every vertex within
+the same number of rounds. The lab PC's clock displayed 30 September during
+this 6 October session, so its logs have incorrect calendar timestamps;
+we did not change that clock while the cluster was running.
 
 ## 10. Short explanation we can give Sir
 
-> We moved the Graph Burning source schedule from a command-line list into the second column of each vertex's text record. Our new Java input reader stores a selected round with the vertex, and our Giraph computation ignites that vertex in the matching superstep while fire messages spread one edge per round. The output distinguishes `B` with the first burn round from `NB -1` when the planned rounds end before a vertex is reached. We tested a three-round nine-node path where all vertices burned and a two-round version where five did not; both Giraph results matched our hand calculations. Python was used for input checking, prediction for comparison, and readable output formatting—not to choose optimal sources in these runs. Next we want to run a deliberately non-optimized hand-picked schedule, then discuss whether automatic source selection or a larger dataset is the better next step.
+> We moved the Graph Burning source schedule from a command-line list into the second column of each vertex's text record. Our new Java input reader stores a selected round with the vertex, and our Giraph computation ignites that vertex in the matching superstep while fire messages spread one edge per round. The output distinguishes `B` with the first burn round from `NB -1` when the planned rounds end before a vertex is reached. We tested a three-round nine-node path where all vertices burned, a two-round version where five did not, and a hand-picked non-optimized three-round schedule where three did not. All three Giraph results matched our hand calculations. Python checked the input and formatted the output—it did not choose optimal sources for these runs. At the next meeting we want to confirm whether Sir prefers more arbitrary-source experiments, a larger graph, or an automatic source-selection rule.
 
 ## 11. What remains before we claim more
 
-- Run the hand-picked `1, 9, 5` input through Giraph when network access is stable; save its **actual** HDFS output and compare it with the prediction above.
+- The hand-picked `1, 9, 5` Giraph test is complete. Prepare to explain why
+  its legal schedule left vertices 4, 6, and 7 unburned in three rounds.
 - Follow Sir's current direction to experiment without an optimizer first.
   At the next meeting, clarify which extension he wants after the simple
   runs: explicit random selection, larger graphs, or another burning rule.

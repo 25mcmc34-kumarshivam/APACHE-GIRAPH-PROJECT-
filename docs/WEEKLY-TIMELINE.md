@@ -242,8 +242,33 @@ the file format, code, predictions, tests, and verification checklist.
   restarting the old ResourceManager, after confirming no active job and
   only one real NodeManager process. The transferred runner lacked execute
   permission, so it was run explicitly with `bash`.
-- Next: ask Sir which Graph Burning extension should follow this verified
-  one-source-per-round input format; record actual meeting feedback.
+- **Meeting:** The planned Thursday 1 October meeting did not take place
+  because of convocation and faculty availability, as reported by the
+  team. No supervisor feedback is claimed for that day. The next planned
+  Thursday meeting, 8 October, is a combined update for Weeks 11 and 12.
+
+## Week 12 — 2–8 October 2026
+
+**Status recorded 6 October:** hand-picked, non-optimized Graph Burning
+experiment verified on Giraph. The 8 October supervisor meeting is still
+upcoming; see the [Week 12 report](../weekly-reports/2026-10-08-week-12.md)
+and the [self-contained study sheet](WEEK-11-INPUT-DRIVEN-BURNING-SELF-CONTAINED-STUDY.md).
+
+- The team chose source vertices `1:9:5` by hand for three rounds on the
+  nine-node path. The optional greedy/exact Python source finder was **not**
+  used. This is reproducible but not a claim of mathematical randomness.
+- After starting HDFS and YARN once on the lab PC, three text parts were
+  uploaded to one HDFS input directory. Giraph application
+  `application_1790779476667_0001` finished with final state `SUCCEEDED`.
+  Vertices 4, 6 and 7 were `NB -1` after round 3; all nine actual values
+  matched the prior hand calculation. The result is under
+  `results/graph-burning-path-9-hand-picked/`.
+- The lab PC was reachable at `10.5.0.239` for this run, but its clock
+  displayed 30 September while the client date was 6 October. Treat the
+  server's log timestamps cautiously and coordinate any clock fix with
+  the lab owner.
+- **Planned 8 October meeting:** present both weeks' progress and ask which
+  next experiment Sir wants. Do not invent meeting feedback in advance.
 
 ## Future weekly entry template
 
