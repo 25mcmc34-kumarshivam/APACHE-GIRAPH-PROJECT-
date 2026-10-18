@@ -11,6 +11,7 @@ Study in this order:
 7. [Thirty-node BFS walkthrough](../docs/BFS-THIRTY-NODE-WALKTHROUGH.md) — explains the output, manual levels, Giraph supersteps, example routes, and BFS versus weighted shortest path.
 8. [Graph Burning and diffusion models](graph-burning-and-diffusion-models.md) — explains GB, ICM, LTM and SIR, distinguishes them from BFS, and gives the Giraph implementation roadmap.
 9. [Maven build workflow](maven-build-workflow.md) — explains why we repeatedly build, every part of the command, the JAR check, and how to decide whether a new build is needed.
+10. [Week 14 limited-neighbour burning study sheet](../docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) — one place to read the new Python-only rule, split graph files, hand-written schedule, step-by-step code, exact commands, tests, measured lab output, and the difference from standard Graph Burning.
 
 The roadmap includes websites, books, Wikipedia pages, research papers, YouTube channels, exercises, and completion checkboxes.
 

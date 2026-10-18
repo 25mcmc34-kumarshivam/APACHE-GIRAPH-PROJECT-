@@ -12,6 +12,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Verified direct experiment:** [hand-picked, non-optimized nine-node schedule](datasets/graph-burning-path-9-hand-picked/README.md) uses source vertices 1, 9, 5 without a source-selection program. Its actual Giraph output is saved under `results/graph-burning-path-9-hand-picked/`.
 
+**Week 14 Python experiment:** [one complete beginner-level study sheet](docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) explains the proposed limited-neighbour rule, every new file and command, the hand calculation, seven tests, and the actual lab-PC output. This is a local teaching simulation, **not** a Giraph or YARN run, and is not mathematically identical to standard Graph Burning.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS

@@ -270,6 +270,28 @@ and the [self-contained study sheet](WEEK-11-INPUT-DRIVEN-BURNING-SELF-CONTAINED
 - **Planned 8 October meeting:** present both weeks' progress and ask which
   next experiment Sir wants. Do not invent meeting feedback in advance.
 
+## Week 13 — 9–15 October 2026
+
+The Thursday 15 October meeting was cancelled, as reported by Shivam,
+because of a placement examination and faculty travel. We do not attribute
+any new direction to that meeting. The
+[Week 13 report](../weekly-reports/2026-10-15-week-13.md) records this gap
+without inventing an experiment.
+
+## Week 14 — 16–22 October 2026
+
+On 18 October we completed a small local Python experiment for the team's
+proposed **limited-neighbour** interpretation of the notebook. A three-round
+source sequence `1,4,6` has neighbour caps `2,1,0`. We wrote an eight-vertex
+graph in two text parts, an explicit source/neighbour schedule, a validated
+Python simulator, and seven passing tests. The lab-PC run as `mca2025`
+produced `B` and first-burn rounds for six vertices and `NB -1` for two;
+the result matched our hand calculation byte for byte. It did **not** run on
+Giraph/YARN. The [Week 14 report](../weekly-reports/2026-10-22-week-14.md)
+and [single study sheet](WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) explain
+the exact rule, commands, data, code, output, and remaining question for the
+planned 22 October meeting.
+
 ## Future weekly entry template
 
 Copy this section for every new week:

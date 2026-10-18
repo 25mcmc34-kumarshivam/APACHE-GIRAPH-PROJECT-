@@ -16,6 +16,8 @@ Existing detailed reports:
 - [Week 10 — 18–24 September](2026-09-24-week-10.md)
 - [Week 11 — 25 September–1 October](2026-10-01-week-11.md)
 - [Week 12 — 2–8 October](2026-10-08-week-12.md)
+- [Week 13 — 9–15 October](2026-10-15-week-13.md)
+- [Week 14 — 16–22 October](2026-10-22-week-14.md)
 
 Recommended filename format:
 

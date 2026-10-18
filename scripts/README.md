@@ -48,6 +48,13 @@ needed.
 
 ## Other scripts
 
+- `simulate_limited_neighbour_burning.py` is a separate, **local Python**
+  Week 14 experiment for the proposed source-only neighbour-cap rule. It
+  reads split text graph parts plus a hand-written schedule and prints the
+  round-by-round trace and `B`/`NB` result. It does not invoke Giraph or
+  choose sources automatically. Start with the
+  [complete Week 14 study sheet](../docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md).
+
 - `check_environment.sh` checks Java, Hadoop, HDFS, YARN, Git and Maven.
 - `generate_graphviz_from_text.py` validates text graph parts and creates an
   exact Graphviz DOT diagram.
