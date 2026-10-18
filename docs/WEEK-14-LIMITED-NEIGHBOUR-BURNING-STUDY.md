@@ -134,6 +134,55 @@ vertex  status  first_burn_round
 `-1` is a clear numeric marker for “no burn round.” It does not mean the
 vertex burned in a negative round.
 
+## Python basics needed to understand this program
+
+You do not need to know Giraph internals to read this script. These are the
+few Python ideas it uses:
+
+| Python expression | Plain meaning | Example in this work |
+| --- | --- | --- |
+| `list` | An ordered collection; order and repeats are possible. | `[(1,[2,3]), (4,[5]), (6,[])]` keeps the round order. |
+| `set` | A collection with no duplicates; useful for “is this adjacent?” | `graph[1] == {2,3,7}`. The order of a set is not important. |
+| `dict` | A mapping from a key to a value. | `first_burn[7] == -1` means vertex 7 has no burn round yet. |
+| `tuple` | A small group of values handled together. | `(4,[5])` means source 4 and selected neighbour 5. |
+| `for ... in ...` | Visit each item in a collection. | The program visits every graph line, then every scheduled round. |
+| `if ...:` | Perform a check before doing the next action. | Reject a neighbour not directly joined to the source. |
+| `in` / `not in` | Membership test. | `5 in graph[4]` is true; `7 in graph[4]` is false. |
+| `enumerate(schedule, 1)` | Produce `(round_number, entry)` pairs starting at 1. | The first source is processed in round 1. |
+| `len(schedule)` | Count scheduled rounds. | Three rows give `k=3`. |
+| `raise ValueError(...)` | Stop with a readable explanation when input is invalid. | A source selecting three neighbours with limit two is rejected. |
+
+Some syntax looks unusual at first. `graph[vertex] = neighbours` stores one
+vertex's neighbour set in the dictionary. `first_burn[vertex] = round_number`
+changes that vertex from `-1` to the round in which it burned. The colon
+after `if`, `for`, or `def` starts an indented block; the indentation tells
+Python which lines belong to that block. `#` begins a comment, ignored by
+Python, and the `"""..."""` text under a function is its explanation.
+
+`Path` from the standard-library `pathlib` package represents a file or
+folder. `argparse` reads options such as `--graph`. `math.isfinite` rejects
+invalid numeric edge weights. All three come with Python; there is no
+extra `pip install` step for this script. We use integer vertex IDs, not
+strings, so sorting produces `1,2,...,8` instead of text order.
+
+### Follow one row through the code
+
+Take `1 2:1 3:1 7:1` from `part-01.txt`. `line.split()` gives four pieces:
+`["1", "2:1", "3:1", "7:1"]`. The first becomes integer vertex `1`. Each
+remaining piece is split again at `:`; for `"2:1"`, neighbour ID is `2` and
+weight is `1`. The program puts neighbours in `{2,3,7}` and stores it as
+`graph[1]`. It reads the other seven vertex lines in the same way. It then
+checks, for example, that vertex 2's line also lists 1; otherwise the
+supposed undirected edge is inconsistent.
+
+Now take schedule row `1 1 2 3`. The parser reads round `1`, source `1`,
+and chosen list `[2,3]`. `simulate` sees `k=3` and computes limit `3-1=2`.
+Both selected IDs occur in `graph[1]`, and neither burned before. It sets
+`first_burn[1]`, `first_burn[2]`, and `first_burn[3]` to `1`. It **does not**
+change `first_burn[7]`: although 7 is adjacent to 1, it was not selected.
+The same process repeats for rows 2 and 3. Finally `result_lines` converts
+each dictionary value into the `B`/`NB` table.
+
 ## What each Python function does
 
 The working program is
@@ -164,6 +213,20 @@ The code has comments at the decisions that matter. Read it in this order:
    **new** result file. It refuses to overwrite a previous result, so use a
    new filename for another experiment.
 
+The burning *idea* itself is small. After the checks, the central update is:
+
+```python
+newly_burned = [source] + chosen
+for vertex in newly_burned:
+    first_burn[vertex] = round_number
+```
+
+The rest of the file reads input safely, verifies our choices, and prints a
+result we can study. Without those checks, a typo such as naming a vertex
+that is not connected to the source could appear to “work” and teach us
+the wrong rule. Python makes the burning step easy to see; it does not
+remove the need to define the model precisely.
+
 The test file
 [`tests/test_limited_neighbour_burning.py`](../tests/test_limited_neighbour_burning.py)
 checks the eight-vertex result and the limits, rejects a non-neighbour and
@@ -179,6 +242,13 @@ neighbours choose kiye. `first_burn` dictionary start mein sab ke liye
 `-1` rakhti hai. Loop har round mein limit `k-r` nikalta hai, selected IDs
 ko check karta hai, phir sirf unhi nodes ki value us round se badalta hai.
 `trace` se hum dekh sakte hain ki har step par kitne nodes naye jale.
+
+Ek line ko phir se socho: `1 1 2 3` mein pehla `1` round hai, doosra `1`
+source node hai, aur `2 3` selected direct neighbours hain. Graph mein 1
+ka neighbour 7 bhi hai, lekin schedule mein 7 nahin likha. Isi liye 7
+unburned rehta hai. `3 6 -` mein `-` ka matlab hai source 6 ke saath koi
+additional neighbour nahin jalega. `-1` output mein “kabhi nahin jala”
+hai; woh round `-1` nahin hai.
 
 ## The actual sequence of work and commands
 
@@ -223,6 +293,35 @@ ko check karta hai, phir sirf unhi nodes ki value us round se badalta hai.
    all eight rows as our hand calculation. The saved lab result matched the
    expected text **byte for byte**. We copied those eight rows into
    [`results/limited-neighbour-burning-demo/result-1-4-6.txt`](../results/limited-neighbour-burning-demo/result-1-4-6.txt).
+
+The lab transfer was done through authenticated SSH, but the experiment
+itself needs only one ordinary `mca2025` terminal. To repeat it on a **fresh
+copy** without any SSH transfer, clone or download this repository on a
+computer with Python 3 and run the `python` command in step 4 from its
+root directory. To repeat it on the lab PC, first check `python3 --version`,
+copy the script plus the two graph parts and schedule, then run step 6.
+The lab IP may change, so never treat one recorded IP as permanent. For a
+second run, choose a *new* `--output` filename because the script protects
+its earlier result from overwrite. There is no need to start Hadoop for
+this specific Python exercise.
+
+## Try three changes yourself before the meeting
+
+Make a **new copy** of the schedule rather than changing our recorded
+example. Predict the result on paper, run the new file, and compare:
+
+1. Change round 1 from `1 1 2 3` to `1 1 2 7`. Which vertex becomes `NB`?
+   **Answer:** 3 becomes `NB -1`; 7 becomes `B 1`. The limit is still two.
+2. Change round 2 from `2 4 5` to `2 4 8`. Which statuses swap?
+   **Answer:** 5 becomes `NB -1`; 8 becomes `B 2` (with the other rows
+   unchanged). Source 6 still burns itself in round 3.
+3. Try `1 1 2 3 7`. What should happen?
+   **Answer:** the program rejects the schedule: three selected neighbours
+   exceed round 1's limit of two. It should not silently discard vertex 7.
+
+If you can explain these three answers without running the program, you
+understand the main rule. Then read the seven tests: they turn the same
+expectations into checks that run automatically.
 
 ## What this establishes—and what it does not
 
