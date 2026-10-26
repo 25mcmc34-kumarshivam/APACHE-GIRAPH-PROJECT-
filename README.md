@@ -18,6 +18,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Week 15 evidence and learning:** [weekly report](weekly-reports/2026-10-29-week-15.md) records the saved-Giraph comparison and generated round pictures; the [Hinglish Python guide](study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md) explains the code and commands for teammates. The [PNG/GraphML/TSV files](results/graph-burning-path-9-scheduled/round-preview/) are kept with the verified result.
 
+**Next practical prepared:** a [30-node undirected graph with randomly chosen, non-optimized source rounds](datasets/thirty-node-random-burning-seed-20261026/) has a [Python prediction](results/graph-burning-30-random-seed-20261026/). Its fresh Giraph/HDFS run is still pending.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS

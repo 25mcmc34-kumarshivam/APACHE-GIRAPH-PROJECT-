@@ -13,6 +13,7 @@ Study in this order:
 9. [Maven build workflow](maven-build-workflow.md) — explains why we repeatedly build, every part of the command, the JAR check, and how to decide whether a new build is needed.
 10. [Week 14 limited-neighbour burning study sheet](../docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) — one place to read the new Python-only rule, split graph files, hand-written schedule, step-by-step code, exact commands, tests, measured lab output, and the difference from standard Graph Burning.
 11. [Round-by-round burning Python guide (Hinglish)](hinglish-code-guide/show-burning-rounds-Hinglish.md) — separate beginner-level explanation of the current standard-burning preview, its helper validator, NetworkX pictures, Giraph comparison and exact lab commands. Start here for the Week 15 practical; do not mix it with item 10's different model.
+12. The same Hinglish guide's last section explains the [30-node random schedule preparer](../scripts/prepare_random_burning_input.py), its eligibility check, seed, generated input and still-pending Giraph comparison.
 
 The roadmap includes websites, books, Wikipedia pages, research papers, YouTube channels, exercises, and completion checkboxes.
 

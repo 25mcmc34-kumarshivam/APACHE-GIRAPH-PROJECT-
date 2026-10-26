@@ -108,3 +108,40 @@ Verified files [`results/graph-burning-path-9-scheduled/round-preview/`](../../r
 - **Yeh Week 14 cap `2,1,0` hai?** Nahin. Standard burning mein pehle source ki radius 2 hops, doosre ki radius 1 hop, teesre ki radius 0 hop hai; direct neighbours ki count par cap nahin.
 - **Python source choose karta hai?** Nahin. User `source_round` values likhta hai. Random aur optimized selection future phases hain. Agar random implement karein, seed save karenge taaki same run dobara mile.
 - **Next khud se try:** pehle small graph par round-1/2/3 ka `frontier`, `newly`, `cumulative` paper par calculate karo. Python printout se check karo. Phir same input Giraph par fresh HDFS paths se run karke final `diff` karo. Large graph ke liye bhi yahi workflow hai, bas manual table ka size badhega.
+
+## 8. Naya 30-node random-source preparer (Giraph run abhi pending)
+
+[`scripts/prepare_random_burning_input.py`](../../scripts/prepare_random_burning_input.py)
+**input file banata hai**; Graph Burning calculation/Giraph job nahin chalata.
+Iska source `datasets/thirty-node-undirected-burning/` hai: 30 vertices, 55
+undirected edges, 3 parts, abhi source-round column nahin. Output
+[`datasets/thirty-node-random-burning-seed-20261026/`](../../datasets/thirty-node-random-burning-seed-20261026/)
+mein wohi edges aur naya second column hai. `selection.json` seed aur
+chosen sequence ka record hai, graph input ka hissa nahin.
+
+Functions samjho:
+
+- `read_graph(input)` existing module ka **sirf parser** use karta hai;
+  us module ka greedy/exact selection function call **nahin** hota.
+- `select_sources(graph, rounds, seed)` `random.Random(seed)` banata hai.
+  Har round mein sorted IDs se un vertices ki `eligible` list banti hai
+  jo kisi previous source ki fire se **is round se pehle** nahin jale.
+  `rng.choice(eligible)` unmein se ek ko randomly leta hai. Ismein degree,
+  PageRank, coverage ya best-score check **nahin** hai. Same seed aur input
+  se experiment repeat kiya ja sakta hai. Jab candidate na ho, error.
+- `distances_from` sirf eligibility check ke liye BFS hops nikalta hai.
+  Earlier source ke round `s` aur distance `d` se vertex ka arrival `s+d`
+  hai. `s+d < current_round` ho to us vertex ko naya source nahin bana
+  sakte; same-round arrival allowed hai. Yeh validity hai, optimization nahin.
+- `prepare_parts` har original line `vertex neighbours...` ko
+  `vertex source_round neighbours...` banata hai. Non-selected vertex ko
+  `0` milta hai. Phir existing `parse_lines` se **poora** generated graph
+  validate hota hai: edges unchanged, 30 vertices, correct markers.
+- `main()` arguments padhta hai, existing output path overwrite nahin
+  karta, parts aur `selection.json` likhta hai, seed/sequence print karta hai.
+
+Is seed `20261026` aur four rounds se `4:27:12:15` mila. Local Python
+preview ne 24 `B` aur six `NB -1` predict kiye; NB IDs 14,18,19,20,24,25.
+Yeh **abhi Giraph verified output nahin**. Next step same 3 `part-*.txt`
+HDFS mein upload, fresh output path par Giraph, phir `diff`. Random ka matlab
+“guaranteed saara graph burn” nahin; incomplete coverage bhi valid result hai.
