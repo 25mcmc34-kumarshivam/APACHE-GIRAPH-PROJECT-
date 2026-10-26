@@ -16,10 +16,12 @@ matched. The result was **119 `B`, one `NB -1` (vertex 85)**. This verifies
 the implementation for this specific input and random schedule; it does not
 mean the sequence is optimal.
 
-The eight lab-generated PNG/GraphML round previews are saved in
-`lab-round-preview/`. The actual HDFS TSV remains on the lab server; its
-copy into this repository is pending. The pictures are Python
-visualizations, not Giraph's own output.
+The [actual Giraph TSV](giraph-actual.tsv) was copied from the completed
+lab run into this repository. A local comparison with
+[lab-round-preview/expected.tsv](lab-round-preview/expected.tsv) also
+matched all 120 rows. The eight lab-generated PNG/GraphML round previews
+are saved in `lab-round-preview/`. The pictures are Python visualizations,
+not Giraph's own output.
 
 | Round | Lab PNG | Burned subgraph | State of every node | Burned-to-burned edges |
 |---:|---|---|---|---|
