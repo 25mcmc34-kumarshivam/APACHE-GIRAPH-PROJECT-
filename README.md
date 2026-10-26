@@ -14,6 +14,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Week 14 Python experiment:** [one complete beginner-level study sheet](docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) explains the proposed limited-neighbour rule, every new file and command, the hand calculation, seven tests, and the actual lab-PC output. This is a local teaching simulation, **not** a Giraph or YARN run, and is not mathematically identical to standard Graph Burning.
 
+**Corrected round-by-round view:** [Graph Burning preview and NetworkX subgraphs](docs/ROUND-BY-ROUND-BURNING-PREVIEW.md) shows the standard source-then-next-round-spread rule for a user-supplied schedule, with Python predictions and one graph snapshot per round. It does not claim a new Giraph run.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS
