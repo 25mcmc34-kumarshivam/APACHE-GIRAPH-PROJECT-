@@ -43,3 +43,11 @@ vertex, yellow previously burned, and grey unburned. Dark edges join two
 burned endpoints; they show the induced subgraph, not necessarily the fire's
 travel path. The [Hinglish study guide](../../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md)
 explains every file and step.
+
+| Round | Lab PNG | Burned subgraph | Node states | Burned edges |
+|---:|---|---|---|---|
+| 1 | [PNG](round-preview/round-01.png) | [GraphML](round-preview/round-01-burned.graphml) | [nodes.tsv](round-preview/round-01-nodes.tsv) | [edges.tsv](round-preview/round-01-burned-edges.tsv) |
+| 2 | [PNG](round-preview/round-02.png) | [GraphML](round-preview/round-02-burned.graphml) | [nodes.tsv](round-preview/round-02-nodes.tsv) | [edges.tsv](round-preview/round-02-burned-edges.tsv) |
+| 3 | [PNG](round-preview/round-03.png) | [GraphML](round-preview/round-03-burned.graphml) | [nodes.tsv](round-preview/round-03-nodes.tsv) | [edges.tsv](round-preview/round-03-burned-edges.tsv) |
+
+Compare the [saved earlier Giraph output](part-00000.txt) with the later [Python expected output](round-preview/expected.tsv). The [experiment index](../../docs/EXPERIMENT-INDEX.md) distinguishes this input-driven run from the older path experiment whose sequence was typed as a command argument.

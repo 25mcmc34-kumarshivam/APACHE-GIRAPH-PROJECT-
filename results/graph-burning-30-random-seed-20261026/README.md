@@ -36,4 +36,13 @@ of flame propagation. The PNG colours have the meanings explained in the
 [Hinglish code guide](../../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md).
 The random sequence is reproducible via its seed but is not optimized.
 
+| Round | Lab PNG | Burned subgraph | Lab node states | Lab burned edges |
+|---:|---|---|---|---|
+| 1 | [PNG](lab-round-preview/round-01.png) | [GraphML](lab-round-preview/round-01-burned.graphml) | [nodes.tsv](lab-round-preview/round-01-nodes.tsv) | [edges.tsv](lab-round-preview/round-01-burned-edges.tsv) |
+| 2 | [PNG](lab-round-preview/round-02.png) | [GraphML](lab-round-preview/round-02-burned.graphml) | [nodes.tsv](lab-round-preview/round-02-nodes.tsv) | [edges.tsv](lab-round-preview/round-02-burned-edges.tsv) |
+| 3 | [PNG](lab-round-preview/round-03.png) | [GraphML](lab-round-preview/round-03-burned.graphml) | [nodes.tsv](lab-round-preview/round-03-nodes.tsv) | [edges.tsv](lab-round-preview/round-03-burned-edges.tsv) |
+| 4 | [PNG](lab-round-preview/round-04.png) | [GraphML](lab-round-preview/round-04-burned.graphml) | [nodes.tsv](lab-round-preview/round-04-nodes.tsv) | [edges.tsv](lab-round-preview/round-04-burned-edges.tsv) |
+
+The [lab Python expected TSV](lab-round-preview/expected.tsv), [local Python expected TSV](python-preview/expected.tsv), and [saved Giraph actual TSV](giraph-actual.tsv) are distinct files with distinct provenance. The [experiment index](../../docs/EXPERIMENT-INDEX.md) maps them to the exact three-part input.
+
 ![Thirty-node graph after round 4: blue current source, orange newly burned, yellow older fire and grey unburned](lab-round-preview/round-04.png)

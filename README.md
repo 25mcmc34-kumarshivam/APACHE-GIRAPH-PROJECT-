@@ -1,26 +1,16 @@
 # Apache Giraph Project
 
-This repository records the Apache Hadoop and Apache Giraph learning work completed on the single-node Ubuntu lab server.
+This repository records the implementation and evaluation of graph algorithms with Apache Giraph on a single-node Ubuntu/Hadoop lab server. Inputs, operational code, measured outputs, weekly work records and separate study notes have distinct locations.
 
-**Preparing for the 24 September meeting?** Start with the [complete meeting brief](docs/MEETING-2026-09-24-COMPLETE-BRIEF.md). It explains the project, every graph/input format, all verified algorithms and outputs, the Java/Python files, and what remains unfinished in one place.
+| Start here | Purpose |
+|---|---|
+| [Experiment index](docs/EXPERIMENT-INDEX.md) | Map each input dataset to its program, result, and verification status. |
+| [Datasets](datasets/README.md) / [results](results/README.md) | Find graph parts, output files and per-round evidence. |
+| [Weekly work reports](weekly-reports/README.md) | Chronology, commands, file transfers, problems and outcomes. |
+| [Study material](study-material/README.md) | Separate technical explanations and team learning notes. |
+| [Setup](setup/) | Installation and startup instructions for a new machine or the shared lab server. |
 
-**Studying only this week's Graph Burning work?** Use the [self-contained Week 10 study sheet](docs/WEEK-10-GRAPH-BURNING-SELF-CONTAINED-STUDY.md). It reproduces the input data, actual outputs, round calculations, code explanations, and limitations on one page.
-
-**Week 11:** [input-driven Graph Burning explanation](study-material/input-driven-graph-burning.md) records the new schedule-in-the-file format, `B`/`NB` output, code, local tests, and two verified lab runs (including actual `NB -1`). The old working runner is preserved.
-
-**One-file Week 11 team revision:** [complete input-driven Graph Burning study sheet](docs/WEEK-11-INPUT-DRIVEN-BURNING-SELF-CONTAINED-STUDY.md) contains the graph, both measured outputs, round-by-round calculations, code and command explanations, problems, and what remains pending.
-
-**Verified direct experiment:** [hand-picked, non-optimized nine-node schedule](datasets/graph-burning-path-9-hand-picked/README.md) uses source vertices 1, 9, 5 without a source-selection program. Its actual Giraph output is saved under `results/graph-burning-path-9-hand-picked/`.
-
-**Week 14 Python experiment:** [one complete beginner-level study sheet](docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) explains the proposed limited-neighbour rule, every new file and command, the hand calculation, seven tests, and the actual lab-PC output. This is a local teaching simulation, **not** a Giraph or YARN run, and is not mathematically identical to standard Graph Burning.
-
-**Corrected round-by-round view:** [Graph Burning preview and NetworkX subgraphs](docs/ROUND-BY-ROUND-BURNING-PREVIEW.md) shows the standard source-then-next-round-spread rule for a user-supplied schedule, with Python predictions and one graph snapshot per round. It does not claim a new Giraph run.
-
-**Week 15:** the [weekly work report](weekly-reports/2026-10-29-week-15.md) records commands, transfers, comparison and files. The separate [learning hub](study-material/week-15/README.md) offers commented code, baby-level Hinglish and a faculty brief. Use the [study-material index](study-material/README.md) to find the right explanation for any week.
-
-**Verified larger-graph practical:** a [30-node undirected graph with randomly chosen, non-optimized source rounds](datasets/thirty-node-random-burning-seed-20261026/) has a [fresh Giraph result, Python comparison and four round pictures](results/graph-burning-30-random-seed-20261026/). Python and Giraph agree exactly for that sequence; six nodes remain unburned after four rounds.
-
-**Verified 120-node practical:** a [synthetic 10×12 grid](datasets/grid-120-unscheduled/) and its [eight-round randomly scheduled input](datasets/grid-120-random-burning-seed-20261026/) ran on Giraph. All 120 final rows matched the [Python prediction](results/grid-120-random-burning-seed-20261026/) (`diff` exit 0); vertex 85 remained `NB -1`. The [Week 15 report](weekly-reports/2026-10-29-week-15.md) is the file-by-file navigation page for this week's work.
+The latest [Week 15 report](weekly-reports/2026-10-29-week-15.md) records fresh 30-node and 120-node input-driven Graph Burning jobs. Python and Giraph agreed on every final row (`diff` exit 0). For the 120-node grid, 119 vertices burned in eight rounds; vertex 85 remained `NB -1`. Sources were selected by seeded random eligible choice, **not** an optimizer. The actual 120-node HDFS TSV still needs to be copied into this repository; the lab comparison and eight round pictures are recorded.
 
 ## Verified environment
 
@@ -44,12 +34,13 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 ## Repository layout
 
-- `datasets/` contains small graph inputs that can be checked manually.
+- `datasets/` contains graph inputs, including split text datasets and the 120-node grid.
 - `src/` contains the custom Giraph computation classes.
 - `scripts/` contains reusable job scripts.
-- `results/` contains verified outputs from the lab server.
+- `results/` contains saved lab outputs where available, Python predictions and visual evidence, labelled by provenance.
 - `diagrams/` contains exact graph visualizations and editable Graphviz source.
-- `docs/` contains the installation guide, lab record, and operating notes.
+- `docs/` contains project, experiment, installation and operating references.
+- `weekly-reports/` contains factual work records; `study-material/` contains separate explanations.
 
 For a new Ubuntu 22.04 machine, choose the [one-account laptop guide](setup/UBUNTU-22.04-SINGLE-ACCOUNT.md) or the [two-account shared-server guide](setup/UBUNTU-22.04-FROM-SCRATCH.md). The one-account guide follows the isolated second-PC validation; the two-account procedure still needs a full blank-laptop trial. The older [`docs/INSTALLATION.md`](docs/INSTALLATION.md) records the lab setup but is not the clean-machine checklist.
 
