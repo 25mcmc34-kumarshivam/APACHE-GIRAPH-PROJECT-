@@ -292,6 +292,22 @@ and [single study sheet](WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md) explain
 the exact rule, commands, data, code, output, and remaining question for the
 planned 22 October meeting.
 
+## Week 15 — 23–29 October 2026
+
+By 26 October we checked the standard Graph Burning run with a round-by-round
+Python preview. The nine-node, three-part input still specified sources
+`3:8:6`; no source optimization was performed. Python generated each round's
+new and cumulative burned sets, TSV tables, NetworkX GraphML subgraphs and PNG
+pictures. NetworkX 3.4.2 and Matplotlib 3.10.9 were installed for `mca2025`
+only to make the optional visualizations. The final Python `expected.tsv`
+matched the **previously completed** Giraph output exactly (`diff` exit 0).
+No new Giraph job was submitted for this check. The files are in
+[`results/graph-burning-path-9-scheduled/round-preview/`](../results/graph-burning-path-9-scheduled/round-preview/),
+with a concise [Week 15 report](../weekly-reports/2026-10-29-week-15.md)
+and a separate [Hinglish code guide](../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md).
+Next: a larger graph, a user-supplied non-optimized sequence, a fresh Giraph
+job and a Python-vs-Giraph comparison.
+
 ## Future weekly entry template
 
 Copy this section for every new week:

@@ -127,3 +127,14 @@ with paths for the **same** graph and schedule. No output from `diff` means
 the files match. A non-zero exit code means they differ or could not be read.
 The runner refuses to overwrite an existing HDFS output path; use a new
 name for each run.
+
+## Verified lab preview
+
+By 26 October, this preview was run on the lab computer against the
+three-part HDFS input above. We installed NetworkX 3.4.2 and Matplotlib
+3.10.9 for `mca2025` with `python3 -m pip install --user networkx matplotlib`.
+The Python `expected.tsv` matched the **previously completed** Giraph
+`part-00000` (`diff` exit 0). We did not submit another Giraph job for this
+check. The actual [PNG, GraphML and TSV files](../results/graph-burning-path-9-scheduled/round-preview/)
+are in the repository. A [Hinglish code walkthrough](../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md)
+is separate from this concise experiment reference.

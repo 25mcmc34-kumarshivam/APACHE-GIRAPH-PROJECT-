@@ -25,3 +25,21 @@ Giraph values in the sibling HDFS directory ending `.__giraph_raw`.
 This verifies the **new input-driven computation and output formatting**
 on one completely burned graph. It does not yet verify `NB -1` in a real
 Giraph run; that needs a deliberately incomplete source schedule.
+
+## Later round-by-round preview and comparison
+
+By 26 October 2026, we ran `scripts/show_burning_rounds.py` on a local copy
+of this same HDFS input. Its [`round-preview/`](round-preview/) folder holds
+`expected.tsv`, three per-round vertex tables, three per-round burned-edge
+tables, three NetworkX GraphML burned subgraphs and three PNG snapshots.
+This preview matched the **saved 30 September Giraph output** exactly:
+`diff -u expected.tsv part-00000` returned exit code 0. No new Giraph job
+was submitted for this later comparison. The server file timestamps showed
+20 October, different from the client date; the files have not been relabelled
+as a new Giraph run.
+
+In the PNGs blue means the current source, orange another newly burned
+vertex, yellow previously burned, and grey unburned. Dark edges join two
+burned endpoints; they show the induced subgraph, not necessarily the fire's
+travel path. The [Hinglish study guide](../../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md)
+explains every file and step.

@@ -16,6 +16,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Corrected round-by-round view:** [Graph Burning preview and NetworkX subgraphs](docs/ROUND-BY-ROUND-BURNING-PREVIEW.md) shows the standard source-then-next-round-spread rule for a user-supplied schedule, with Python predictions and one graph snapshot per round. It does not claim a new Giraph run.
 
+**Week 15 evidence and learning:** [weekly report](weekly-reports/2026-10-29-week-15.md) records the saved-Giraph comparison and generated round pictures; the [Hinglish Python guide](study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md) explains the code and commands for teammates. The [PNG/GraphML/TSV files](results/graph-burning-path-9-scheduled/round-preview/) are kept with the verified result.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS
