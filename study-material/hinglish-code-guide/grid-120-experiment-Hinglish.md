@@ -1,9 +1,8 @@
 # 120-node grid practical: basic se samjho (Hinglish)
 
-Is file mein **naya bada experiment** hai. Result ko verified tabhi bolenge
-jab same four input files lab Giraph par chalenge aur Python `expected.tsv`
-se actual HDFS output ka `diff` 0 aayega. Abhi repo mein Python prediction
-hai; Giraph run pending hai. Yeh synthetic teaching graph hai, real social
+Is file mein **naya bada experiment** hai. Same four input files lab Giraph
+par chale aur lab Python `expected.tsv` se actual HDFS output ka `diff` **0**
+aaya. Matlab final 120 rows match hui. Yeh synthetic teaching graph hai, real social
 network dataset nahin. Optimization bhi nahin chal rahi.
 
 ## Grid kya hai aur 120 kahan se aaye?
@@ -59,9 +58,9 @@ Sirf four scheduled `part-*.txt` HDFS mein upload honge.
    karta hai. No output + exit 0 means same rows. `NB -1` means scheduled
    last round ke end tak vertex nahin jala, error nahin.
 
-Current local Python prediction: rounds 1–8 mein newly burned counts
+Python prediction: rounds 1–8 mein newly burned counts
 **1, 5, 12, 20, 26, 30, 20, 5**. Total 119 burned; vertex **85** `NB -1`.
-Yeh number Giraph run se pehle sirf prediction hai. Graph ke size ki wajah
+Giraph ke final output ne bhi isi result ko confirm kiya. Graph ke size ki wajah
 se terminal ka har-round print long hoga; files ko inspect karna aasaan hai.
 `round-08-nodes.tsv` har vertex ka final state bhi dikhata hai.
 
@@ -75,9 +74,42 @@ se terminal ka har-round print long hoga; files ko inspect karna aasaan hai.
 6. Fresh HDFS output path par `bash ~/giraph/run_graph_burning_from_input.sh
    HDFS_INPUT HDFS_OUTPUT`.
 7. Actual `part-00000` ko local file mein copy, `diff` compare.
-8. Actual output aur pictures result folder mein save; tab weekly report ko
-   “verified” update.
+8. Actual output aur pictures result folder mein save.
 
-Is study guide aur main result record ko future mein actual lab evidence
-ke saath update karna hoga. Abhi Python prediction ko Giraph result bolna
-galat hoga.
+## Lab mein kya hua aur kaise check kiya?
+
+`hduser` ne Hadoop/YARN services start ki. `yarn node -list` mein pehle
+zero nodes aaye; NodeManager unavailable tha. YARN restart ke baad one
+`RUNNING` node aur zero containers dikhe. Iska matlab worker job ke liye
+available tha. `mca2025` ne four scheduled parts fresh HDFS input directory
+mein upload kiye. `hdfs dfs -ls` ne chaar files dikhayi; input mein metadata
+JSON ya pictures nahin daale.
+
+Usi input se Python preview ne 120 vertices, 218 undirected edges, eight
+sources aur expected output nikala. `--networkx --png` se har round ki
+picture aur GraphML bana. Phir real Giraph job chalaya:
+
+```bash
+bash "$HOME/giraph/run_graph_burning_from_input.sh" \
+  /user/mca2025/giraph_learning/graph_burning_grid120_random_20261026_input \
+  /user/mca2025/giraph_learning/graph_burning_grid120_random_20261026_output
+```
+
+Runner ne readable output HDFS ke `part-00000` mein diya. Final comparison:
+
+```bash
+actual="$HOME/giraph_learning_burning/week15_grid120_actual.tsv"
+hdfs dfs -cat /user/mca2025/giraph_learning/graph_burning_grid120_random_20261026_output/part-00000 > "$actual"
+diff -u "$HOME/giraph_learning_burning/week15_grid120_preview/expected.tsv" "$actual"
+echo "Comparison exit code: $?"
+```
+
+`diff -u` ka matlab two files ki lines compare karna. Koi difference line
+print nahin hui; exit code **0** aaya. `120` lines ka matlab har vertex ka
+ek answer hai. `B` = eight rounds tak jal gaya. Third column = pehli baar
+kaunse round mein jala. `NB -1` = last round ke baad bhi nahin jala. Sirf
+vertex 85 `NB -1` raha, yani **119/120** burned. Yeh chosen sequence ki
+coverage hai, optimal burning number ka proof nahin. Python ka kaam
+independent expected answer dena tha; Giraph ka kaam actual distributed job
+chalana tha. Pictures samajhne ke liye hain, correctness ka final proof
+line-by-line comparison se mila.

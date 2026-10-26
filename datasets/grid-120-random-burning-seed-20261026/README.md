@@ -30,9 +30,9 @@ python3 scripts/prepare_random_burning_input.py \
 ```
 
 The [Python preview](../../results/grid-120-random-burning-seed-20261026/python-preview/expected.tsv)
-predicts **119 `B` and one `NB -1` (vertex 85)** after round 8. This is
-only a prediction until the same input is run on the lab Giraph system and
-the actual HDFS output is compared. Because the files were generated on a
+predicted **119 `B` and one `NB -1` (vertex 85)** after round 8. The
+same four parts were run on the lab Giraph system; the actual HDFS output
+matched the lab Python prediction (`diff -u` exit 0). Because the files were generated on a
 Windows Python installation, the committed `.txt` files may have CRLF
 line endings; the text reader accepts them, and comparison should be done
 by rows or after normalizing line endings.
