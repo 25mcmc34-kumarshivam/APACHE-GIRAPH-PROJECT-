@@ -1,9 +1,17 @@
 # Beginner-friendly script copies
 
-This folder contains teaching copies of every executable script in `scripts/`.
+This folder contains teaching copies of the earlier executable scripts in `scripts/`.
 The files outside this folder are the operational versions used in the lab.
 These copies add English and Hinglish comments but keep the same logic, so a
 student can read them without changing the tested commands.
+
+For the newer Week 15 Graph Burning generator, random schedule, preview,
+Giraph runner and Java code, use the separate [Week 15 commented-code
+guide](../../study-material/week-15/CODE-WITH-COMMENTS.md) and its
+[baby-level Hinglish companion](../../study-material/week-15/BABY-LEVEL-HINGLISH.md).
+The [study-material index](../../study-material/README.md) shows the learning
+pages by week. The [weekly reports](../../weekly-reports/README.md) are work
+records, not copies of this teaching material.
 
 ## Recommended reading order
 

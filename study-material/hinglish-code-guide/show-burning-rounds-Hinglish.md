@@ -6,7 +6,7 @@ Yeh guide team ke learning ke liye hai. **Main experiment** ke files `datasets/`
 
 User graph aur ignition schedule deta hai. Abhi Python ya Giraph koi “best” source **nahin** dhoondhta. Python pehle har round ka expected answer banata hai. Giraph usi input par distributed job chalakar final answer deta hai. `diff` se dono final files compare hoti hain. Same result aane ka matlab is example par agreement hai; iska matlab har possible graph par proof nahin hai.
 
-Week 15 mein humne pehle se successfully run hua nine-node Giraph output compare kiya, **naya Giraph job nahin chalaya**. `diff` exit code 0 tha. Agla practical bada graph aur fresh Giraph run hoga.
+Week 15 mein nine-node example ke liye pehle se successfully run hua Giraph output compare kiya—us comparison ke liye **naya** job nahin chalaya. Iske baad 30-node aur 120-node graphs par fresh Giraph jobs bhi chalaye aur Python se `diff` exit 0 mila. Current week ka [learning hub](../week-15/README.md) alag commented code, baby-level explanation aur faculty brief deta hai.
 
 ## 2. Input ka ek line ka matlab
 

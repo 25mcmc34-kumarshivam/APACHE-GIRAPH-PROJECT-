@@ -2,6 +2,8 @@
 
 The [master weekly timeline](../docs/WEEKLY-TIMELINE.md) begins on 17 July 2026. Use [SIMPLE-WEEKLY-UPDATE.md](SIMPLE-WEEKLY-UPDATE.md) for a quick fill-in-the-blanks update or the [detailed weekly report template](../docs/WEEKLY-REPORT-TEMPLATE.md) for a formal report.
 
+This folder is the **work record**: goals, exact or reproducible commands, account roles, where files moved, checks, outputs, errors and next work. Keep long line-by-line code comments and baby-level lessons in the separate [study-material index](../study-material/README.md), with a short link from the relevant weekly report. For example, Week 15 has a [learning hub](../study-material/week-15/README.md) with commented-code, Hinglish beginner and faculty pages. The timeline stays concise; the weekly report can be detailed without becoming a textbook.
+
 Existing detailed reports:
 
 - [Week 1 — 17–23 July](2026-07-23-week-01.md)

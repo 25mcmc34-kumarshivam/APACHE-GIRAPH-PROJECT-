@@ -16,7 +16,7 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Corrected round-by-round view:** [Graph Burning preview and NetworkX subgraphs](docs/ROUND-BY-ROUND-BURNING-PREVIEW.md) shows the standard source-then-next-round-spread rule for a user-supplied schedule, with Python predictions and one graph snapshot per round. It does not claim a new Giraph run.
 
-**Week 15 evidence and learning:** [weekly report](weekly-reports/2026-10-29-week-15.md) records the saved-Giraph comparison and generated round pictures; the [Hinglish Python guide](study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md) explains the code and commands for teammates. The [PNG/GraphML/TSV files](results/graph-burning-path-9-scheduled/round-preview/) are kept with the verified result.
+**Week 15:** the [weekly work report](weekly-reports/2026-10-29-week-15.md) records commands, transfers, comparison and files. The separate [learning hub](study-material/week-15/README.md) offers commented code, baby-level Hinglish and a faculty brief. Use the [study-material index](study-material/README.md) to find the right explanation for any week.
 
 **Verified larger-graph practical:** a [30-node undirected graph with randomly chosen, non-optimized source rounds](datasets/thirty-node-random-burning-seed-20261026/) has a [fresh Giraph result, Python comparison and four round pictures](results/graph-burning-30-random-seed-20261026/). Python and Giraph agree exactly for that sequence; six nodes remain unburned after four rounds.
 
