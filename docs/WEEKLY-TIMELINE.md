@@ -307,12 +307,13 @@ with a concise [Week 15 report](../weekly-reports/2026-10-29-week-15.md)
 and a separate [Hinglish code guide](../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md).
 We then prepared the existing 30-node/55-edge undirected graph with a
 seeded, random-but-eligible four-round sequence `4:27:12:15`. The input
-remains three parts; the local Python preview predicts 24 burned and six
-`NB -1` vertices. The [dataset](../datasets/thirty-node-random-burning-seed-20261026/)
-and [prediction](../results/graph-burning-30-random-seed-20261026/) are
-committed, but **no Giraph job on this larger case has been verified yet**.
-Next: transfer those exact parts to HDFS, run a fresh Giraph job, and compare
-Python vs Giraph. Random source selection here is not optimization.
+remained three parts; the lab Python preview predicted 24 burned and six
+`NB -1` vertices. The fresh Giraph/HDFS job on the same three parts
+completed. Its 30 actual rows matched the Python prediction (`diff` exit 0).
+The [dataset](../datasets/thirty-node-random-burning-seed-20261026/) and
+[actual result, round tables and four pictures](../results/graph-burning-30-random-seed-20261026/)
+are saved. Random source selection here is not optimization. Next: compare
+several recorded random sequences or design an explicit optimization method.
 
 ## Future weekly entry template
 

@@ -138,3 +138,10 @@ The Python `expected.tsv` matched the **previously completed** Giraph
 check. The actual [PNG, GraphML and TSV files](../results/graph-burning-path-9-scheduled/round-preview/)
 are in the repository. A [Hinglish code walkthrough](../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md)
 is separate from this concise experiment reference.
+
+The same preview was subsequently used for the [30-node, four-round
+random-source practical](../results/graph-burning-30-random-seed-20261026/).
+Its **fresh** Giraph result matched the Python final rows (`diff` exit 0),
+including six `NB -1` vertices. Four lab-generated PNG/GraphML snapshots
+are saved with that result. This is a reproducible non-optimized sequence,
+not a source-selection optimum.

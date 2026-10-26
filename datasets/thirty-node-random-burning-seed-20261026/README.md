@@ -34,8 +34,8 @@ python3 scripts/validate_burning_schedule.py /tmp/thirty-node-random-20261026
 python3 scripts/show_burning_rounds.py /tmp/thirty-node-random-20261026
 ```
 
-The current [Python prediction](../../results/graph-burning-30-random-seed-20261026/python-preview/expected.tsv)
+The [Python prediction](../../results/graph-burning-30-random-seed-20261026/python-preview/expected.tsv)
 has 24 `B` vertices and six `NB -1` vertices (14, 18, 19, 20, 24, 25).
-This is **not yet a Giraph result**. The next lab practical must upload the
-three parts, run the same input through Giraph, and compare its result with
-`expected.tsv`.
+The lab Giraph job then ran on these exact three parts; its
+[actual output](../../results/graph-burning-30-random-seed-20261026/giraph-actual.tsv)
+matches the prediction (`diff` exit 0). See the [result record](../../results/graph-burning-30-random-seed-20261026/README.md).

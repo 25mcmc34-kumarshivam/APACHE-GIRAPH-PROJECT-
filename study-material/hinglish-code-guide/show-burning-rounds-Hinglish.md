@@ -109,7 +109,7 @@ Verified files [`results/graph-burning-path-9-scheduled/round-preview/`](../../r
 - **Python source choose karta hai?** Nahin. User `source_round` values likhta hai. Random aur optimized selection future phases hain. Agar random implement karein, seed save karenge taaki same run dobara mile.
 - **Next khud se try:** pehle small graph par round-1/2/3 ka `frontier`, `newly`, `cumulative` paper par calculate karo. Python printout se check karo. Phir same input Giraph par fresh HDFS paths se run karke final `diff` karo. Large graph ke liye bhi yahi workflow hai, bas manual table ka size badhega.
 
-## 8. Naya 30-node random-source preparer (Giraph run abhi pending)
+## 8. Naya 30-node random-source preparer aur verified Giraph run
 
 [`scripts/prepare_random_burning_input.py`](../../scripts/prepare_random_burning_input.py)
 **input file banata hai**; Graph Burning calculation/Giraph job nahin chalata.
@@ -142,6 +142,65 @@ Functions samjho:
 
 Is seed `20261026` aur four rounds se `4:27:12:15` mila. Local Python
 preview ne 24 `B` aur six `NB -1` predict kiye; NB IDs 14,18,19,20,24,25.
-Yeh **abhi Giraph verified output nahin**. Next step same 3 `part-*.txt`
-HDFS mein upload, fresh output path par Giraph, phir `diff`. Random ka matlab
-“guaranteed saara graph burn” nahin; incomplete coverage bhi valid result hai.
+Lab PC par **same** three parts upload karke Giraph job chalaya. Uska actual
+output bhi exactly wahi 30 rows hai. Random ka matlab “guaranteed saara
+graph burn” nahin; incomplete coverage bhi valid result hai.
+
+### Is baar lab mein kaunse steps hue, aur kyun?
+
+1. Windows laptop se `scp` ne generated `part-01.txt` se `part-03.txt`
+   lab PC ke `~/giraph_learning_burning/week15_random30_input/` mein copy
+   kiye. Sirf graph parts transfer hue; source-selection script Giraph job
+   ke andar nahin chalta.
+2. `python3 ~/giraph/validate_burning_schedule.py INPUT_DIR` ne 30
+   vertices, 55 undirected edges, four consecutive source rounds aur
+   `4:27:12:15` check kiya. Isse typo ya invalid schedule par expensive
+   Giraph run shuru karne ki zaroorat nahin hoti.
+3. `python3 ~/giraph/show_burning_rounds.py INPUT_DIR --output-dir PREVIEW_DIR
+   --networkx --png` ne expected final rows aur har round ka TSV,
+   GraphML, PNG banaya. Yeh Python calculation hai, cluster job nahin.
+4. `hdfs dfs -mkdir -p HDFS_INPUT` HDFS mein input folder banata hai;
+   `hdfs dfs -put LOCAL_DIR/part-*.txt HDFS_INPUT/` teen parts HDFS mein
+   bhejta hai. `hdfs dfs -ls` se confirm hua ki teeno wahan hain.
+5. `yarn node -list` ne ek RUNNING worker aur job se pehle 0 containers
+   dikhaye. Isse pata chala ki Giraph ko worker mil sakta hai.
+6. Neeche wala `bash` command shell runner chalata hai. Runner HDFS input
+   dobara validate karta hai; Giraph Java computation run karta hai;
+   numeric result ko readable `B`/`NB -1` mein format karta hai. Python
+   preparer **is step mein source select nahin karta**: source rounds
+   already input lines mein fixed hain.
+
+```bash
+bash "$HOME/giraph/run_graph_burning_from_input.sh" \
+  /user/mca2025/giraph_learning/graph_burning_30_random_20261026_input \
+  /user/mca2025/giraph_learning/graph_burning_30_random_20261026_output
+```
+
+7. `hdfs dfs -cat HDFS_OUTPUT/part-00000 > actual.tsv` ne Giraph ke real
+   HDFS result ko local file mein copy kiya. `diff -u PREVIEW/expected.tsv
+   actual.tsv` ne koi difference print nahin kiya aur exit code `0` diya.
+   `0` comparison success hai, “0 burned vertices” nahin. Lab se actual
+   file aur pictures Windows par copy karke repo mein save kiye.
+
+Round details (new source ko newly-burned list mein count kiya hai):
+
+| Round | Source | Newly burned | Total burned |
+|---:|---:|---|---:|
+| 1 | 4 | 4 | 1 |
+| 2 | 27 | 3,5,9,27 | 5 |
+| 3 | 12 | 1,2,8,10,11,12,22,26,28 | 14 |
+| 4 | 15 | 6,7,13,15,16,17,21,23,29,30 | 24 |
+
+Example: node 4 first round mein source ke roop mein jala; node 3 uske
+direct neighbour ke roop mein round 2 mein; node 2 uske baad round 3 mein.
+Node 14 ko source 15 ke neighbour hone par bhi round 4 mein fire nahin
+milti, kyunki 15 **round 4 mein hi** jala aur round 5 allowed nahin hai.
+Isliye 14 `NB -1` hai. Isi tarah 18,19,20,24,25 bhi scheduled horizon
+mein nahin jale. `round-04.png` mein yeh grey dikhte hain.
+
+Actual rows [`giraph-actual.tsv`](../../results/graph-burning-30-random-seed-20261026/giraph-actual.tsv)
+mein hain. [`lab-round-preview/`](../../results/graph-burning-30-random-seed-20261026/lab-round-preview/)
+mein four PNG/GraphML aur detailed tables hain. Yeh **one** random seed ka
+verified result hai, optimized burning number ka proof nahin. Next study:
+same graph par doosra recorded seed run karke compare karna, *without*
+calling the better-looking seed globally optimal.
