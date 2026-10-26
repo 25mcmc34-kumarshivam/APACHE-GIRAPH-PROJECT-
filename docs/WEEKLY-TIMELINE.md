@@ -314,6 +314,12 @@ The [dataset](../datasets/thirty-node-random-burning-seed-20261026/) and
 [actual result, round tables and four pictures](../results/graph-burning-30-random-seed-20261026/)
 are saved. Random source selection here is not optimization. Next: compare
 several recorded random sequences or design an explicit optimization method.
+On 26 October we instead began a larger **120-node** practical at the user's
+request. A synthetic 10×12 undirected grid (218 connections) and an
+eight-round seeded random schedule were generated in four parts. Python
+predicts 119 burned vertices and vertex 85 as `NB -1`; the lab Giraph run
+is still pending. The [Week 15 report](../weekly-reports/2026-10-29-week-15.md)
+links every new input, script, test, preview, actual result and picture.
 
 ## Future weekly entry template
 

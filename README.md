@@ -20,6 +20,8 @@ This repository records the Apache Hadoop and Apache Giraph learning work comple
 
 **Verified larger-graph practical:** a [30-node undirected graph with randomly chosen, non-optimized source rounds](datasets/thirty-node-random-burning-seed-20261026/) has a [fresh Giraph result, Python comparison and four round pictures](results/graph-burning-30-random-seed-20261026/). Python and Giraph agree exactly for that sequence; six nodes remain unburned after four rounds.
 
+**120-node practical in progress:** a [synthetic 10×12 grid](datasets/grid-120-unscheduled/) and its [eight-round randomly scheduled input](datasets/grid-120-random-burning-seed-20261026/) are prepared. The [Python prediction](results/grid-120-random-burning-seed-20261026/) is not yet a Giraph result. The [Week 15 report](weekly-reports/2026-10-29-week-15.md) is the file-by-file navigation page for all this week's work.
+
 ## Verified environment
 
 - Ubuntu 22.04 LTS

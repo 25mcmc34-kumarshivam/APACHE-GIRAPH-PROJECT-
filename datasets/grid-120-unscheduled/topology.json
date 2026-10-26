@@ -1,0 +1,8 @@
+{
+  "type": "undirected_grid",
+  "rows": 10,
+  "columns": 12,
+  "vertices": 120,
+  "undirected_edges": 218,
+  "parts": 4
+}
