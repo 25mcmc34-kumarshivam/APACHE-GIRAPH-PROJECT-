@@ -305,8 +305,14 @@ No new Giraph job was submitted for this check. The files are in
 [`results/graph-burning-path-9-scheduled/round-preview/`](../results/graph-burning-path-9-scheduled/round-preview/),
 with a concise [Week 15 report](../weekly-reports/2026-10-29-week-15.md)
 and a separate [Hinglish code guide](../study-material/hinglish-code-guide/show-burning-rounds-Hinglish.md).
-Next: a larger graph, a user-supplied non-optimized sequence, a fresh Giraph
-job and a Python-vs-Giraph comparison.
+We then prepared the existing 30-node/55-edge undirected graph with a
+seeded, random-but-eligible four-round sequence `4:27:12:15`. The input
+remains three parts; the local Python preview predicts 24 burned and six
+`NB -1` vertices. The [dataset](../datasets/thirty-node-random-burning-seed-20261026/)
+and [prediction](../results/graph-burning-30-random-seed-20261026/) are
+committed, but **no Giraph job on this larger case has been verified yet**.
+Next: transfer those exact parts to HDFS, run a fresh Giraph job, and compare
+Python vs Giraph. Random source selection here is not optimization.
 
 ## Future weekly entry template
 
