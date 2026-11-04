@@ -10,6 +10,13 @@ graph, removed self-loops/duplicates, and kept the largest connected
 component. The resulting graph has **9,625 vertices and 14,511 undirected
 edges**, split across four text parts.
 
+The `100000` value was an **ID bound**, not a promise that the output would
+contain exactly 100,000 vertices. After filtering the first 100,000 IDs, the
+converter found several disconnected pieces and retained only the largest
+connected component. That component contained 9,625 vertices. A future
+100,000-vertex experiment needs a different sampling/connected-component
+selection step; it cannot be claimed from the current result.
+
 The source sequence was selected uniformly at random from eligible vertices
 with seed `20261104`; it was not greedy or optimized:
 

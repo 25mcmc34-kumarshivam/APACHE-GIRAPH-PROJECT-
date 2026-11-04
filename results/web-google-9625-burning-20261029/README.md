@@ -15,9 +15,13 @@ The copied [actual Giraph output](giraph-actual.tsv) has 9,625 rows and
 matches the Python prediction exactly (`diff -u` exit code `0`).
 
 Final result: **131 vertices burned** and **9,494 remained `NB -1`** after
-six rounds. This is a correctness check for this random schedule, not an
-optimization result. The low coverage is expected because six rounds were
-used on a much larger graph.
+six rounds. Six rounds were chosen as a first manageable test, not because
+the graph requires six rounds and not because six is optimal. With `k`
+source rounds, the first source can spread at most `k-1` hops by the end,
+the second at most `k-2` hops, and the final source only ignites itself.
+Therefore this run used maximum radii `5,4,3,2,1,0`. This is a correctness
+check for this random schedule, not an optimization result; low coverage is
+expected for a sparse large component under this short schedule.
 
 | Evidence | File |
 |---|---|
