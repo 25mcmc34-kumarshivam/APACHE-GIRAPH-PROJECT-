@@ -21,6 +21,7 @@ Existing detailed reports:
 - [Week 13 — 9–15 October](2026-10-15-week-13.md)
 - [Week 14 — 16–22 October](2026-10-22-week-14.md)
 - [Week 15 — 23–29 October](2026-10-29-week-15.md)
+- [Week 16 — 30 October–5 November](2026-11-05-week-16.md)
 
 Recommended filename format:
 

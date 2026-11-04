@@ -322,6 +322,17 @@ lab Giraph job completed; its 120 rows matched the lab Python prediction
 remained `NB -1`. The [Week 15 report](../weekly-reports/2026-10-29-week-15.md)
 links the input, scripts, tests, preview and saved lab evidence.
 
+## Week 16 — 30 October–5 November 2026
+
+We moved from synthetic graphs to a real Stanford SNAP Web-Google edge list.
+The converter created an undirected 9,625-vertex, 14,511-edge connected
+subgraph from the first 100,000 IDs. Six seeded random burning rounds ran on
+the lab Giraph setup; Python and Giraph matched all 9,625 rows (`diff` exit
+0), with 131 burned and 9,494 unburned. The [Week 16 report](../weekly-reports/2026-11-05-week-16.md)
+records the work and the pending task: construct a genuinely approximately
+100,000-vertex connected sample and choose the number of rounds according to
+the faculty's burning-sequence rule.
+
 ## Future weekly entry template
 
 Copy this section for every new week:
