@@ -48,6 +48,14 @@ needed.
 
 ## Other scripts
 
+- `convert_snap_edge_list.py` converts a downloaded Stanford SNAP two-column
+  edge list into deterministic, undirected `part-*.txt` adjacency files. It
+  keeps a bounded node-ID range and then the largest connected component, so
+  it is suitable for a first large-data burning experiment. It does not add
+  source rounds; run `prepare_random_burning_input.py` on its output, then
+  validate and run `run_graph_burning_from_input.sh`. The original SNAP file
+  is not copied into Git.
+
 - `simulate_limited_neighbour_burning.py` is a separate, **local Python**
   Week 14 experiment for the proposed source-only neighbour-cap rule. It
   reads split text graph parts plus a hand-written schedule and prints the
