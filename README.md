@@ -9,6 +9,8 @@ This repository records the implementation and evaluation of graph algorithms wi
 | [Weekly work reports](weekly-reports/README.md) | Chronology, commands, file transfers, problems and outcomes. |
 | [Study material](study-material/README.md) | Separate technical explanations and team learning notes. |
 | [Setup](setup/) | Installation and startup instructions for a new machine or the shared lab server. |
+| [Common Graph Burning commands](docs/GIRAPH-BURNING-COMMON-COMMANDS.md) | Reusable connection, startup, validation, HDFS upload, Giraph run, timing and comparison procedure. |
+| [Multi-core/multi-node plan](docs/MULTI-CORE-MULTI-NODE-EXPERIMENT.md) | Explains one-node multi-core work, true YARN multi-node work, and staged large-graph experiments. |
 
 The latest [Week 15 report](weekly-reports/2026-10-29-week-15.md) records fresh 30-node and 120-node input-driven Graph Burning jobs. Python and Giraph agreed on every final row (`diff` exit 0). For the 120-node grid, 119 vertices burned in eight rounds; vertex 85 remained `NB -1`. Sources were selected by seeded random eligible choice, **not** an optimizer. The actual 120-node HDFS TSV still needs to be copied into this repository; the lab comparison and eight round pictures are recorded.
 
