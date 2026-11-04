@@ -19,6 +19,7 @@
 | 12–13 | [Weekly-report index](../weekly-reports/README.md) | [Graph Burning and diffusion models](graph-burning-and-diffusion-models.md), [small-graph source search](hinglish-code-guide/find-small-graph-burning-sequence-Hinglish.md). These are subject guides, not automatically a claim that each topic was completed in both weeks. |
 | 14 | [Week 14 report](../weekly-reports/2026-10-22-week-14.md) | [Limited-neighbour Python lesson](../docs/WEEK-14-LIMITED-NEIGHBOUR-BURNING-STUDY.md). This is a different model from standard burning. |
 | 15 | [Week 15 report](../weekly-reports/2026-10-29-week-15.md) | [Week 15 hub](week-15/README.md): [commented code](week-15/CODE-WITH-COMMENTS.md), [baby-level Hinglish](week-15/BABY-LEVEL-HINGLISH.md), [faculty brief](week-15/FACULTY-BRIEF.md). |
+| 16 | [Week 16 report](../weekly-reports/2026-11-05-week-16.md) | [348k experiment Hinglish notes](week-16/348k-experiment-HINGLISH.md): timing, round-by-round preview, Python/Giraph comparison and file map. |
 
 The older study sheets remain at their original paths so existing GitHub and teammate links do not break. New week-specific learning pages go under `study-material/week-N/`; the factual weekly entry stays under `weekly-reports/`.
 
