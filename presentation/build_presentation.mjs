@@ -67,9 +67,11 @@ function addSlide(heading, sub = "") {
 {
   const s = presentation.slides.add(); s.background.fill = C.navy;
   shape(s, "rect", 0, 0, 1280, 18, C.orange, C.orange);
-  text(s, "IMPLEMENTATION OF DISTRIBUTED GRAPH ALGORITHMS", 76, 116, 1100, 48, 25, "#BFD8EA", true);
-  text(s, "for Social Network Problems using Apache Giraph", 76, 178, 1100, 100, 42, C.white, true);
-  text(s, "Semester III academic project evaluation", 80, 318, 800, 38, 24, "#D9E7F2");
+  const coverBytes = await fs.readFile(`${ROOT}graph-network-cover.png`);
+  s.images.add({ blob: coverBytes, contentType: "image/png", alt: "Distributed graph network illustration", fit: "cover", position: { left: 680, top: 44, width: 570, height: 600 } });
+  text(s, "IMPLEMENTATION OF DISTRIBUTED GRAPH ALGORITHMS", 76, 116, 560, 48, 23, "#BFD8EA", true);
+  text(s, "for Social Network Problems using Apache Giraph", 76, 178, 560, 110, 37, C.white, true);
+  text(s, "Semester III academic project evaluation", 80, 318, 560, 38, 22, "#D9E7F2");
   text(s, "Kumar Shivam  |  Archana Kumari", 80, 402, 700, 36, 23, C.white, true);
   text(s, "MCA, School of Computer and Information Sciences\nUniversity of Hyderabad", 80, 452, 800, 66, 20, "#D9E7F2");
   text(s, "Supervisor: Dr. Anjeneya Swami Kare", 80, 590, 800, 32, 18, "#BFD8EA");

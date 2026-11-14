@@ -1,8 +1,10 @@
 # Semester III evaluation presentation
 
-The final deck is [`semester-3-evaluation-2026-final-v5.pptx`](./semester-3-evaluation-2026-final-v5.pptx). It follows the order given by our faculty: problem definition, aim and scope, existing work, semester progress, contribution, results and discussion, demo plan, conclusion/future work, and references.
+The final deck is [`semester-3-evaluation-2026-final-v6.pptx`](./semester-3-evaluation-2026-final-v6.pptx). It follows the order given by our faculty: problem definition, aim and scope, existing work, semester progress, contribution, results and discussion, demo plan, conclusion/future work, and references.
 
 The detailed page-by-page preparation note is [`SEMESTER-III-PRESENTATION-STUDY-GUIDE.md`](./SEMESTER-III-PRESENTATION-STUDY-GUIDE.md).
+
+The cover uses `graph-network-cover.png`, a project-themed network illustration with no external logo or claim. It gives the audience a visual cue for vertices, edges and distributed graph clusters without adding technical text to the title slide.
 
 ## How we should present it
 

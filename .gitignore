@@ -46,5 +46,6 @@ presentation/*.inspect.ndjson
 presentation/semester-3-evaluation-2026-final*.pptx
 !presentation/semester-3-evaluation-2026-final-v4.pptx
 !presentation/semester-3-evaluation-2026-final-v5.pptx
+!presentation/semester-3-evaluation-2026-final-v6.pptx
 presentation/semester-3-evaluation-2026.pptx
 presentation/finalize_presentation.mjs
