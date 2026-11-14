@@ -21,6 +21,7 @@ id_rsa.*
 .idea/
 .vscode/
 *.swp
+~$*
 .DS_Store
 Thumbs.db
 
