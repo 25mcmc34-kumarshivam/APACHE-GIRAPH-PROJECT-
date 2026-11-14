@@ -42,6 +42,7 @@ presentation/chart.png
 presentation/test_*.mjs
 presentation/node_modules/
 presentation/*.inspect.ndjson
-presentation/semester-3-evaluation-2026-final.pptx
+presentation/semester-3-evaluation-2026-final*.pptx
+!presentation/semester-3-evaluation-2026-final-v4.pptx
 presentation/semester-3-evaluation-2026.pptx
 presentation/finalize_presentation.mjs

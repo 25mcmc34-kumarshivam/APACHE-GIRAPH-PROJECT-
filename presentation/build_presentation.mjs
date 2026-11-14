@@ -320,7 +320,7 @@ function addSlide(heading, sub = "") {
   bullet(s,"Confirm the faculty-approved burning model and constraints.",690,236,C.ink,20,470);
   bullet(s,"Study larger graphs and true multi-node execution.",690,288,C.ink,20,470);
   bullet(s,"Compare source-selection strategies and optimization methods.",690,340,C.ink,20,470);
-  bullet(s,"Separate Group A and Group B research implementations.",690,392,C.ink,20,470);
+  bullet(s,"Extend the Group A implementation after the faculty review.",690,392,C.ink,20,470);
   shape(s,"roundRect",170,520,940,65,"#EAF3FA","#B9D5E8");
   text(s,"Our current result is a verified foundation, not the final optimization study.",200,540,880,28,21,C.navy,true,"center");
 }
@@ -336,8 +336,11 @@ function addSlide(heading, sub = "") {
     "Week reports, source code, datasets and result comparisons are linked from the repository README.",
   ];
   refs.forEach((r,i)=>bullet(s,r,190+i*62,C.ink,19));
-  shape(s,"roundRect",110,535,1060,62,"#F4F7FA",C.line);
-  text(s,"Thank you\nQuestions and discussion",145,548,990,42,22,C.navy,true,"center");
+  shape(s,"roundRect",110,535,820,62,"#F4F7FA",C.line);
+  text(s,"Thank you\nQuestions and discussion",145,548,750,42,22,C.navy,true,"center");
+  text(s,"Scan for the repository",982,505,190,24,15,C.muted,true,"center");
+  const qrBytes = await fs.readFile(`${ROOT}repo-qr.png`);
+  s.images.add({ blob: qrBytes, contentType: "image/png", alt: "QR code linking to the project repository", position: { left: 1015, top: 530, width: 110, height: 110 } });
 }
 
 for (const [i, slide] of presentation.slides.items.entries()) {
