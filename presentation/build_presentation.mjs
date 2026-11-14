@@ -83,9 +83,9 @@ function addSlide(heading, sub = "") {
   bullet(s, "Large graphs make repeated, vertex-to-vertex computation difficult on a single ordinary program.", 240);
   bullet(s, "We needed a reproducible framework to load split graph files, execute vertex-centric algorithms, and verify results.", 290);
   bullet(s, "Our approved project problem is to implement distributed graph algorithms for social-network problems using Apache Giraph.", 340);
-  shape(s, "roundRect", 86, 444, 1080, 120, "#EAF3FA", "#B9D5E8");
+  shape(s, "roundRect", 86, 440, 1080, 132, "#EAF3FA", "#B9D5E8");
   text(s, "Research question for this semester", 112, 468, 400, 28, 18, C.blue, true);
-  text(s, "Can we build, run, check and explain graph algorithms on a Hadoop/YARN/Giraph setup, from a tiny graph to a real large graph?", 112, 508, 1000, 45, 23, C.navy, true);
+  text(s, "Can we build, run, check and explain graph algorithms on a Hadoop/YARN/Giraph setup, from a tiny graph to a real large graph?", 112, 504, 1000, 62, 22, C.navy, true);
 }
 
 // 3. Aim and scope
@@ -139,7 +139,7 @@ function addSlide(heading, sub = "") {
   milestones.forEach((m, i) => {
     const x = 110 + i * 230;
     shape(s, "ellipse", x, 326, 48, 48, i === 4 ? C.orange : C.blue, i === 4 ? C.orange : C.blue);
-    text(s, m[0], x - 20, 246, 90, 28, 18, C.navy, true, "center");
+    text(s, m[0], x - 50, 246, 140, 28, 16, C.navy, true, "center");
     text(s, m[1], x - 70, 400, 190, 58, 17, C.ink, false, "center");
   });
   shape(s, "roundRect", 160, 535, 960, 62, "#EEF8F0", "#C5E1CA");
@@ -154,10 +154,10 @@ function addSlide(heading, sub = "") {
     ["HDFS", "logical input directory", 350, 260, C.teal],
     ["YARN", "ResourceManager + NodeManager", 620, 260, C.orange],
     ["Giraph", "vertex-centric supersteps", 890, 260, C.green],
-    ["Result", "B/NB + first burn round", 620, 490, C.navy],
+    ["Result", "B/NB + first burn round", 890, 490, C.navy],
   ];
   boxes.forEach(b => { shape(s, "roundRect", b[2], b[3], 220, 105, "#F7FAFC", b[4]); text(s, b[0], b[2]+18, b[3]+20, 185, 28, 22, b[4], true, "center"); text(s, b[1], b[2]+18, b[3]+58, 185, 32, 15, C.ink, false, "center"); });
-  [[300,312,350,312],[570,312,620,312],[840,312,890,312],[1000,365,730,490],[620,542,570,365]].forEach(a => shape(s, "line", a[0], a[1], a[2]-a[0], a[3]-a[1], C.muted, C.muted));
+  [[300,312,350,312],[570,312,620,312],[840,312,890,312],[1000,365,1000,490]].forEach(a => shape(s, "line", a[0], a[1], a[2]-a[0], a[3]-a[1], C.muted, C.muted));
   text(s, "The two-account arrangement is operational: hduser runs Hadoop services; mca2025 builds Giraph and submits experiments.", 100, 620, 1080, 30, 18, C.muted, false, "center");
 }
 
@@ -177,8 +177,8 @@ function addSlide(heading, sub = "") {
     text(s, a[0], 122, y + 13, 220, 25, 20, C.navy, true);
     text(s, a[1], 420, y + 12, 680, 28, 19, C.ink);
   });
-  shape(s, "roundRect", 100, 545, 1050, 58, "#FFF6ED", "#F2D1B1");
-  text(s, "These baseline jobs taught us the input format, HDFS paths, YARN execution, supersteps and output interpretation.", 130, 562, 990, 28, 19, C.orange, true, "center");
+  shape(s, "roundRect", 100, 545, 1050, 66, "#FFF6ED", "#F2D1B1");
+  text(s, "Key takeaway: these baseline jobs taught us the input format, HDFS paths, YARN execution, supersteps and output interpretation.", 130, 559, 990, 42, 17, C.orange, true, "center");
 }
 
 // 8. Burning model
@@ -194,7 +194,7 @@ function addSlide(heading, sub = "") {
   bullet(s, "The source for a round ignites in that round.", 380, C.ink, 20);
   bullet(s, "Existing fire spreads one hop per round.", 430, C.ink, 20);
   bullet(s, "Each vertex records its first burn round.", 480, C.ink, 20);
-  bullet(s, "`NB -1` means the vertex stayed unburned within the configured rounds.", 530, C.ink, 20);
+  bullet(s, "NB -1 means the vertex stayed unburned within the configured rounds.", 530, C.ink, 20);
 }
 
 // 9. Data pipeline

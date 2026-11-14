@@ -8,6 +8,10 @@ Our project studies distributed graph algorithms for social-network type data us
 
 This is a verified foundation. It is not yet an optimized source-selection algorithm or a final multi-node performance study.
 
+## Meaning of the coloured boxes
+
+The coloured boxes at the bottom of some slides are intentional key-takeaway boxes. They are part of the presentation, not hidden instructions and not extra technical results. They help the panel remember the one sentence that matters on that slide. We should explain the main slide content first and then use the coloured sentence as the short conclusion.
+
 ## Important correction about “distributed”
 
 The software stack is distributed even though our lab currently uses one physical worker machine. HDFS stores the input as Hadoop files, YARN allocates containers, and Giraph divides vertex computation among mapper tasks. We used multiple `part-*.txt` files as one logical graph and submitted jobs through YARN. The current machine is a pseudo-distributed or single-node cluster, so it demonstrates the distributed execution model without giving us a true multi-machine speedup. True multi-node scaling is future work.
