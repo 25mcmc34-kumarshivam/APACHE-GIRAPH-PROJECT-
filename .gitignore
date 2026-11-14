@@ -32,3 +32,16 @@ Thumbs.db
 # Python-generated cache
 __pycache__/
 *.pyc
+
+# Presentation build previews and private validation files
+.codex-finalizer/
+presentation/preview/
+presentation/build-run.txt
+presentation/build.log
+presentation/chart.png
+presentation/test_*.mjs
+presentation/node_modules/
+presentation/*.inspect.ndjson
+presentation/semester-3-evaluation-2026-final.pptx
+presentation/semester-3-evaluation-2026.pptx
+presentation/finalize_presentation.mjs
