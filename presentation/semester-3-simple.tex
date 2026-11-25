@@ -23,59 +23,60 @@
 
 \begin{frame}{Problem definition}
 \begin{itemize}
-  \item A social network can be represented as a graph.
-  \item A vertex represents an object such as a person or a web page.
-  \item An edge represents a relationship between two vertices.
-  \item Large graphs contain many vertices and edges, so repeated graph computation becomes difficult in one ordinary program.
-  \item Our project studies how distributed graph algorithms can be implemented using Apache Giraph.
+  \item We represent a social network as a graph.
+  \item A vertex can be a person or a web page.
+  \item An edge shows a connection between two vertices.
+  \item A large graph has many vertices and edges, so one ordinary program can take a long time.
+  \item We are studying how Apache Giraph can run these graph programs on Hadoop.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Aim of the project}
 \begin{itemize}
-  \item Learn the vertex-centric graph processing model.
-  \item Install and operate Hadoop, HDFS, YARN and Apache Giraph.
-  \item Run basic graph algorithms and understand their output.
-  \item Implement Graph Burning and compare the result with an independent Python calculation.
-  \item Maintain commands, source code, datasets and results in a GitHub repository.
+  \item Understand how Giraph processes one vertex at a time.
+  \item Set up and use Hadoop, HDFS, YARN and Apache Giraph.
+  \item Run basic graph programs and read their output.
+  \item Implement Graph Burning and check it with a Python program.
+  \item Keep our commands, code, input files and results in GitHub.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Distributed technology used}
 \begin{itemize}
-  \item \textbf{Hadoop}: provides the basic distributed-processing environment.
-  \item \textbf{HDFS}: stores graph input and output files.
-  \item \textbf{YARN}: starts containers and manages the submitted job.
-  \item \textbf{Apache Giraph}: runs vertex-centric graph computations.
-  \item \textbf{Maven}: builds the Giraph source and creates the executable JAR.
-  \item \textbf{Git}: stores the source code, commands, reports and evidence.
+  \item \textbf{Hadoop}: the platform on which our lab services run.
+  \item \textbf{HDFS}: stores the graph files.
+  \item \textbf{YARN}: starts and manages a submitted job.
+  \item \textbf{Apache Giraph}: runs the graph algorithm.
+  \item \textbf{Maven}: builds the Java code and creates the JAR file.
+  \item \textbf{Git}: stores our code, reports and experiment records.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Progress during the semester}
 \begin{enumerate}
-  \item Studied Linux commands, graphs, Hadoop and distributed computing.
-  \item Prepared the shared lab computer and connected through SSH.
-  \item Installed Java, Git, Maven and Hadoop services.
-  \item Built Apache Giraph 1.4.0-SNAPSHOT with Maven.
-  \item Tested HDFS and YARN using small graph inputs.
-  \item Ran PageRank, in-degree, out-degree, BFS and shortest path.
-  \item Implemented input-driven Graph Burning.
-  \item Tested the implementation on graphs up to 348,087 vertices.
+  \item We first learned Linux commands, graphs, Hadoop and distributed computing.
+  \item We connected to the shared lab computer through SSH.
+  \item We installed Java, Git, Maven and Hadoop services.
+  \item We built Apache Giraph 1.4.0-SNAPSHOT with Maven.
+  \item We tested HDFS and YARN with small graph files.
+  \item We ran PageRank, in-degree, out-degree, BFS and shortest path.
+  \item We added Graph Burning and checked its answer with Python.
+  \item We tested the same workflow on a 348,087-vertex graph.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Vertex-centric computation}
+\begin{frame}{How Giraph runs our programs}
 \begin{itemize}
-  \item Each vertex stores an identifier, a value and a list of edges.
-  \item During a superstep, the vertex reads messages from its neighbours.
-  \item It updates its value and can send messages for the next superstep.
-  \item Giraph repeats supersteps until the computation finishes.
+  \item Yes, this is the model we used in our Giraph programs.
+  \item Each vertex keeps its id, current value and neighbours.
+  \item In one superstep, the vertex reads messages from neighbours.
+  \item It updates its value and sends messages for the next superstep.
+  \item Giraph repeats these supersteps until the program finishes.
 \end{itemize}
 
 \vspace{0.3cm}
 \begin{block}{Simple idea}
-  The program describes what one vertex should do. Giraph applies that computation to all vertices.
+  We write the rule for one vertex. Giraph applies the same rule to every vertex.
 \end{block}
 \end{frame}
 
@@ -93,16 +94,16 @@ Shortest path & Minimum total edge weight from a source \\
 \end{tabular}
 
 \vspace{0.4cm}
-These programs helped us understand the input format, messages, supersteps, HDFS output and YARN execution.
+These programs helped us learn the input format, messages, supersteps, HDFS output and YARN execution.
 \end{frame}
 
 \begin{frame}{Graph Burning problem}
 \begin{itemize}
-  \item A graph and a sequence of source vertices are supplied as input.
-  \item A scheduled source starts the fire in its assigned round.
-  \item Existing fire continues to spread according to the current experiment rule.
+  \item The input contains the graph and the source sequence.
+  \item A source starts the fire in its assigned round.
+  \item The fire spreads to connected vertices in later rounds.
   \item Every vertex records the first round in which it burns.
-  \item The output uses \texttt{B round} for burned vertices and \texttt{NB -1} for vertices not burned within the configured rounds.
+  \item We write \texttt{B round} for a burned vertex and \texttt{NB -1} if it is not burned.
 \end{itemize}
 
 \begin{block}{Example}
@@ -112,13 +113,12 @@ Source sequence: \texttt{3:8:6}. The sequence is an input schedule, not an optim
 
 \begin{frame}{Graph Burning workflow}
 \begin{enumerate}
-  \item Store the graph in plain-text adjacency-list files.
-  \item Include the source round in the input record.
-  \item Validate the graph and schedule with Python.
-  \item Generate the expected output with Python.
-  \item Upload the same logical graph to HDFS.
-  \item Run the Giraph computation through YARN.
-  \item Compare the Python output and Giraph output.
+  \item We store the graph in plain-text adjacency-list files.
+  \item We include the source round in each input record.
+  \item Python checks the graph and calculates an expected answer.
+  \item We upload the same input to HDFS.
+  \item Giraph runs the Java program through YARN.
+  \item We compare the Python and Giraph files.
 \end{enumerate}
 \end{frame}
 
@@ -128,7 +128,7 @@ Source sequence: \texttt{3:8:6}. The sequence is an input schedule, not an optim
 \texttt{8 2 7:1 9:1}\\
 \texttt{6 3 5:1 7:1}
 
-The first value is the vertex id. The next value is its scheduled source round. The remaining values are neighbour and weight pairs.
+The first value is the vertex id. The second value is its source round. The remaining values are neighbour and weight pairs.
 
 \textbf{Output example:}\\[-2pt]
 \texttt{3  B  1}\\
@@ -138,15 +138,15 @@ The first value is the vertex id. The next value is its scheduled source round. 
 
 \begin{frame}{Python verification and Giraph execution}
 \begin{itemize}
-  \item Python is used as an independent reference calculation.
-  \item Giraph reads the HDFS input and runs the distributed computation.
-  \item Both outputs contain vertex id, burn status and first burn round.
-  \item We compare the files line by line.
-  \item Exit code 0 means that the tested Python and Giraph outputs matched exactly.
+  \item Python calculates the answer independently.
+  \item Giraph reads the HDFS input and runs the Java computation.
+  \item Both outputs contain the vertex id, burn status and first burn round.
+  \item We compare the two files line by line.
+  \item Exit code 0 means the two tested files matched exactly.
 \end{itemize}
 
 \begin{block}{Why this is useful}
-The Python program gives us an expected answer before we trust the distributed implementation.
+Python gives us an expected answer before we check the Giraph result.
 \end{block}
 \end{frame}
 
@@ -165,38 +165,38 @@ Python and Giraph rows & 348,087 each \\
 \end{tabular}
 
 \vspace{0.4cm}
-The random source schedule was a reproducible baseline. It was not presented as an optimal burning sequence.
+This was a reproducible random schedule. We did not claim that it was optimal.
 \end{frame}
 
 \begin{frame}{Results and discussion}
 \begin{itemize}
-  \item The baseline algorithms ran successfully on small graphs.
-  \item Graph Burning ran on small, medium and large graph inputs.
-  \item The 348,087-vertex Giraph output matched the Python reference output.
-  \item The measured Giraph run took approximately 54.887 seconds after YARN was running.
-  \item The Python preview took longer because it wrote a full state table and edge table for every round.
+  \item The basic programs ran successfully on small graphs.
+  \item Graph Burning ran on small, medium and large inputs.
+  \item The 348,087-vertex Giraph output matched the Python output.
+  \item The Giraph run took about 54.887 seconds after YARN was ready.
+  \item The Python preview took longer because it saved every round's state and edges.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Our work this semester}
 \begin{itemize}
-  \item Prepared the shared SSH-based lab environment.
-  \item Built and tested the Apache Giraph JAR.
-  \item Created graph inputs in JSON and plain-text formats.
-  \item Created runners for repeatable Giraph experiments.
-  \item Implemented Graph Burning input parsing and computation.
-  \item Added Python validation, prediction and comparison scripts.
-  \item Maintained weekly reports, study notes, datasets and results in GitHub.
+  \item We prepared the shared SSH lab environment.
+  \item We built and tested the Apache Giraph JAR.
+  \item We tried JSON and then used plain-text graph input.
+  \item We wrote a runner so that we could repeat a Giraph experiment.
+  \item We implemented Graph Burning input parsing and computation.
+  \item We added Python checking, prediction and comparison scripts.
+  \item We kept weekly reports, study notes, datasets and results in GitHub.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Conclusion and future work}
 \begin{itemize}
-  \item We established a working Hadoop, YARN and Giraph environment.
-  \item We understood and tested several vertex-centric graph algorithms.
-  \item We implemented and verified the current Graph Burning workflow.
-  \item We still need to confirm the final faculty-approved burning constraints.
-  \item Future work includes source-sequence optimization and true multi-node experiments.
+  \item We now have a working Hadoop, YARN and Giraph setup.
+  \item We ran several Giraph graph algorithms and learned how their output is produced.
+  \item We implemented and checked the current Graph Burning workflow.
+  \item Next we will confirm the final burning constraints with our faculty.
+  \item Later we will study better source selection and multi-node experiments.
 \end{itemize}
 \end{frame}
 
