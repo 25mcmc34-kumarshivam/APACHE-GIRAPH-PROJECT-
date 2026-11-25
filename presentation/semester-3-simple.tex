@@ -123,21 +123,17 @@ Source sequence: \texttt{3:8:6}. The sequence is an input schedule, not an optim
 \end{frame}
 
 \begin{frame}{Input and output format}
-\textbf{Input example:}
-\begin{lstlisting}[basicstyle=\ttfamily\small]
-3 1 2:1 4:1
-8 2 7:1 9:1
-6 3 5:1 7:1
-\end{lstlisting}
+\textbf{Input example:}\\[-2pt]
+\texttt{3 1 2:1 4:1}\\
+\texttt{8 2 7:1 9:1}\\
+\texttt{6 3 5:1 7:1}
 
 The first value is the vertex id. The next value is its scheduled source round. The remaining values are neighbour and weight pairs.
 
-\textbf{Output example:}
-\begin{lstlisting}[basicstyle=\ttfamily\small]
-3       B       1
-8       B       2
-9       NB      -1
-\end{lstlisting}
+\textbf{Output example:}\\[-2pt]
+\texttt{3  B  1}\\
+\texttt{8  B  2}\\
+\texttt{9  NB -1}
 \end{frame}
 
 \begin{frame}{Python verification and Giraph execution}
