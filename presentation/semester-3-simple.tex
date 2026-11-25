@@ -1,0 +1,216 @@
+\documentclass[aspectratio=169]{beamer}
+
+% Simple student presentation for the Semester III evaluation.
+% Compile on Overleaf with pdfLaTeX.
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\title{Implementation of Distributed Graph Algorithms}
+\subtitle{Social network problems using Apache Giraph}
+\author{Kumar Shivam \and Archana Kumari}
+\institute{School of Computer and Information Sciences\\University of Hyderabad}
+\date{Semester III Evaluation\\11 December 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Problem definition}
+\begin{itemize}
+  \item A social network can be represented as a graph.
+  \item A vertex represents an object such as a person or a web page.
+  \item An edge represents a relationship between two vertices.
+  \item Large graphs contain many vertices and edges, so repeated graph computation becomes difficult in one ordinary program.
+  \item Our project studies how distributed graph algorithms can be implemented using Apache Giraph.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Aim of the project}
+\begin{itemize}
+  \item Learn the vertex-centric graph processing model.
+  \item Install and operate Hadoop, HDFS, YARN and Apache Giraph.
+  \item Run basic graph algorithms and understand their output.
+  \item Implement Graph Burning and compare the result with an independent Python calculation.
+  \item Maintain commands, source code, datasets and results in a GitHub repository.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Distributed technology used}
+\begin{itemize}
+  \item \textbf{Hadoop}: provides the basic distributed-processing environment.
+  \item \textbf{HDFS}: stores graph input and output files.
+  \item \textbf{YARN}: starts containers and manages the submitted job.
+  \item \textbf{Apache Giraph}: runs vertex-centric graph computations.
+  \item \textbf{Maven}: builds the Giraph source and creates the executable JAR.
+  \item \textbf{Git}: stores the source code, commands, reports and evidence.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Progress during the semester}
+\begin{enumerate}
+  \item Studied Linux commands, graphs, Hadoop and distributed computing.
+  \item Prepared the shared lab computer and connected through SSH.
+  \item Installed Java, Git, Maven and Hadoop services.
+  \item Built Apache Giraph 1.4.0-SNAPSHOT with Maven.
+  \item Tested HDFS and YARN using small graph inputs.
+  \item Ran PageRank, in-degree, out-degree, BFS and shortest path.
+  \item Implemented input-driven Graph Burning.
+  \item Tested the implementation on graphs up to 348,087 vertices.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Vertex-centric computation}
+\begin{itemize}
+  \item Each vertex stores an identifier, a value and a list of edges.
+  \item During a superstep, the vertex reads messages from its neighbours.
+  \item It updates its value and can send messages for the next superstep.
+  \item Giraph repeats supersteps until the computation finishes.
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{block}{Simple idea}
+  The program describes what one vertex should do. Giraph applies that computation to all vertices.
+\end{block}
+\end{frame}
+
+\begin{frame}{Programs tested before Graph Burning}
+\begin{tabular}{ll}
+\toprule
+Algorithm & What it calculates \\
+\midrule
+PageRank & Importance score based on incoming links \\
+In-degree & Number of incoming edges \\
+Out-degree & Number of outgoing edges \\
+BFS & Minimum number of edges from a source \\
+Shortest path & Minimum total edge weight from a source \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4cm}
+These programs helped us understand the input format, messages, supersteps, HDFS output and YARN execution.
+\end{frame}
+
+\begin{frame}{Graph Burning problem}
+\begin{itemize}
+  \item A graph and a sequence of source vertices are supplied as input.
+  \item A scheduled source starts the fire in its assigned round.
+  \item Existing fire continues to spread according to the current experiment rule.
+  \item Every vertex records the first round in which it burns.
+  \item The output uses \texttt{B round} for burned vertices and \texttt{NB -1} for vertices not burned within the configured rounds.
+\end{itemize}
+
+\begin{block}{Example}
+Source sequence: \texttt{3:8:6}. The sequence is an input schedule, not an optimized solution.
+\end{block}
+\end{frame}
+
+\begin{frame}{Graph Burning workflow}
+\begin{enumerate}
+  \item Store the graph in plain-text adjacency-list files.
+  \item Include the source round in the input record.
+  \item Validate the graph and schedule with Python.
+  \item Generate the expected output with Python.
+  \item Upload the same logical graph to HDFS.
+  \item Run the Giraph computation through YARN.
+  \item Compare the Python output and Giraph output.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Input and output format}
+\textbf{Input example:}
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+3 1 2:1 4:1
+8 2 7:1 9:1
+6 3 5:1 7:1
+\end{lstlisting}
+
+The first value is the vertex id. The next value is its scheduled source round. The remaining values are neighbour and weight pairs.
+
+\textbf{Output example:}
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+3       B       1
+8       B       2
+9       NB      -1
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Python verification and Giraph execution}
+\begin{itemize}
+  \item Python is used as an independent reference calculation.
+  \item Giraph reads the HDFS input and runs the distributed computation.
+  \item Both outputs contain vertex id, burn status and first burn round.
+  \item We compare the files line by line.
+  \item Exit code 0 means that the tested Python and Giraph outputs matched exactly.
+\end{itemize}
+
+\begin{block}{Why this is useful}
+The Python program gives us an expected answer before we trust the distributed implementation.
+\end{block}
+\end{frame}
+
+\begin{frame}{Large graph experiment}
+\begin{tabular}{lr}
+\toprule
+Measure & Result \\
+\midrule
+Vertices & 348,087 \\
+Undirected connections & 1,128,693 \\
+Scheduled source rounds & 8 \\
+Burned vertices & 243,095 \\
+Unburned vertices & 104,992 \\
+Python and Giraph rows & 348,087 each \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4cm}
+The random source schedule was a reproducible baseline. It was not presented as an optimal burning sequence.
+\end{frame}
+
+\begin{frame}{Results and discussion}
+\begin{itemize}
+  \item The baseline algorithms ran successfully on small graphs.
+  \item Graph Burning ran on small, medium and large graph inputs.
+  \item The 348,087-vertex Giraph output matched the Python reference output.
+  \item The measured Giraph run took approximately 54.887 seconds after YARN was running.
+  \item The Python preview took longer because it wrote a full state table and edge table for every round.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Our work this semester}
+\begin{itemize}
+  \item Prepared the shared SSH-based lab environment.
+  \item Built and tested the Apache Giraph JAR.
+  \item Created graph inputs in JSON and plain-text formats.
+  \item Created runners for repeatable Giraph experiments.
+  \item Implemented Graph Burning input parsing and computation.
+  \item Added Python validation, prediction and comparison scripts.
+  \item Maintained weekly reports, study notes, datasets and results in GitHub.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion and future work}
+\begin{itemize}
+  \item We established a working Hadoop, YARN and Giraph environment.
+  \item We understood and tested several vertex-centric graph algorithms.
+  \item We implemented and verified the current Graph Burning workflow.
+  \item We still need to confirm the final faculty-approved burning constraints.
+  \item Future work includes source-sequence optimization and true multi-node experiments.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+\begin{itemize}
+  \item Apache Giraph: \url{https://giraph.apache.org/}
+  \item Apache Hadoop: \url{https://hadoop.apache.org/}
+  \item Stanford SNAP datasets: \url{https://snap.stanford.edu/data/}
+  \item Project repository: \url{https://github.com/25mcmc34-kumarshivam/APACHE-GIRAPH-PROJECT-}
+\end{itemize}
+\end{frame}
+
+\end{document}
