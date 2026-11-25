@@ -202,31 +202,6 @@ diff -u preview/expected.tsv giraph-actual.tsv
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Verification and runtime}
-\scriptsize
-\begin{columns}[T]
-\column{.48\textwidth}
-\textbf{Correctness check}
-\begin{tabular}{lr}
-Python expected rows & 348,087 \\
-Giraph actual rows & 348,087 \\
-Comparison & exit code 0 \\
-Burned / unburned & 243,095 / 104,992
-\end{tabular}
-
-\column{.48\textwidth}
-\textbf{Timing}
-\begin{tabular}{ll}
-Python preview & about 20 minutes \\
-Giraph run & 54.887 seconds \\
-\end{tabular}
-
-\vspace{0.2cm}
-\small The Python preview wrote every round's node table and edge list.\\
-Giraph only computed and wrote the final result, so the two timings measure different amounts of work.
-\end{columns}
-\end{frame}
-
 \begin{frame}{Larger example: 30 vertices}
 \begin{columns}[T]
 \column{.52\textwidth}
@@ -282,6 +257,32 @@ Python and Giraph rows & 348,087 each \\
 
 \vspace{0.4cm}
 This was a reproducible random schedule. We did not claim that it was optimal.
+\end{frame}
+
+\begin{frame}{Verification and runtime: large graph}
+\scriptsize
+\begin{columns}[T]
+\column{.48\textwidth}
+\begin{block}{Correctness check}
+\begin{tabular}{lr}
+Python expected rows & 348,087 \\
+Giraph actual rows & 348,087 \\
+Comparison & \textbf{exit code 0} \\
+Burned / unburned & 243,095 / 104,992
+\end{tabular}
+\end{block}
+
+\column{.48\textwidth}
+\begin{alertblock}{Measured timing}
+\begin{tabular}{ll}
+Python preview & about 20 minutes \\
+Giraph run & \textbf{54.887 seconds}
+\end{tabular}
+\end{alertblock}
+\end{columns}
+
+\vspace{0.25cm}
+\small Python wrote every round's node table and edge list. Giraph computed and wrote only the final result, so these timings measure different amounts of work.
 \end{frame}
 
 \begin{frame}{Results and discussion}
