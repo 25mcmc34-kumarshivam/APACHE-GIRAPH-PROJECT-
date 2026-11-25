@@ -5,6 +5,8 @@
 \usetheme{default}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}[frame number]
+\usepackage{graphicx}
+\graphicspath{{assets/}}
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{booktabs}
@@ -120,6 +122,95 @@ Source sequence: \texttt{3:8:6}. The sequence is an input schedule, not an optim
   \item Giraph runs the Java program through YARN.
   \item We compare the Python and Giraph files.
 \end{enumerate}
+\end{frame}
+
+\begin{frame}{Small example: one edge per round}
+\begin{itemize}
+  \item We use the nine-vertex path graph and the schedule \texttt{3:8:6}.
+  \item Round 1 burns source 3 only.
+  \item Round 2 spreads one edge from the old fire and ignites source 8.
+  \item Round 3 repeats the same rule for source 6.
+  \item A vertex first records the round in which it catches fire.
+\end{itemize}
+\vspace{0.15cm}
+\begin{center}
+\includegraphics[width=.31\textwidth]{path9-round-01.png}\hspace{0.01\textwidth}
+\includegraphics[width=.31\textwidth]{path9-round-02.png}\hspace{0.01\textwidth}
+\includegraphics[width=.31\textwidth]{path9-round-03.png}
+\end{center}
+\scriptsize Round 1, Round 2 and Round 3. Burned vertices are highlighted in the saved NetworkX images.
+\end{frame}
+
+\begin{frame}[fragile]{Input formats used in the experiment}
+\begin{columns}[T]
+\column{.48\textwidth}
+\textbf{Our scheduled plain-text format}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+3 1 2:1 4:1
+8 2 7:1 9:1
+6 3 5:1 7:1
+\end{lstlisting}
+The fields are vertex id, source round, then neighbour:weight pairs. A source round of 0 means that the vertex is not a source.
+
+\column{.48\textwidth}
+\textbf{Giraph adjacency-list format}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+1 0.0 2 1.0 3 1.0
+2 0.0 1 1.0
+3 0.0 1 1.0
+\end{lstlisting}
+This built-in format stores a vertex value followed by alternating neighbour ids and edge values. Our custom reader is needed for the source-round field.
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{What the Java computation does}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\tiny,aboveskip=2pt,belowskip=2pt]
+long currentRound = getSuperstep() + 1;
+double storedValue = vertex.getValue().get();
+if (storedValue <= 0) {
+  double firstArrival = Double.MAX_VALUE;
+  for (DoubleWritable message : messages)
+    firstArrival = Math.min(firstArrival, message.get());
+  if (storedValue == -currentRound)
+    firstArrival = Math.min(firstArrival, currentRound);
+  if (firstArrival != Double.MAX_VALUE) {
+    vertex.getValue().set(firstArrival);
+    for (Edge<LongWritable, FloatWritable> edge : vertex.getEdges())
+      sendMessage(edge.getTargetVertexId(),
+                  new DoubleWritable(currentRound + 1));
+  }
+}
+\end{lstlisting}
+\begin{itemize}
+  \item The negative input value keeps a scheduled source until its round.
+  \item A positive value is the first burn round.
+  \item Messages move the fire one edge per superstep.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python check before the Giraph job}
+\begin{lstlisting}[language=bash,basicstyle=\ttfamily\scriptsize]
+python3 show_burning_rounds.py scheduled-input \\
+  --output-dir preview
+hdfs dfs -cat giraph-output/part-00000 > giraph-actual.tsv
+diff -u preview/expected.tsv giraph-actual.tsv
+\end{lstlisting}
+\begin{itemize}
+  \item \texttt{show\_burning\_rounds.py} applies the same one-edge-per-round rule.
+  \item It saves the expected table and a PNG for each round.
+  \item Exit code 0 from \texttt{diff} means the Python and Giraph rows match exactly.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Larger example: 30 vertices}
+\begin{columns}[T]
+\column{.52\textwidth}
+\includegraphics[width=\textwidth]{graph30-round-01.png}
+\column{.44\textwidth}
+\includegraphics[width=\textwidth]{graph30-round-04.png}
+\end{columns}
+\vspace{0.15cm}
+The same input-driven program was run on a 30-vertex graph. These are saved experiment images, not a hand-drawn illustration. The colours show which vertices have burned by each round.
 \end{frame}
 
 \begin{frame}{Input and output format}
