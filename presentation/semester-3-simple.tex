@@ -202,6 +202,31 @@ diff -u preview/expected.tsv giraph-actual.tsv
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Verification and runtime}
+\scriptsize
+\begin{columns}[T]
+\column{.48\textwidth}
+\textbf{Correctness check}
+\begin{tabular}{lr}
+Python expected rows & 348,087 \\
+Giraph actual rows & 348,087 \\
+Comparison & exit code 0 \\
+Burned / unburned & 243,095 / 104,992
+\end{tabular}
+
+\column{.48\textwidth}
+\textbf{Timing}
+\begin{tabular}{ll}
+Python preview & about 20 minutes \\
+Giraph run & 54.887 seconds \\
+\end{tabular}
+
+\vspace{0.2cm}
+\small The Python preview wrote every round's node table and edge list.\\
+Giraph only computed and wrote the final result, so the two timings measure different amounts of work.
+\end{columns}
+\end{frame}
+
 \begin{frame}{Larger example: 30 vertices}
 \begin{columns}[T]
 \column{.52\textwidth}
